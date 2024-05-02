@@ -1,13 +1,162 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>GouvdevAdmin</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-</head>
-<body>
-  <app-root></app-root>
-</body>
+    <head>
+        <meta charset="utf-8">
+        <title>GOUVDEV-ADMIN</title>
+        <base href="/">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+        <!-- Font Family -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+        <!-- Material Icons -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> 
+    </head>
+    <body>
+        <app-root>
+            <style>
+                .center {
+                    position: absolute;
+                    top: calc(50vh - 50px);
+                    left: calc(50vw - 50px);
+                }
+        
+                .mat-progress-spinner {
+                    animation: mat-progress-spinner-linear-rotate 2s linear infinite;
+                    display: block;
+                    position: relative;
+                    height: 100px;
+                    width: 100px;
+                }
+        
+                .mat-progress-spinner svg {
+                    position: absolute;
+                    transform: rotate(-90deg);
+                    top: calc(50% - 50px);
+                    left: calc(50% - 50px);
+                    transform-origin: center;
+                    overflow: visible;
+                }
+        
+                .mat-progress-spinner svg circle {
+                    animation-name: mat-progress-spinner-stroke-rotate-100;
+                    stroke: #3f51b5;
+                    stroke-dasharray: 282.743px;
+                    stroke-width: 10%;
+                    transition-property: stroke;
+                    animation-duration: 4000ms;
+                    animation-timing-function: cubic-bezier(0.35, 0, 0.25, 1);
+                    animation-iteration-count: infinite;
+                    fill: transparent;
+                    transform-origin: center;
+                    transition: stroke-dashoffset 225ms linear;
+                }
+        
+                @keyframes mat-progress-spinner-linear-rotate {
+                    0% {
+                        transform: rotate(0deg);
+                    }
+                    100% {
+                        transform: rotate(360deg);
+                    }
+                }
+        
+                @keyframes mat-progress-spinner-stroke-rotate-100 {
+                    0% {
+                        stroke-dashoffset: 268.606171575px;
+                        transform: rotate(0);
+                    }
+            
+                    12.5% {
+                        stroke-dashoffset: 56.5486677px;
+                        transform: rotate(0);
+                    }
+            
+                    12.5001% {
+                        stroke-dashoffset: 56.5486677px;
+                        transform: rotateX(180deg) rotate(72.5deg);
+                    }
+            
+                    25% {
+                        stroke-dashoffset: 268.606171575px;
+                        transform: rotateX(180deg) rotate(72.5deg);
+                    }
+            
+                    25.0001% {
+                        stroke-dashoffset: 268.606171575px;
+                        transform: rotate(270deg);
+                    }
+            
+                    37.5% {
+                        stroke-dashoffset: 56.5486677px;
+                        transform: rotate(270deg);
+                    }
+            
+                    37.5001% {
+                        stroke-dashoffset: 56.5486677px;
+                        transform: rotateX(180deg) rotate(161.5deg);
+                    }
+            
+                    50% {
+                        stroke-dashoffset: 268.606171575px;
+                        transform: rotateX(180deg) rotate(161.5deg);
+                    }
+            
+                    50.0001% {
+                        stroke-dashoffset: 268.606171575px;
+                        transform: rotate(180deg);
+                    }
+            
+                    62.5% {
+                        stroke-dashoffset: 56.5486677px;
+                        transform: rotate(180deg);
+                    }
+            
+                    62.5001% {
+                        stroke-dashoffset: 56.5486677px;
+                        transform: rotateX(180deg) rotate(251.5deg);
+                    }
+            
+                    75% {
+                        stroke-dashoffset: 268.606171575px;
+                        transform: rotateX(180deg) rotate(251.5deg);
+                    }
+            
+                    75.0001% {
+                        stroke-dashoffset: 268.606171575px;
+                        transform: rotate(90deg);
+                    }
+            
+                    87.5% {
+                        stroke-dashoffset: 56.5486677px;
+                        transform: rotate(90deg);
+                    }
+            
+                    87.5001% {
+                        stroke-dashoffset: 56.5486677px;
+                        transform: rotateX(180deg) rotate(341.5deg);
+                    }
+            
+                    100% {
+                        stroke-dashoffset: 268.606171575px;
+                        transform: rotateX(180deg) rotate(341.5deg);
+                    }
+                }
+        </style>
+    
+        <div class="center">
+            <div role="progressbar" class="mat-progress-spinner" style="width: 100px; height: 100px;">
+            <svg focusable="false" style="width: 100px; height: 100px;">
+                <circle cx="50%" cy="50%" r="45"></circle>
+            </svg>
+            </div>
+            <p style="margin-top: 10%;">Initialisation en cours....</p> 
+        </div> 
+        </app-root>
+    </body>
 </html>
+        
