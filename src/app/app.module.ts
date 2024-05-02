@@ -65,6 +65,8 @@ import { InfoProfileComponent } from './auth/profile/info-profile/info-profile.c
 import { LimiterTextPipe } from './pipes/limiter-text.pipe'; 
 import { PersonnaliteSectionAddComponent } from './personnalite-sections/personnalite-section-add/personnalite-section-add.component';
 import { PersonnaliteSectionEditComponent } from './personnalite-sections/personnalite-section-edit/personnalite-section-edit.component';
+import { OpinionUserComponent } from './opinions/opinion-user/opinion-user.component';
+import { OpinionSondageComponent } from './opinions/opinion-sondage/opinion-sondage.component';
 
 registerLocaleData(localeFr);
 
@@ -131,7 +133,7 @@ registerLocaleData(localeFr);
     EditTextLegauxTitreDialogBox, 
     PersonnaliteSectionAddComponent,
     PersonnaliteSectionEditComponent, 
-    EditSondageDialogBox,
+    EditSondageDialogBox, OpinionUserComponent, OpinionSondageComponent,
   ],
   imports: [
     BrowserModule,

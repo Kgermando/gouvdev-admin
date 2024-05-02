@@ -24,20 +24,20 @@
  
                  <!-- Nom Column -->
                  <ng-container matColumnDef="sondage_id">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Identifiant Sondage</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Sujet</th>
                     <td mat-cell *matCellDef="let element">
-                        <a [routerLink]="['/web/sondages', element.sondage_id, 'view']">
-                            {{element.sondage_id}} 
+                        <a [routerLink]="['/web/sondages', element.sondage_id, 'view']"> 
+                            <app-opinion-sondage [id]="element.sondage_id"></app-opinion-sondage>
                         </a>
                     </td>
                 </ng-container> 
 
                  <!-- Nom Column -->
                  <ng-container matColumnDef="user_id">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Identifiant utilisateur</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Utilisateur</th>
                     <td mat-cell *matCellDef="let element">
-                        <a [routerLink]="['/web/users', element.user_id, 'view']">
-                            {{element.user_id}} 
+                        <a [routerLink]="['/web/users', element.user_id, 'view']"> 
+                            <app-opinion-user [id]="element.user_id"></app-opinion-user>
                         </a>
                     </td>
                 </ng-container> 

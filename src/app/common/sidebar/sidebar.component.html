@@ -1,12 +1,8 @@
-<div
-    class="sidebar-area bg-white box-shadow"
-    [ngClass]="{'active': isToggled}"
-    [class.dark-sidebar]="themeService.isSidebarDark()"
-    [class.right-sidebar]="themeService.isRightSidebar()"
-    [class.hide-sidebar]="themeService.isHideSidebar()"
->
+<div class="sidebar-area bg-white box-shadow" [ngClass]="{'active': isToggled}"
+    [class.dark-sidebar]="themeService.isSidebarDark()" [class.right-sidebar]="themeService.isRightSidebar()"
+    [class.hide-sidebar]="themeService.isHideSidebar()">
     <div class="logo bg-white">
-        <a  class="d-flex align-items-center">
+        <a class="d-flex align-items-center">
             <!-- <img src="assets/img/logo-icon.png" alt="logo"> -->
             <span>GOUVDEV-ADMIN</span>
         </a>
@@ -21,58 +17,73 @@
             <div class="sidebar-menu">
                 <mat-accordion>
                     <span class="sub-title gray-color">MAIN</span>
-                    <a routerLink="/web/dashboard" class="sidebar-menu-link" routerLinkActive="active" 
-                        [routerLinkActiveOptions]="{exact: true}" >
+                    <a routerLink="/web/dashboard" class="sidebar-menu-link" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{exact: true}">
                         <i class="flaticon-menu-1"></i>
                         <span class="title">Dashboard</span>
-                    </a>  
+                    </a>
 
-                    <a routerLink="/web/actualites/list" class="sidebar-menu-link" routerLinkActive="active" 
-                        [routerLinkActiveOptions]="{exact: true}" >
-                        <i class="fi fi-rr-newspaper"></i>
+                    <a routerLink="/web/actualites/list" class="sidebar-menu-link" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{exact: true}">
+                        <i class="material-symbols-outlined">
+                            receipt_long
+                        </i>
                         <span class="title">Actualites</span>
                     </a>
- 
-                    <a routerLink="/web/sondages/list" class="sidebar-menu-link" routerLinkActive="active" 
-                        [routerLinkActiveOptions]="{exact: true}" >
-                        <i class="fi fi-rr-videoconference"></i>
+
+                    <a routerLink="/web/sondages/list" class="sidebar-menu-link" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{exact: true}">
+                        <i class="material-symbols-outlined">
+                            ar_stickers
+                        </i>
                         <span class="title">Sondages</span>
                     </a>
 
-                    <a routerLink="/web/opinions/list" class="sidebar-menu-link" routerLinkActive="active" 
-                        [routerLinkActiveOptions]="{exact: true}" >
-                        <i class="fi fi-rr-videoconference"></i>
+                    <a routerLink="/web/opinions/list" class="sidebar-menu-link" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{exact: true}">
+                        <i class="material-symbols-outlined">
+                            diversity_3
+                        </i>
                         <span class="title">Opinions</span>
                     </a>
 
-                    <a routerLink="/web/personnalites/list" class="sidebar-menu-link" routerLinkActive="active" 
-                        [routerLinkActiveOptions]="{exact: true}" >
-                        <i class="fi fi-rr-leadership"></i>
+                    <a routerLink="/web/personnalites/list" class="sidebar-menu-link" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{exact: true}">
+                        <i class="material-symbols-outlined">
+                            groups
+                        </i>
                         <span class="title">Personnalites</span>
                     </a>
 
-                    <a routerLink="/web/proposition-lois/list" class="sidebar-menu-link" routerLinkActive="active" 
-                        [routerLinkActiveOptions]="{exact: true}" >
-                        <i class="fi fi-rr-catalog-magazine"></i>
+                    <a routerLink="/web/proposition-lois/list" class="sidebar-menu-link" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{exact: true}">
+                        <i class="material-symbols-outlined">
+                            partner_exchange
+                        </i>
                         <span class="title">Propositions</span>
                     </a>
 
-
-                    <a routerLink="/web/text-legaux-titre/list" class="sidebar-menu-link" routerLinkActive="active" 
-                        [routerLinkActiveOptions]="{exact: true}" >
-                        <i class="fi fi-rr-diary-clasp"></i>
+                    <a routerLink="/web/text-legaux-titre/list" class="sidebar-menu-link" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{exact: true}">
+                        <i class="material-symbols-outlined">
+                            edit_note
+                        </i>
                         <span class="title">Text-legaux titres</span>
                     </a>
 
-                    <a routerLink="/web/contacts/list" class="sidebar-menu-link" routerLinkActive="active" 
-                        [routerLinkActiveOptions]="{exact: true}" >
-                        <i class="ri-contacts-book-line"></i>
+                    <a routerLink="/web/contacts/list" class="sidebar-menu-link" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{exact: true}">
+                        <i class="material-symbols-outlined">
+                            alternate_email
+                        </i>
                         <span class="title">Contacts </span>
-                    </a> 
+                    </a>
 
-                    <a routerLink="/web/users/list" class="sidebar-menu-link" routerLinkActive="active" 
-                        [routerLinkActiveOptions]="{exact: true}" >
-                        <i class="fi fi-rr-users-alt"></i>
+                    <a routerLink="/web/users/list" class="sidebar-menu-link" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{exact: true}">
+                        <i class="material-symbols-outlined">
+                            group
+                        </i>
                         <span class="title">Utilisateurs</span>
                     </a>
                 </mat-accordion>
