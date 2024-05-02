@@ -1,0 +1,329 @@
+
+<mat-card class="create-project-card tagus-card mb-25">
+    <mat-card-header>
+        <h4 class="mb-0">Nouvelle personnalite </h4>
+    </mat-card-header>
+    <mat-card-content>
+        <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+            <div class="row"> 
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <label class="d-block mb-12 fw-semibold gray-color">Photo profile </label>
+                    <input type="file" (change)="onFileSelected($event)" placeholder="select image"> 
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <label class="d-block mb-12 fw-semibold gray-color">Personnalite </label>
+                    <mat-form-field appearance="fill">
+                        <i class="ri-group-line"></i>
+                        <mat-label>Select personnalite</mat-label>
+                        <mat-select (selectionChange)="onChangeCategory($event)" formControlName="category">
+                            <mat-option *ngFor="let category of categoryList" [value]="category">{{category}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="formGroup.controls['category'].hasError('required')">
+                            Ce champs est obligatoire
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <label class="d-block mb-12 fw-semibold gray-color">Gouv Aff Public </label>
+                    <mat-form-field appearance="fill">
+                        <i class="ri-group-line"></i>
+                        <mat-label>Select Gouv Aff Public</mat-label>
+                        <mat-select (selectionChange)="onChangeCategoryGouvAffpublic($event)" formControlName="category_gouv_aff_public">
+                            <mat-option *ngFor="let category of categoryGouvAffPublicList" [value]="category">{{category}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="formGroup.controls['category_gouv_aff_public'].hasError('required')">
+                            Ce champs est obligatoire
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <label class="d-block mb-12 fw-semibold gray-color">1er categorie filtre </label>
+                    <mat-form-field appearance="fill">
+                        <i class="ri-group-line"></i>
+                        <mat-label>Select category filtre</mat-label>
+                        <mat-select formControlName="category_filtre">
+                            <mat-option *ngFor="let category of categorFiltreList" [value]="category">{{category}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="formGroup.controls['category_filtre'].hasError('required')">
+                            Ce champs est obligatoire
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <label class="d-block mb-12 fw-semibold gray-color">2eme categorie filtre </label>
+                    <mat-form-field appearance="fill">
+                        <i class="ri-group-line"></i>
+                        <mat-label>Select top header</mat-label>
+                        <mat-select formControlName="top_header">
+                            <mat-option *ngFor="let category of top_header" [value]="category">{{category}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="formGroup.controls['top_header'].hasError('required')">
+                            Ce champs est obligatoire
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <label class="d-block mb-12 fw-semibold gray-color">Nom </label>
+                    <mat-form-field appearance="fill">
+                        <i class="ri-edit-2-line"></i>
+                        <mat-label>Entrer le nom</mat-label>
+                        <input matInput type="text" formControlName="nom" name="nom">
+                        <mat-error *ngIf="formGroup.controls['nom'].hasError('required')">
+                            Ce champs est obligatoire
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <label class="d-block mb-12 fw-semibold gray-color">Postnom </label>
+                    <mat-form-field appearance="fill">
+                        <i class="ri-edit-2-line"></i>
+                        <mat-label>Entrer le postnom</mat-label>
+                        <input matInput type="text" formControlName="postnom" name="postnom">
+                        <mat-error *ngIf="formGroup.controls['postnom'].hasError('required')">
+                            Ce champs est obligatoire
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <label class="d-block mb-12 fw-semibold gray-color">Prenom </label>
+                    <mat-form-field appearance="fill">
+                        <i class="ri-edit-2-line"></i>
+                        <mat-label>Entrer le prenom</mat-label>
+                        <input matInput type="text" formControlName="prenom" name="prenom">
+                        <mat-error *ngIf="formGroup.controls['prenom'].hasError('required')">
+                            Ce champs est obligatoire
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="tagus-form-group">
+                        <label class="d-block mb-12 fw-semibold gray-color">Sexe</label>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Select sexe</mat-label>
+                            <i class="ri-list-check"></i>
+                            <mat-select formControlName="sexe">
+                                <mat-option  *ngFor="let sexe of sexeList" [value]="sexe">{{sexe}}</mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="formGroup.controls['sexe'].hasError('required')">
+                                Ce champs est obligatoire
+                            </mat-error>
+                        </mat-form-field>
+                    </div> 
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="tagus-form-group">
+                        <label class="d-block mb-12 fw-semibold gray-color">Date de naissance </label>
+                        <mat-form-field appearance="fill" class="date-input">
+                            <mat-label>DD/MM/YYYY</mat-label>
+                            <input matInput [matDatepicker]="pickerNaissance" id="birthday" 
+                                    formControlName="birthday" required>
+                            <mat-datepicker-toggle matIconSuffix [for]="pickerNaissance"></mat-datepicker-toggle>
+                            <mat-datepicker #pickerNaissance></mat-datepicker> 
+                            <mat-error *ngIf="formGroup.controls['birthday'].hasError('required')">
+                                Ce champs est obligatoire
+                            </mat-error>
+                        </mat-form-field> 
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <label class="d-block mb-12 fw-semibold gray-color">Lieu naissance </label>
+                    <mat-form-field appearance="fill">
+                        <i class="ri-edit-2-line"></i>
+                        <mat-label>Entrer lieu naissance</mat-label>
+                        <input matInput type="text" formControlName="lieu_naissance" name="lieu_naissance">
+                        <mat-error *ngIf="formGroup.controls['lieu_naissance'].hasError('required')">
+                            Ce champs est obligatoire
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <label class="d-block mb-12 fw-semibold gray-color">Nationalite </label>
+                    <mat-form-field appearance="fill">
+                        <i class="ri-edit-2-line"></i>
+                        <mat-label>Entrer nationalite</mat-label>
+                        <input matInput type="text" formControlName="nationalite" name="nationalite">
+                        <mat-error *ngIf="formGroup.controls['nationalite'].hasError('required')">
+                            Ce champs est obligatoire
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="tagus-form-group">
+                        <label class="d-block mb-12 fw-semibold gray-color">Etat civile</label>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Select etat civile</mat-label>
+                            <i class="ri-list-check"></i>
+                            <mat-select formControlName="etat_civile">
+                                <mat-option  *ngFor="let etat_civile of etatCivileList" [value]="etat_civile">{{etat_civile}}</mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="formGroup.controls['etat_civile'].hasError('required')">
+                                Ce champs est obligatoire
+                            </mat-error>
+                        </mat-form-field>
+                    </div> 
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <label class="d-block mb-12 fw-semibold gray-color">Conjoint </label>
+                    <mat-form-field appearance="fill">
+                        <i class="ri-edit-2-line"></i>
+                        <mat-label>Entrer le conjoint</mat-label>
+                        <input matInput type="text" formControlName="conjoint" name="conjoint">
+                        <mat-error *ngIf="formGroup.controls['conjoint'].hasError('required')">
+                            Ce champs est obligatoire
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="tagus-form-group">
+                        <label class="d-block mb-12 fw-semibold gray-color">Province</label>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Select province</mat-label>
+                            <i class="ri-list-check"></i>
+                            <mat-select (selectionChange)="onChangeProvince($event)" formControlName="province">
+                                <mat-option *ngFor="let province of provinceList" [value]="province">{{province}}</mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="formGroup.controls['province'].hasError('required')">
+                                Ce champs est obligatoire
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="tagus-form-group">
+                        <label class="d-block mb-12 fw-semibold gray-color">Territoire/Ville</label>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Select Territoire/Ville</mat-label>
+                            <i class="ri-list-check"></i>
+                            <mat-select formControlName="territoire_ville">
+                                <mat-option *ngFor="let territoireVille of territoireVilleList" [value]="territoireVille">{{territoireVille}}</mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="formGroup.controls['territoire_ville'].hasError('required')">
+                                Ce champs est obligatoire
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <label class="d-block mb-12 fw-semibold gray-color">Secteur / chefferie </label>
+                    <mat-form-field appearance="fill">
+                        <i class="ri-edit-2-line"></i>
+                        <mat-label>Entrer le secteur/chefferie</mat-label>
+                        <input matInput type="tel" formControlName="secteur_chefferie" name="secteur_chefferie">
+                        <mat-error *ngIf="formGroup.controls['secteur_chefferie'].hasError('required')">
+                            Ce champs est obligatoire
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <label class="d-block mb-12 fw-semibold gray-color">Village </label>
+                    <mat-form-field appearance="fill">
+                        <i class="ri-edit-2-line"></i>
+                        <mat-label>Entrer le village</mat-label>
+                        <input matInput type="text" formControlName="village" name="village">
+                        <mat-error *ngIf="formGroup.controls['village'].hasError('required')">
+                            Ce champs est obligatoire
+                        </mat-error>
+                    </mat-form-field>
+                </div> 
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <label class="d-block mb-12 fw-semibold gray-color">Pere </label>
+                    <mat-form-field appearance="fill">
+                        <i class="ri-edit-2-line"></i>
+                        <mat-label>Entrer le pere</mat-label>
+                        <input matInput type="text" formControlName="pere" name="pere">
+                        <mat-error *ngIf="formGroup.controls['pere'].hasError('required')">
+                            Ce champs est obligatoire
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <label class="d-block mb-12 fw-semibold gray-color">Mere </label>
+                    <mat-form-field appearance="fill">
+                        <i class="ri-edit-2-line"></i>
+                        <mat-label>Entrer le mere</mat-label>
+                        <input matInput type="text" formControlName="mere" name="mere">
+                        <mat-error *ngIf="formGroup.controls['mere'].hasError('required')">
+                            Ce champs est obligatoire
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <label class="d-block mb-12 fw-semibold gray-color">Lien facebook </label>
+                    <mat-form-field appearance="fill">
+                        <i class="ri-edit-2-line"></i>
+                        <mat-label>Entrer le lien facebook</mat-label>
+                        <input matInput type="text" formControlName="compte_fb" name="compte_fb">
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <label class="d-block mb-12 fw-semibold gray-color">Lien compte X (twitter) </label>
+                    <mat-form-field appearance="fill">
+                        <i class="ri-edit-2-line"></i>
+                        <mat-label>Entrer le lien compte X</mat-label>
+                        <input matInput type="text" formControlName="compte_x" name="compte_x">
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <label class="d-block mb-12 fw-semibold gray-color">Lien linkedIn </label>
+                    <mat-form-field appearance="fill">
+                        <i class="ri-edit-2-line"></i>
+                        <mat-label>Entrer le lien linkedIn</mat-label>
+                        <input matInput type="text" formControlName="compte_linkedIn" name="compte_linkedIn">
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <label class="d-block mb-12 fw-semibold gray-color">Lien instagram </label>
+                    <mat-form-field appearance="fill">
+                        <i class="ri-edit-2-line"></i>
+                        <mat-label>Entrer le lien instagram</mat-label>
+                        <input matInput type="text" formControlName="compte_instagram" name="compte_instagram">
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <label class="d-block mb-12 fw-semibold gray-color">Lien tiktok </label>
+                    <mat-form-field appearance="fill">
+                        <i class="ri-edit-2-line"></i>
+                        <mat-label>Entrer le lien tiktok</mat-label>
+                        <input matInput type="text" formControlName="compte_tiktok" name="compte_tiktok">
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-12 col-md-12">
+                    <div class="tagus-form-group">
+                        <label class="d-block mb-12 fw-semibold gray-color">Publié</label>
+                        <mat-form-field appearance="fill">
+                            <i class="ri-edit-2-line"></i>
+                            <mat-label>Valider la publication</mat-label>
+                            <mat-select formControlName="is_publie">
+                                <mat-option *ngFor="let isPubie of isPubieList" [value]="isPubie">
+                                    <span *ngIf="isPubie">Publié directement</span>
+                                    <span *ngIf="!isPubie">Ne pas Publié</span>
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div> 
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12"> 
+                    <label class="d-block mb-12 fw-semibold gray-color">A propos (Résumé) </label>
+                    <quill-editor [styles]="{height: '200px'}" (onFocus)="focus($event)" 
+                        (onEditorChanged)="changedEditor($event)" (onBlur)="blur($event)" 
+                        (onEditorCreated)="created($event)" formControlName="about"></quill-editor> 
+                </div>
+            </div>
+            <div class="d-flex justify-content-center" *ngIf="isLoading">
+                <mat-spinner color="warn" [diameter]="30"></mat-spinner> <p class="ml-2"> Patientez-svp...</p>
+            </div>
+            <div class="text-center" *ngIf="!isLoading">
+                <div *ngIf="currentUser">
+                    <button mat-button type="submit" class="default-btn mt-25"
+                    *ngIf="currentUser.accreditation === 'RC' ||
+                                currentUser.accreditation === 'RCU' ||
+                                currentUser.accreditation === 'CRUD'">
+                        Soumettre
+                    </button>
+                </div> 
+            </div> 
+        </form>
+    </mat-card-content>
+</mat-card>

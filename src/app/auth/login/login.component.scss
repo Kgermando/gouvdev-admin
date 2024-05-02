@@ -1,0 +1,199 @@
+.tagus-form {
+    max-width: 510px;
+
+    .title {
+        margin-bottom: 30px;
+
+        p {
+            font-size: 18px;
+        }
+    }
+    .login-with-socials {
+        margin-bottom: 25px;
+
+        .mdc-button {
+            margin-top: 0;
+            font-size: 15px !important;
+            padding: 17px 25px 17px 60px !important;
+
+            img {
+                top: 50%;
+                position: absolute;
+                transform: translateY(-50%);
+                margin: {
+                    left: -35px;
+                };
+            }
+            &.gray {
+                border: 1px solid #EDEFF5 !important;
+                background-color: var(--whiteColor) !important;
+            }
+        }
+    }
+    .or {
+        margin-bottom: 25px;
+        color: #777E90;
+        line-height: 1;
+        z-index: 1;
+
+        span {
+            display: inline-block;
+            background: #f5f5f5;
+            padding: {
+                left: 15px;
+                right: 15px;
+            };
+        }
+        &::before {
+            left: 0;
+            right: 0;
+            top: 50%;
+            height: 1px;
+            content: '';
+            z-index: -1;
+            position: absolute;
+            background: #E2E8F0;
+            transform: translateY(-50%);
+        }
+    }
+    .mdc-button {
+        margin-top: 20px;
+        padding: 17px 35px !important;
+        font: {
+            size: 18px !important;
+            family: var(--headingFontFamily) !important;
+        };
+    }
+    .info {
+        margin-top: 15px;
+
+        a {
+            &:hover {
+                color: var(--blackColor) !important;
+            }
+        }
+    }
+}
+.component-dark-theme {
+    .tagus-form {
+        .login-with-socials {
+            .mdc-button {
+                &.gray {
+                    border-color: #1f2226 !important;
+                    background-color: #1e2227 !important;
+                }
+            }
+        }
+        .or {
+            color: #828690;
+    
+            span {
+                background: #0d1015;
+            }
+            &::before {
+                background: #1f2226;
+            }
+        }
+        .info {
+            a {
+                &:hover {
+                    color: var(--whiteColor) !important;
+                }
+            }
+        }
+    }
+    &.card-borderd-theme {
+        .bg-white {
+            box-shadow: var(--borderWhiteBoxShadow);
+        }
+    }
+}
+.card-borderd-theme {
+    .bg-white {
+        box-shadow: var(--borderBoxShadow);
+    }
+}
+.card-border-radius {
+    .bg-white {
+        border-radius: 0 !important;
+    }
+}
+.component-rtl-enabled {
+    .tagus-form {
+        .login-with-socials {
+            .mdc-button {
+                padding: {
+                    left: 25px !important;
+                    right: 60px !important;
+                };
+                img {
+                    margin: {
+                        left: 0;
+                        right: -35px;
+                    };
+                }
+            }
+        }
+        .me-30 {
+            margin-right: 0 !important;
+        }
+    }
+}
+
+@media only screen and (max-width : 767px) {
+
+    .tagus-form {
+        max-width: 100%;
+        padding: {
+            left: 15px;
+            right: 15px;
+        };
+        .title {
+            margin-bottom: 20px;
+    
+            p {
+                font-size: 15px;
+            }
+        }
+        .login-with-socials {
+            margin-bottom: 20px;
+    
+            .mdc-button {
+                margin-bottom: 15px;
+            }
+        }
+        .or {
+            margin-bottom: 20px;
+        }
+        .mdc-button {
+            margin-top: 15px;
+            font-size: 15px !important;
+            padding: 17px 30px !important;
+        }
+    }
+
+}
+
+@media only screen and (min-width : 768px) and (max-width : 991px) {
+
+    .tagus-form {
+        .title {
+            margin-bottom: 15px;
+    
+            p {
+                font-size: 15px;
+            }
+        }
+        .login-with-socials {
+            margin-bottom: 20px;
+        }
+        .or {
+            margin-bottom: 20px;
+        }
+        .mdc-button {
+            margin-top: 15px;
+            font-size: 16px !important;
+        }
+    }
+
+}

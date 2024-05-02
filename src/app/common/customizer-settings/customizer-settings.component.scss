@@ -1,0 +1,131 @@
+.settings-sidebar {
+    bottom: 0;
+    opacity: 0;
+    right: -100%;
+    width: 300px;
+    height: 100%;
+    z-index: 2221;
+    position: fixed;
+    visibility: hidden;
+    border-radius: 10px 0 0 10px;
+    transition: var(--transition);
+
+    .settings-header {
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 2;
+        position: absolute;
+    }
+    .settings-body {
+        padding-top: 80px;
+
+        .switch-btn {
+            width: 60px;
+            height: 30px;
+            cursor: pointer;
+            position: relative;
+            border-radius: 30px;
+            display: inline-block;
+            border: 1px solid #ededed;
+            background-color: transparent;
+
+            &::before {
+                left: 4px;
+                width: 22px;
+                content: "";
+                bottom: 3px;
+                height: 22px;
+                border-radius: 50%;
+                position: absolute;
+                background-color: #dad9d9;
+                transition: var(--transition);
+            }
+            &.active {
+                &::before {
+                    left: 31px;
+                    background-color: var(--heraBlueColor) !important;
+                }
+            }
+        }
+    }
+    &.active {
+        right: 0;
+        opacity: 1;
+        visibility: visible;
+    }
+    &.component-rtl-enabled {
+        right: auto;
+        left: -100%;
+
+        &.active {
+            right: auto;
+            left: 0;
+        }
+    }
+}
+.settings-btn {
+    right: 20px;
+    bottom: 20px;
+    z-index: 2221;
+    position: fixed;
+    transition: var(--transition);
+
+    &.active {
+        right: 320px;
+    }
+    &.component-rtl-enabled {
+        right: auto;
+        left: 20px;
+    
+        &.active {
+            right: auto;
+            left: 320px;
+        }
+    }
+}
+.component-dark-theme {
+    &.settings-sidebar {
+        .settings-body {
+            .switch-btn {
+                border-color: #413e3e !important;
+    
+                &::before {
+                    background-color: var(--whiteColor);
+                }
+                &.active {
+                    &::before {
+                        background-color: var(--heraBlueColor);
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width : 767px) {
+
+    .settings-sidebar {
+        width: 260px;
+    }
+    .settings-btn {
+        right: 15px;
+        width: 50px;
+        bottom: 15px;
+        height: 50px;
+    
+        &.active {
+            right: 265px;
+        }
+        &.component-rtl-enabled {
+            right: auto;
+            left: 15px;
+        
+            &.active {
+                right: auto;
+                left: 265px;
+            }
+        }
+    }
+    
+}

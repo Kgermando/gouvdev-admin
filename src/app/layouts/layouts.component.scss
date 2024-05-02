@@ -1,0 +1,404 @@
+.main-content {
+    overflow: hidden;
+    min-height: 100vh;
+    transition: var(--transition);
+    padding: {
+        left: 285px;
+        right: 25px;
+    };
+    &.active {
+        padding-left: 85px;
+    }
+    &.right-sidebar {
+        padding: {
+            left: 25px;
+            right: 285px;
+        };
+        &.active {
+            padding-right: 85px;
+        }
+    }
+    &.hide-sidebar {
+        padding-left: 85px;
+
+        &.right-sidebar {
+            padding: {
+                left: 25px;
+                right: 85px;
+            };
+        }
+    }
+}
+.blank-page {
+    app-sidebar, app-footer, app-header {
+        display: none !important;
+    }
+    .main-content {
+        padding: 0 !important;
+    }
+}
+.rtl-enabled {
+    .main-content {
+        padding: {
+            right: 285px;
+            left: 25px;
+        };
+        &.active {
+            padding: {
+                left: 25px;
+                right: 85px;
+            };
+        }
+        &.right-sidebar {
+            padding: {
+                right: 25px;
+                left: 285px;
+            };
+            &.active {
+                padding: {
+                    right: 25px;
+                    left: 85px;
+                };
+            }
+        }
+        &.hide-sidebar {
+            padding: {
+                left: 25px;
+                right: 85px;
+            };
+            &.right-sidebar {
+                padding: {
+                    right: 25px;
+                    left: 85px;
+                };
+            }
+        }
+    }
+}
+
+@media only screen and (max-width : 767px) {
+
+    .main-content {
+        padding: {
+            left: 15px;
+            right: 15px;
+        };
+        &.active {
+            padding-left: 15px;
+        }
+        &.right-sidebar {
+            padding: {
+                left: 15px;
+                right: 15px;
+            };
+            &.active {
+                padding-right: 15px;
+            }
+        }
+        &.hide-sidebar {
+            padding-left: 15px;
+
+            &.right-sidebar {
+                padding: {
+                    left: 15px;
+                    right: 15px;
+                };
+            }
+        }
+    }
+    .rtl-enabled {
+        .main-content {
+            padding: {
+                left: 15px;
+                right: 15px;
+            };
+            &.active {
+                padding-right: 15px;
+            }
+            &.right-sidebar {
+                padding: {
+                    left: 15px;
+                    right: 15px;
+                };
+                &.active {
+                    padding-left: 15px;
+                }
+            }
+            &.hide-sidebar {
+                padding-right: 15px;
+    
+                &.right-sidebar {
+                    padding: {
+                        left: 15px;
+                        right: 15px;
+                    };
+                }
+            }
+        }
+    }
+    
+}
+
+@media only screen and (min-width : 768px) and (max-width : 991px) {
+
+    .main-content {
+        padding: {
+            left: 25px;
+            right: 25px;
+        };
+        &.active {
+            padding-left: 25px;
+        }
+        &.right-sidebar {
+            padding: {
+                left: 25px;
+                right: 25px;
+            };
+            &.active {
+                padding-right: 25px;
+            }
+        }
+        &.hide-sidebar {
+            padding-left: 25px;
+
+            &.right-sidebar {
+                padding: {
+                    left: 25px;
+                    right: 25px;
+                };
+            }
+        }
+    }
+    .rtl-enabled {
+        .main-content {
+            padding: {
+                left: 25px;
+                right: 25px;
+            };
+            &.active {
+                padding-right: 25px;
+            }
+            &.right-sidebar {
+                padding: {
+                    left: 25px;
+                    right: 25px;
+                };
+                &.active {
+                    padding-left: 25px;
+                }
+            }
+            &.hide-sidebar {
+                padding-right: 25px;
+    
+                &.right-sidebar {
+                    padding: {
+                        left: 25px;
+                        right: 25px;
+                    };
+                }
+            }
+        }
+    }
+
+}
+
+@media only screen and (min-width : 992px) and (max-width : 1199px) {
+
+    .main-content {
+        padding: {
+            left: 25px;
+            right: 25px;
+        };
+        &.active {
+            padding-left: 25px;
+        }
+        &.right-sidebar {
+            padding: {
+                left: 25px;
+                right: 25px;
+            };
+            &.active {
+                padding-right: 25px;
+            }
+        }
+        &.hide-sidebar {
+            padding-left: 25px;
+
+            &.right-sidebar {
+                padding: {
+                    left: 25px;
+                    right: 25px;
+                };
+            }
+        }
+    }
+    .rtl-enabled {
+        .main-content {
+            padding: {
+                left: 25px;
+                right: 25px;
+            };
+            &.active {
+                padding-right: 25px;
+            }
+            &.right-sidebar {
+                padding: {
+                    left: 25px;
+                    right: 25px;
+                };
+                &.active {
+                    padding-left: 25px;
+                }
+            }
+            &.hide-sidebar {
+                padding-right: 25px;
+    
+                &.right-sidebar {
+                    padding: {
+                        left: 25px;
+                        right: 25px;
+                    };
+                }
+            }
+        }
+    }
+
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1399px) {
+
+    .main-content {
+        padding-left: 265px;
+        
+        &.active {
+            padding-left: 85px;
+        }
+        &.right-sidebar {
+            padding-right: 265px;
+
+            &.active {
+                padding-right: 85px;
+            }
+        }
+        &.hide-sidebar {
+            padding-left: 85px;
+
+            &.right-sidebar {
+                padding: {
+                    left: 25px;
+                    right: 85px;
+                };
+            }
+        }
+    }
+    .rtl-enabled {
+        .main-content {
+            padding: {
+                left: 25px;
+                right: 265px;
+            };
+            &.active {
+                padding: {
+                    left: 25px;
+                    right: 85px;
+                };
+            }
+            &.right-sidebar {
+                padding: {
+                    left: 265px;
+                    right: 25px;
+                };
+                &.active {
+                    padding: {
+                        right: 25px;
+                        left: 85px;
+                    };
+                }
+            }
+            &.hide-sidebar {
+                padding: {
+                    left: 25px;
+                    right: 85px;
+                };
+                &.right-sidebar {
+                    padding: {
+                        right: 25px;
+                        left: 85px;
+                    };
+                }
+            }
+        }
+    }
+
+}
+
+@media only screen and (min-width: 1600px) {
+
+    .main-content {
+        padding: {
+            left: 325px;
+            right: 25px;
+        };
+        &.active {
+            padding-left: 85px;
+        }
+        &.right-sidebar {
+            padding: {
+                left: 25px;
+                right: 325px;
+            };
+            &.active {
+                padding-right: 85px;
+            }
+        }
+        &.hide-sidebar {
+            padding-left: 85px;
+
+            &.right-sidebar {
+                padding: {
+                    left: 25px;
+                    right: 85px;
+                };
+            }
+        }
+    }
+    .rtl-enabled {
+        .main-content {
+            padding: {
+                right: 325px;
+                left: 25px;
+            };
+            &.active {
+                padding: {
+                    left: 25px;
+                    right: 85px;
+                };
+            }
+            &.right-sidebar {
+                padding: {
+                    right: 25px;
+                    left: 325px;
+                };
+                &.active {
+                    padding: {
+                        left: 85px;
+                        right: 25px;
+                    };
+                }
+            }
+            &.hide-sidebar {
+                padding: {
+                    left: 25px;
+                    right: 85px;
+                };
+                &.right-sidebar {
+                    padding: {
+                        right: 25px;
+                        left: 85px;
+                    };
+                }
+            }
+        }
+    }
+
+}

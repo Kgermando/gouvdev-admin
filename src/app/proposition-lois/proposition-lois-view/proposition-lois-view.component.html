@@ -1,0 +1,58 @@
+<div class="d-flex justify-content-center" *ngIf="isLoading">
+    <mat-spinner color="warn" [diameter]="30"></mat-spinner> <p class="ml-2"> Patientez-svp...</p>
+</div>
+<div *ngIf="!isLoading">
+    <div class="row mb-25" *ngIf="propositionLoisModel">
+        <mat-card class="mb-25 personal-info-card tagus-card" [class.component-dark-theme]="themeService.isDark()">
+            <mat-card-header class="border-bottom">
+                <div class="d-flex align-items-center">
+                    <div class="">
+                        <h5 class="mb-5">Proposition des lois</h5> 
+                    </div>
+                </div>
+                <div>  
+                    <button mat-icon-button color="warn" 
+                            (click)="delete(propositionLoisModel.ID)"
+                        *ngIf="currentUser.accreditation === 'CRUD'" 
+                        matTooltip="Mettre en corbeille ce document">
+                            <mat-icon>delete</mat-icon>
+                    </button>
+                </div>
+            </mat-card-header>
+            <mat-card-content>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <ul class="list ps-0 mb-0">
+                            <li>
+                                <span class="fw-semibold">Sujet: </span>
+                                <p class="gray-color">{{ propositionLoisModel.sujet }}</p>
+                            </li>  
+                            <li>
+                                <span class="fw-semibold">UserId: </span>
+                                <span class="gray-color">{{ propositionLoisModel.userId }}</span>
+                            </li> 
+                            <li>
+                                <span class="fw-semibold">Signature: </span>
+                                <span class="gray-color">{{ propositionLoisModel.signature }}</span>
+                            </li>
+                            <li>
+                                <span class="fw-semibold">Date de creation: </span>
+                                <span class="gray-color">{{ propositionLoisModel.CreatedAt | date: 'dd/MM/yyyy' }}</span>
+                            </li> 
+                            <li>
+                                <span class="fw-semibold">Mise à jour le: </span>
+                                <span class="gray-color">{{ propositionLoisModel.UpdatedAt | date: 'dd/MM/yyyy HH:mm' }}</span>
+                            </li>   
+                        </ul> 
+                        <ul class="list ps-0 mb-15"> 
+                            <li>
+                                <span class="fw-semibold">Contenu: </span>
+                                <div [innerHTML]="propositionLoisModel.contenu"></div>
+                            </li>
+                        </ul>
+                    </div>  
+                </div>
+            </mat-card-content>
+        </mat-card> 
+    </div>
+</div>

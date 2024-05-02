@@ -1,0 +1,39 @@
+<div class="create-dialog-box scrollable-dialog">
+    <div class="title d-flex align-items-center justify-content-space-between">
+        <h4 class="mb-0">Modifier vos infos</h4>
+        <button class="close-btn bg-transparent p-0 border-none" (click)="close()"><i class="flaticon-close"></i></button>
+    </div>
+    <form [formGroup]="formGroup" (submit)="onSubmit()">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="form-group">
+                    <label class="d-block fw-semibold">Téléphone</label>
+                    <input type="text" formControlName="telephone" class="input-control" placeholder="telephone">
+                </div>
+                <div *ngIf="formGroup.controls['telephone'].invalid && formGroup.controls['telephone'].dirty">
+                    <div class="text-danger" *ngIf="formGroup.controls['telephone'].errors">
+                        Entrer le numero téléphone
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12">
+                <div class="form-group">
+                    <label class="d-block fw-semibold">Email</label>
+                    <input type="text" formControlName="email" class="input-control" placeholder="Email">
+                </div>
+                <div *ngIf="formGroup.controls['email'].invalid && formGroup.controls['email'].dirty">
+                    <div class="text-danger" *ngIf="formGroup.controls['email'].errors">
+                        Entrer l'adresse mail
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center" *ngIf="isLoading">
+            <mat-spinner color="warn" [diameter]="30"></mat-spinner> <p class="ml-2"> Patientez-svp...</p>
+        </div>  
+        <div class="text-end" *ngIf="!isLoading">
+            <button type="button" class="gray" (click)="close()"><i class="ri-close-fill"></i> Annuler</button>
+            <button type="submit"><i class="ri-edit-fill"></i> Metre à jour</button>
+        </div>
+    </form>
+</div>

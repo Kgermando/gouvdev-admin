@@ -1,0 +1,96 @@
+<header
+    class="header-area bg-white border-bottom-radius box-shadow mb-25"
+    [ngClass]="{'active': isToggled, 'sticky': isSticky}"
+    [class.component-dark-theme]="themeService.isDark()"
+    [class.right-sidebar]="themeService.isRightSidebar()"
+    [class.hide-sidebar]="themeService.isHideSidebar()"
+    [class.dark-header]="themeService.isHeaderDark()"
+    [class.card-borderd-theme]="themeService.isCardBorder()"
+    [class.card-border-radius]="themeService.isCardBorderRadius()" 
+>
+    <div class="d-md-flex align-items-center justify-content-space-between">
+        <div class="header-left-side d-flex align-items-center">
+            <div class="burger-menu" (click)="toggle()" [ngClass]="{'active': isToggled}">
+                <span class="top-bar"></span>
+                <span class="middle-bar"></span>
+                <span class="bottom-bar"></span>
+            </div>
+        </div>
+        <ul class="header-right-side d-flex align-items-center mt-0 mb-0">  
+            <li>
+                <button mat-icon-button [matMenuTriggerFor]="notificationMenu" 
+                    class="btn p-0 border-none rounded-circle position-relative"
+                    [ngClass]="{'notification-btn': isNotify}"
+                    >
+                    <i class="flaticon-bell-2"></i>
+                </button>
+                <mat-menu class="menu-dropdown" #notificationMenu="matMenu" xPosition="before">
+                    <div class="menu-header d-flex align-items-center justify-content-space-between">
+                        <h5 class="m-0">Notifications</h5>
+                    </div>
+                    <ul class="menu-body">
+                        <li class="position-relative" *ngFor="let notify of notificationList">
+                            <a [routerLink]="['/layouts/notifications', notify.id, notify.date_de_rembousement, 'notification']" class="fw-medium position-relative">
+                                <div class="d-flex">
+                                    <i class="flaticon-bell-2 icon"></i>
+                                    <div class="title">
+                                        <h6>{{ notify.name_beneficiaire }}</h6>
+                                        <span class="color"><i class="flaticon-timer"></i> {{ notify.date_de_rembousement | dateAgo }}</span>
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="d-flex justify-content-center" *ngIf="isLoading">
+                                <mat-spinner color="warn" [diameter]="5"></mat-spinner>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="menu-footer">
+                        <a routerLink="/layouts/notifications/notification-list" class="fw-medium position-relative">
+                            Voir plus <i class="flaticon-chevron"></i>
+                        </a>
+                    </div>
+                </mat-menu>
+            </li>
+            <li class="d-none d-lg-block">
+                <div class="date-btn main-color fw-semibold position-relative">
+                    <i class="flaticon-calendar"></i> {{ formattedDate }}
+                </div>
+            </li>
+           <li class="d-none d-lg-block" *ngIf="loading">
+                <mat-card class="mb-10 tagus-card">
+                    <mat-card-content>
+                        <mat-spinner [diameter]="20"></mat-spinner>
+                    </mat-card-content>
+                </mat-card>
+            </li>
+            <li *ngIf="!loading">
+                <div *ngIf="currentUser">
+                    <button mat-icon-button [matMenuTriggerFor]="profileMenu" class="profile-btn main-color border-none bg-transparent position-relative">
+                        <img src="assets/img/admin.jpg" class="rounded-circle" alt="admin">
+                        {{currentUser.role.toUpperCase()}}
+                        <span class="fw-semibold">{{currentUser.fullname}}</span>
+                    </button>
+                    <mat-menu class="profile-menu-dropdown" #profileMenu="matMenu" xPosition="before">
+                        <ul class="m-0">
+                            <li>
+                                <a routerLink="/web/profil">
+                                    <i class="ri-user-3-line"></i> Profil
+                                </a>
+                            </li> 
+                            <li>
+                                <a routerLink="/web/helps/support">
+                                    <i class="ri-question-line"></i> Centre d'aide
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript.void()" (click)="logOut()">
+                                    <i class="ri-shut-down-line"></i> Déconnexion 
+                                </a>
+                            </li>
+                        </ul>
+                    </mat-menu>
+                </div> 
+            </li>
+        </ul>
+    </div>
+</header>

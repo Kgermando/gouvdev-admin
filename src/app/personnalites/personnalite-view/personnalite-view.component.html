@@ -1,0 +1,215 @@
+<div class="d-flex justify-content-center" *ngIf="isLoading">
+    <mat-spinner color="warn" [diameter]="30"></mat-spinner> <p class="ml-2"> Patientez-svp...</p>
+</div>
+<div *ngIf="!isLoading">
+    <div class="row mb-25" *ngIf="personnalite">
+        <mat-card class="mb-25 personal-info-card tagus-card" [class.component-dark-theme]="themeService.isDark()">
+            <mat-card-header class="border-bottom">
+                <div class="d-flex align-items-center">
+                    <!-- <img src="assets/img/user/user22.jpg" width="57" class="rounded-circle" alt="user"> -->
+                    <div class="">
+                        <h5 class="mb-5">{{ personnalite.prenom }} {{ personnalite.nom }} {{ personnalite.postnom }}</h5>
+                        <span class="d-block gray-color success" *ngIf="personnalite.is_publie">Publié</span>
+                        <span class="d-block gray-color danger" *ngIf="!personnalite.is_publie">En attente</span>
+                        <span class="d-block gray-color mt-5">Visites: {{ personnalite.counter }}</span>
+                    </div>
+                </div>
+                <div>
+                    
+                    <button mat-icon-button color="accent"  
+                        [routerLink]="['/web/personnalites', personnalite.ID, 'edit']"
+                        *ngIf="currentUser.accreditation === 'CRUD'" 
+                        matTooltip="Modifier ce document">
+                            <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-icon-button color="warn" 
+                            (click)="delete(personnalite.ID)"
+                        *ngIf="currentUser.accreditation === 'CRUD'" 
+                        matTooltip="Mettre en corbeille ce document">
+                            <mat-icon>delete</mat-icon>
+                    </button>
+                </div>
+            </mat-card-header>
+            <mat-card-content>
+                
+                    <div class="row mb-30">
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <ul class="list ps-0 mb-0">
+                                <li>
+                                    <span class="fw-semibold">Categorie: </span>
+                                    <span class="gray-color">{{ personnalite.category }}</span>
+                                </li>  
+                                <li>
+                                    <span class="fw-semibold">Gouv aff public: </span>
+                                    <span class="gray-color">{{ personnalite.category_gouv_aff_public }}</span>
+                                </li>  
+                                <li>
+                                    <span class="fw-semibold">Fonction: </span>
+                                    <span class="gray-color">{{ personnalite.category_filtre }}</span>
+                                </li>  
+                                <li>
+                                    <span class="fw-semibold">top_header: </span>
+                                    <span class="gray-color">{{ personnalite.top_header }}</span>
+                                </li>  
+                                <li>
+                                    <span class="fw-semibold">Nom: </span>
+                                    <span class="gray-color">{{ personnalite.nom }}</span>
+                                </li>  
+                                <li>
+                                    <span class="fw-semibold">Postnom: </span>
+                                    <span class="gray-color">{{ personnalite.postnom }}</span>
+                                </li>  
+                                <li>
+                                    <span class="fw-semibold">Prenom: </span>
+                                    <span class="gray-color">{{ personnalite.prenom }}</span>
+                                </li>  
+                                <li>
+                                    <span class="fw-semibold">Sexe: </span>
+                                    <span class="gray-color">{{ personnalite.sexe }}</span>
+                                </li>
+                                <li>
+                                    <span class="fw-semibold">Nationalité: </span>
+                                    <span class="gray-color">{{ personnalite.nationalite }}</span>
+                                </li>
+                                <li>
+                                    <span class="fw-semibold">Date de naissance: </span>
+                                    <span class="gray-color">{{ personnalite.birthday | date: 'dd/MM/yyyy' }}</span>
+                                </li>  
+                                <li>
+                                    <span class="fw-semibold">Lieu de naissance: </span>
+                                    <span class="gray-color">{{ personnalite.lieu_naissance }}</span>
+                                </li>
+                                <li>
+                                    <span class="fw-semibold">Signature: </span>
+                                    <span class="gray-color">{{ personnalite.signature }}</span>
+                                </li>
+                                <li>
+                                    <span class="fw-semibold">Date de creation: </span>
+                                    <span class="gray-color">{{ personnalite.CreatedAt | date: 'dd/MM/yyyy' }}</span>
+                                </li>  
+                                <li>
+                                    <span class="fw-semibold">Mise à jour le: </span>
+                                    <span class="gray-color">{{ personnalite.UpdatedAt | date: 'dd/MM/yyyy HH:mm' }}</span>
+                                </li> 
+                            </ul>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <ul class="list ps-0 mb-0">
+                                
+                                <li>
+                                    <span class="fw-semibold">Etat civile: </span>
+                                    <span class="gray-color">{{ personnalite.etat_civile }}</span>
+                                </li>
+                                <li>
+                                    <span class="fw-semibold">Conjoint: </span>
+                                    <span class="gray-color">{{ personnalite.conjoint }} ans</span>
+                                </li> 
+                                <li>
+                                    <span class="fw-semibold">Province: </span>
+                                    <span class="gray-color">{{ personnalite.province }}</span>
+                                </li>
+                                <li>
+                                    <span class="fw-semibold">Territoire/Ville: </span>
+                                    <span class="gray-color">{{ personnalite.territoire_ville }}</span>
+                                </li>
+                                <li> 
+                                    <span class="fw-semibold">Secteur/Chefferie: </span>
+                                    <span class="gray-color">{{ personnalite.secteur_chefferie }}</span>
+                                </li>
+                                <li>
+                                    <span class="fw-semibold">Village: </span>
+                                    <span class="gray-color">{{ personnalite.village }}</span>
+                                </li> 
+
+                                <li>
+                                    <span class="fw-semibold">Pere: </span>
+                                    <span class="gray-color">{{ personnalite.pere }}</span>
+                                </li> 
+                                <li>
+                                    <span class="fw-semibold">Mere: </span>
+                                    <span class="gray-color">{{ personnalite.mere }}</span>
+                                </li> 
+
+                                <li>
+                                    <span class="fw-semibold">Statut de publication: </span> 
+                                    <span class="gray-color" *ngIf="personnalite.is_publie"> Publié</span>
+                                    <span class="gray-color" *ngIf="!personnalite.is_publie"> En attente</span>
+                                </li>  
+                              
+                                <li>
+                                    <span class="fw-semibold">LinkedIn: </span>
+                                    <span class="gray-color">{{ personnalite.compte_linkedin }}</span>
+                                </li> 
+                                <li>
+                                    <span class="fw-semibold">Instagram: </span>
+                                    <span class="gray-color">{{ personnalite.compte_instagram }}</span>
+                                </li> 
+                                <li>
+                                    <span class="fw-semibold">Tiktok: </span>
+                                    <span class="gray-color">{{ personnalite.compte_tiktok }}</span>
+                                </li> 
+
+                                <li>
+                                    <span class="fw-semibold">counter: </span>
+                                    <span class="gray-color">{{ personnalite.counter }}</span>
+                                </li>  
+                                <li>
+                                    <span class="fw-semibold">Link photo: </span>
+                                    <span class="gray-color">{{ personnalite.photo }}</span>
+                                </li>
+                            </ul>
+                        </div> 
+                    </div>
+
+                    <h4>A Propos</h4>
+                    <div [innerHTML]="personnalite.about" class="mb-25"></div>
+
+     
+                    <div class="mb-25">
+                        <hr>
+                        <div class="d-flex justify-content-space-between">
+                            <h2>Sections</h2>
+                            <div>
+                                <button mat-icon-button  
+                                    [routerLink]="['/web/personnalites/personnalite-section', personnalite.ID, 'add']"
+                                    *ngIf="currentUser.accreditation === 'CRUD'" 
+                                    matTooltip="Add new section">
+                                        <mat-icon>add</mat-icon>
+                                </button>
+                            </div> 
+                        </div>
+                        <hr>
+                        <div *ngFor="let section of personnaliteSectionList">
+                            <div class="d-flex justify-content-space-between align-items-center"> 
+                                <h4>{{ section.title }} </h4>
+                                <div class="d-flex justify-content-end">
+                                    <div>
+                                        <p class="badge text-bg-success" *ngIf="section.is_valid">Validé</p> 
+                                        <p class="badge text-bg-danger" *ngIf="!section.is_valid">Non Validé</p> 
+                                    </div>
+                                    <button mat-icon-button color="accent"  
+                                        [routerLink]="['/web/personnalites/personnalite-section', section.ID, 'edit']"
+                                        *ngIf="currentUser.accreditation === 'CRUD'" 
+                                        matTooltip="Modifier cette section">
+                                            <mat-icon>edit</mat-icon>
+                                    </button>
+                                    <button mat-icon-button color="warn" 
+                                        (click)="deleteSection(section.ID)"
+                                        *ngIf="currentUser.accreditation === 'CRUD'" 
+                                        matTooltip="Supprimer ce document">
+                                            <mat-icon>delete</mat-icon>
+                                    </button>
+                                </div> 
+                            </div> 
+                            <div *ngIf="section.image">
+                                <p>{{ section.image }} </p>
+                            </div>
+                            <div [innerHTML]="section.content"></div>
+                            <hr>
+                        </div>
+                    </div> 
+                    
+            </mat-card-content>
+        </mat-card>  
+    </div>
+</div>

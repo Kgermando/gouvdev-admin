@@ -1,0 +1,43 @@
+<div class="create-dialog-box">
+    <div class="title d-flex align-items-center justify-content-space-between">
+        <h4 class="mb-0">Modification de la validation des sondages</h4>
+        <button class="close-btn bg-transparent p-0 border-none" (click)="close()"><i class="flaticon-close"></i></button>
+    </div>
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+        <div class="row"> 
+            <div class="col-lg-12 col-md-12">
+                <div class="tagus-form-group">
+                    <label class="d-block mb-12 fw-semibold gray-color">Statut du sondage</label>
+                    <mat-form-field appearance="fill">
+                        <i class="ri-edit-2-line"></i>
+                        <mat-label>Fermé le sondage</mat-label>
+                        <mat-select formControlName="is_valid">
+                            <mat-option *ngFor="let isValid of isValidList" [value]="isValid">
+                                <span *ngIf="!isValid">Fermée le sondage</span>
+                                <span *ngIf="isValid">Ouvrir le sondage</span>
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field> 
+                </div> 
+            </div>
+        </div>
+        <div class="text-end">
+            <button type="button" class="gray" (click)="close()">
+                <i class="ri-close-fill"></i> 
+                Annuler
+            </button>
+            <button type="submit">
+                <span *ngIf="isLoading">
+                    <mat-progress-spinner [diameter]="30"
+                        color="primary" 
+                        mode="indeterminate">
+                    </mat-progress-spinner>
+                </span>
+                <span *ngIf="!isLoading">
+                    <i class="ri-add-fill"></i> 
+                    Soumettre
+                </span> 
+            </button>
+        </div>
+    </form>
+</div>

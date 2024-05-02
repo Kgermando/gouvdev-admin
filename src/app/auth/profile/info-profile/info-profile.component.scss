@@ -1,0 +1,87 @@
+.personal-info-card {
+    p {
+        font-size: 14px;
+    }
+    .list {
+        list-style-type: none;
+        margin-top: 20px;
+
+        li {
+            font-size: 14px;
+            border-bottom: 1px solid #F7FAFF;
+            padding: {
+                top: 11px;
+                bottom: 11px;
+            };
+            span {
+                &:nth-child(1) {
+                    width: 115px;
+                }
+            }
+            &:first-child {
+                padding-top: 0;
+            }
+            &:last-child {
+                border-bottom: none;
+                padding-bottom: 0;
+            }
+        }
+    }
+    &.component-dark-theme {
+        .list {
+            li {
+                border-bottom-color: #1f2226;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width : 767px) {
+
+    .personal-info-card {
+        p {
+            font-size: 13.5px;
+        }
+        .list {
+            margin-top: 15px;
+    
+            li {
+                font-size: 13.5px;
+                padding: {
+                    top: 10px;
+                    bottom: 10px;
+                };
+                span {
+                    &:nth-child(1) {
+                        width: 90px;
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+@media only screen and (min-width: 1600px) {
+
+    .personal-info-card {
+        p {
+            font-size: var(--fontSize);
+        }
+        .list {
+            li {
+                font-size: var(--fontSize);
+                padding: {
+                    top: 15px;
+                    bottom: 15px;
+                };
+                span {
+                    &:nth-child(1) {
+                        width: 150px;
+                    }
+                }
+            }
+        }
+    }
+
+}

@@ -1,0 +1,84 @@
+<div class="d-flex justify-content-center" *ngIf="isLoading">
+    <mat-spinner color="warn" [diameter]="30"></mat-spinner> <p class="ml-2"> Patientez-svp...</p>
+</div>
+<div *ngIf="!isLoading">
+    <div class="row mb-25" *ngIf="user">
+        <mat-card class="mb-25 personal-info-card tagus-card" [class.component-dark-theme]="themeService.isDark()">
+            <mat-card-header class="border-bottom">
+                <div class="d-flex align-items-center">
+                    <img src="assets/img/user/user22.jpg" width="57" class="rounded-circle" alt="user">
+                    <div class="ms-15">
+                        <h5 class="mb-5">{{ user.role.toUpperCase() }}</h5>
+                        <span class="d-block gray-color success" *ngIf="user.is_active">Actif</span>
+                        <span class="d-block gray-color danger" *ngIf="!user.is_active">Inactif</span>
+                    </div>
+                </div>
+                <div>
+                    <button mat-icon-button color="accent"  
+                        [routerLink]="['/web/users', user.ID, 'edit']"
+                        *ngIf="currentUser.accreditation === 'CRUD'" 
+                        matTooltip="Modifier ce document">
+                            <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-icon-button color="warn" 
+                            (click)="delete(user.ID)"
+                        *ngIf="currentUser.accreditation === 'CRUD'" 
+                        matTooltip="Mettre en corbeille cet utilisateur">
+                            <mat-icon>delete</mat-icon>
+                    </button>
+                </div>
+            </mat-card-header>
+            <mat-card-content>
+                
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <ul class="list ps-0 mb-0">
+                                <li>
+                                    <span class="fw-semibold">Fullname: </span>
+                                    <span class="gray-color">{{ user.fullname }}</span>
+                                </li>  
+                                <li>
+                                    <span class="fw-semibold">Role: </span>
+                                    <span class="gray-color">{{ user.role }}</span>
+                                </li>
+                                <li>
+                                    <span class="fw-semibold">Accreditation: </span>
+                                    <span class="gray-color">{{ user.accreditation }}</span>
+                                </li>  
+                                <li>
+                                    <span class="fw-semibold">Date de creation: </span>
+                                    <span class="gray-color">{{ user.CreatedAt | date: 'dd/MM/yyyy' }}</span>
+                                </li> 
+                                <li>
+                                    <span class="fw-semibold">Mise à jour le: </span>
+                                    <span class="gray-color">{{ user.UpdatedAt | date: 'dd/MM/yyyy HH:mm' }}</span>
+                                </li>   
+                            </ul>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <ul class="list ps-0 mb-0">
+                                <li>
+                                    <span class="fw-semibold">Email: </span>
+                                    <span class="gray-color">{{ user.email }}</span>
+                                </li>
+                                <li>
+                                    <span class="fw-semibold">Sexe: </span>
+                                    <span class="gray-color">{{ user.sexe }}</span>
+                                </li> 
+                                <li>
+                                    <span class="fw-semibold">Tranche Age: </span>
+                                    <span class="gray-color">{{ user.trancheage }} ans</span>
+                                </li> 
+                                <li>
+                                    <span class="fw-semibold">Statut utilisateur: </span> 
+                                    <span class="gray-color" *ngIf="user.is_active"> Actif</span>
+                                    <span class="gray-color" *ngIf="!user.is_active"> Inactif</span>
+                                </li> 
+                                
+                            </ul>
+                        </div> 
+                    </div>
+            </mat-card-content>
+        </mat-card> 
+    </div>
+</div>

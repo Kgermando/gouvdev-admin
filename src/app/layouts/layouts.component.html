@@ -1,0 +1,19 @@
+<div
+    [class.dark-theme]="themeService.isDark()"
+    [class.card-borderd-theme]="themeService.isCardBorder()"
+    [class.card-border-radius]="themeService.isCardBorderRadius()" 
+>
+    <app-sidebar></app-sidebar>
+    <div
+        class="main-content d-flex flex-column"
+        [ngClass]="{'active': isToggled}"
+        [class.right-sidebar]="themeService.isRightSidebar()"
+        [class.hide-sidebar]="themeService.isHideSidebar()"
+    >
+        <app-header></app-header>
+        <router-outlet></router-outlet>
+        <div class="flex-grow-1"></div>
+        <app-footer></app-footer>
+    </div>
+    <app-customizer-settings></app-customizer-settings>
+</div>

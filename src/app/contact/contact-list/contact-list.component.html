@@ -1,0 +1,91 @@
+<mat-card class="mb-25 tagus-card" [class.component-dark-theme]="themeService.isDark()"
+  [class.card-border-radius]="themeService.isCardBorderRadius()">
+    <mat-card-header>
+        <div>
+            <h4 class="mb-0">Liste des Messages recus</h4> 
+        </div>
+        <!-- <div>
+            <button mat-flat-button class="default-btn tagus m-0 margin" 
+                routerLink="/layouts/users/user-add">
+                <i class="ri-add-fill"></i> Ajouter un utilisateur
+            </button>
+            <button type="button" mat-button class="position-relative dot-btn p-0 bg-transparent border-none" 
+                [matMenuTriggerFor]="iconMenu">
+                <i class="ri-menu-line"></i>
+            </button>
+            <mat-menu #iconMenu="matMenu" class="dotMenu monthMenu" xPosition="before">
+                <button mat-menu-item type="button" 
+                class="bg-transparent border-none position-relative"
+                (click)="openExportDialog('300ms', '100ms')">
+                    <i class="ri-printer-line"></i> Exporter
+                </button>
+            </mat-menu>
+        </div> -->
+    </mat-card-header>
+    <mat-card-content> 
+        <div class="tagus-form-group">
+            <mat-form-field appearance="fill">
+                <i class="ri-search-line"></i>
+                <mat-label>Filter</mat-label>
+                <input matInput (keyup)="applyFilter($event)" #input>
+            </mat-form-field>
+        </div>
+        <div class="mat-elevation-z8 tagus-mat-table">
+            <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
+               
+                <ng-container matColumnDef="numero">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>N° </th>
+                    <td mat-cell *matCellDef="let element; let i = index;">
+                        <a [routerLink]="['/web/contacts', element.ID, 'view']">
+                            {{i +1}}
+                        </a>
+                    </td>   
+                </ng-container>
+ 
+                 <!-- Nom Column -->
+                 <ng-container matColumnDef="fullname">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Nom complet</th>
+                    <td mat-cell *matCellDef="let element">
+                        <a [routerLink]="['/web/contacts', element.ID, 'view']">
+                            {{element.fullname}} 
+                        </a>
+                    </td>
+                </ng-container> 
+
+                <!-- Email Column -->
+                <ng-container matColumnDef="email">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+                    <td mat-cell *matCellDef="let element">
+                        {{element.email}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="is_read">
+                    <th mat-header-cell *matHeaderCellDef>Lu</th>
+                    <td mat-cell *matCellDef="let element">
+                        <span class="badge text-bg-success" *ngIf="element.is_read">Lu</span> 
+                        <span class="badge text-bg-danger" *ngIf="!element.is_read">Non lu</span> 
+                    </td>
+                </ng-container> 
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)"></tr>
+ 
+            </table>
+            <mat-paginator #paginator (page)="handlePageChange($event)"
+                [length]="totalPages"
+                [pageSize]="pageSize"
+                [pageIndex]="pageNumber"
+                [pageSizeOptions]="[15, 30, 45]">
+            </mat-paginator>
+
+            <div *ngIf="isLoading" 
+                style="display: flex; justify-content: center; align-items: center; background: white;">
+                <mat-progress-spinner [diameter]="30"
+                    color="primary" 
+                    mode="indeterminate">
+                </mat-progress-spinner>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>

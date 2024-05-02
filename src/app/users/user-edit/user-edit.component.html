@@ -1,0 +1,88 @@
+
+<mat-card class="create-project-card tagus-card mb-25">
+    <mat-card-header>
+        <h4 class="mb-0" *ngIf="user">Modification de {{user.fullname}}</h4>
+    </mat-card-header>
+    <mat-card-content>
+        <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <label class="d-block mb-12 fw-semibold gray-color">Fullname </label>
+                    <mat-form-field appearance="fill">
+                        <i class="ri-edit-2-line"></i>
+                        <mat-label>Entrer le fullname</mat-label>
+                        <input matInput type="text" id="fullname" formControlName="fullname" required>
+                        <mat-error *ngIf="formGroup.controls['fullname'].hasError('required')">
+                            Ce champs est obligatoire
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <label class="d-block mb-12 fw-semibold gray-color">Sexe </label>
+                    <mat-form-field appearance="fill">
+                        <i class="ri-group-line"></i>
+                        <mat-label>Select sexe</mat-label>
+                        <mat-select formControlName="sexe">
+                            <mat-option *ngFor="let sexe of sexeList" [value]="sexe">{{sexe}}</mat-option>
+                        </mat-select> 
+                    </mat-form-field>
+                </div>  
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <label class="d-block mb-12 fw-semibold gray-color">Tranche age </label>
+                    <mat-form-field appearance="fill">
+                        <i class="ri-group-line"></i>
+                        <mat-label>Select tranche age</mat-label>
+                        <mat-select formControlName="trancheage">
+                            <mat-option *ngFor="let trancheage of trancheAgeList" [value]="trancheage">{{trancheage}}</mat-option>
+                        </mat-select> 
+                    </mat-form-field>
+                </div>  
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="tagus-form-group">
+                        <label class="d-block mb-12 fw-semibold gray-color">Statut utilisateur</label>
+                        <mat-checkbox class="example-margin" id="is_active" formControlName="is_active">
+                            Statut 
+                        </mat-checkbox> 
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="tagus-form-group">
+                        <label class="d-block mb-12 fw-semibold gray-color">Role</label>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Select role</mat-label>
+                            <i class="ri-list-check"></i>
+                            <mat-select formControlName="role">
+                                <mat-option *ngFor="let role of roleList" [value]="role">{{role}}</mat-option>
+                            </mat-select> 
+                        </mat-form-field>
+                    </div> 
+                </div> 
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="tagus-form-group">
+                        <label class="d-block mb-12 fw-semibold gray-color">Accreditation <span>*</span></label>
+                        <mat-form-field appearance="fill">
+                            <i class="ri-edit-2-line"></i>
+                            <mat-label>Accreditation</mat-label>
+                            <mat-select formControlName="accreditation">
+                                <mat-option *ngFor="let accreditation of permissionList" [value]="accreditation">
+                                    {{accreditation}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center" *ngIf="isLoading">
+                <mat-spinner color="warn" [diameter]="30"></mat-spinner> <p class="ml-2"> Patientez-svp...</p>
+            </div>
+            <div *ngIf="!isLoading">
+                <div *ngIf="currentUser">
+                    <button mat-button type="submit" class="default-btn mt-25"
+                    *ngIf="currentUser.accreditation === 'CRUD'">
+                    Soumettre
+                </button>
+                </div>
+            </div> 
+        </form>
+    </mat-card-content>
+</mat-card>

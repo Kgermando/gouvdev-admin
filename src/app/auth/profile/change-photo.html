@@ -1,0 +1,23 @@
+<div class="create-dialog-box scrollable-dialog">
+    <div class="title d-flex align-items-center justify-content-space-between">
+        <h4 class="mb-0">Changer photo de profile</h4>
+        <button class="close-btn bg-transparent p-0 border-none" (click)="close()"><i class="flaticon-close"></i></button>
+    </div>
+    <form [formGroup]="photoForm" (submit)="photoSubmit()">
+        <div class="row">
+            <div class="d-flex align-items-center">
+                <!-- <img [src]="currentUser.photo" class="rounded-circle" width="110" alt="user" *ngIf="currentUser.photo"> -->
+                <img src="assets/img/user/user15.jpg" class="rounded-circle" width="110" alt="user">
+                <div class="tagus-form-group ms-20"> 
+                    <input formControlName="photo" hidden type="hidden" name="photo"> 
+                    <app-upload (uploadedUrl)="photoForm.patchValue({'photo': $event})"></app-upload>  
+                </div>
+            </div> 
+        </div>
+        <div class="text-end">
+            <button type="button" class="gray" (click)="close()"><i class="ri-close-fill"></i> Annuler</button>
+            <button type="submit"><i class="ri-user-fill"></i> Changer</button>
+        </div>
+    </form>
+</div>
+ 

@@ -1,0 +1,55 @@
+<div
+    class="settings-sidebar bg-white box-shadow"
+    [ngClass]="{'active': isToggled}"
+    [class.component-dark-theme]="themeService.isDark()"
+>
+    <div class="settings-header bg-gray p-20">
+        <div class="d-flex align-items-center justify-content-space-between">
+            <h5 class="m-0">Configuration Panel</h5>
+            <img src="assets/img/logo-icon.png" alt="logo-icon">
+        </div>
+    </div>
+    <ng-scrollbar visibility="hover">
+        <div class="settings-body">
+            <mat-divider></mat-divider>
+            <div class="p-20">
+                <span class="sub-title d-block mb-12 fw-semibold">Mode sombre</span>
+                <button (click)="toggleTheme()" class="switch-btn" [class.active]="themeService.isDark()"></button>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="p-20">
+                <span class="sub-title d-block mb-12 fw-semibold">Barre de navigation sombre</span>
+                <button (click)="toggleSidebarTheme()" class="switch-btn" [class.active]="themeService.isSidebarDark()"></button>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="p-20">
+                <span class="sub-title d-block mb-12 fw-semibold">Only Header Dark</span>
+                <button (click)="toggleHeaderTheme()" class="switch-btn" [class.active]="themeService.isHeaderDark()"></button>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="p-20">
+                <span class="sub-title d-block mb-12 fw-semibold">Barre de navigation à droite</span>
+                <button (click)="toggleRightSidebarTheme()" class="switch-btn" [class.active]="themeService.isRightSidebar()"></button>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="p-20">
+                <span class="sub-title d-block mb-12 fw-semibold">Cacher barre de navigation</span>
+                <button (click)="toggleHideSidebarTheme()" class="switch-btn" [class.active]="themeService.isHideSidebar()"></button>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="p-20">
+                <span class="sub-title d-block mb-12 fw-semibold">Borderd Card</span>
+                <button (click)="toggleCardBorderTheme()" class="switch-btn" [class.active]="themeService.isCardBorder()"></button>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="p-20">
+                <span class="sub-title d-block mb-12 fw-semibold">Card Border Radius</span>
+                <button (click)="toggleCardBorderRadiusTheme()" class="switch-btn" [class.active]="themeService.isCardBorderRadius()"></button>
+            </div>
+        </div>
+    </ng-scrollbar>
+</div>
+
+<button mat-fab class="tagus settings-btn" (click)="toggle()" [ngClass]="{'active': isToggled}">
+    <mat-icon>settings</mat-icon>
+</button>

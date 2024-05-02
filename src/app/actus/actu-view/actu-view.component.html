@@ -1,0 +1,43 @@
+<div class="d-flex justify-content-center" *ngIf="isLoading">
+    <mat-spinner color="warn" [diameter]="30"></mat-spinner> <p class="ml-2"> Patientez-svp...</p>
+</div>
+<div *ngIf="!isLoading">
+    <div class="row mb-25" *ngIf="actu">
+        <mat-card class="mb-25 personal-info-card tagus-card" [class.component-dark-theme]="themeService.isDark()">
+            <mat-card-header class="border-bottom">
+                <h4>Actualite</h4>
+            </mat-card-header>
+            <mat-card-content>
+                
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <ul class="list ps-0 mb-0">
+                                <li>
+                                    <span class="fw-semibold">Titre: </span>
+                                    <p class="gray-color">{{ actu.titre }}</p>
+                                </li>  
+                                <li>
+                                    <span class="fw-semibold">Statut: </span>
+                                    <span class="d-block gray-color success" *ngIf="actu.is_publie">Publié</span> 
+                                    <span class="d-block gray-color danger" *ngIf="!actu.is_publie">En attente</span> 
+                                </li>
+                                <li>
+                                    <span class="fw-semibold">Singature: </span>
+                                    <span class="gray-color">{{ actu.signature }}</span>
+                                </li> 
+                                <li>
+                                    <span class="fw-semibold">Date de creation: </span>
+                                    <span class="gray-color">{{ actu.CreatedAt | date: 'dd/MM/yyyy' }}</span>
+                                </li> 
+                                <li>
+                                    <span class="fw-semibold">Mise à jour le: </span>
+                                    <span class="gray-color">{{ actu.UpdatedAt | date: 'dd/MM/yyyy HH:mm' }}</span>
+                                </li>   
+                            </ul>
+                        </div>
+                        
+                    </div>
+            </mat-card-content>
+        </mat-card> 
+    </div>
+</div>

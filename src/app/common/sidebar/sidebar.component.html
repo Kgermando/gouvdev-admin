@@ -1,0 +1,82 @@
+<div
+    class="sidebar-area bg-white box-shadow"
+    [ngClass]="{'active': isToggled}"
+    [class.dark-sidebar]="themeService.isSidebarDark()"
+    [class.right-sidebar]="themeService.isRightSidebar()"
+    [class.hide-sidebar]="themeService.isHideSidebar()"
+>
+    <div class="logo bg-white">
+        <a  class="d-flex align-items-center">
+            <!-- <img src="assets/img/logo-icon.png" alt="logo"> -->
+            <span>GOUVDEV-ADMIN</span>
+        </a>
+    </div>
+    <div class="burger-menu" (click)="toggle()" [ngClass]="{'active': isToggled}">
+        <span class="top-bar"></span>
+        <span class="middle-bar"></span>
+        <span class="bottom-bar"></span>
+    </div>
+    <ng-scrollbar visibility="hover" style="height: 100vh;">
+        <div class="sidebar-inner">
+            <div class="sidebar-menu">
+                <mat-accordion>
+                    <span class="sub-title gray-color">MAIN</span>
+                    <a routerLink="/web/dashboard" class="sidebar-menu-link" routerLinkActive="active" 
+                        [routerLinkActiveOptions]="{exact: true}" >
+                        <i class="flaticon-menu-1"></i>
+                        <span class="title">Dashboard</span>
+                    </a>  
+
+                    <a routerLink="/web/actualites/list" class="sidebar-menu-link" routerLinkActive="active" 
+                        [routerLinkActiveOptions]="{exact: true}" >
+                        <i class="fi fi-rr-newspaper"></i>
+                        <span class="title">Actualites</span>
+                    </a>
+ 
+                    <a routerLink="/web/sondages/list" class="sidebar-menu-link" routerLinkActive="active" 
+                        [routerLinkActiveOptions]="{exact: true}" >
+                        <i class="fi fi-rr-videoconference"></i>
+                        <span class="title">Sondages</span>
+                    </a>
+
+                    <a routerLink="/web/opinions/list" class="sidebar-menu-link" routerLinkActive="active" 
+                        [routerLinkActiveOptions]="{exact: true}" >
+                        <i class="fi fi-rr-videoconference"></i>
+                        <span class="title">Opinions</span>
+                    </a>
+
+                    <a routerLink="/web/personnalites/list" class="sidebar-menu-link" routerLinkActive="active" 
+                        [routerLinkActiveOptions]="{exact: true}" >
+                        <i class="fi fi-rr-leadership"></i>
+                        <span class="title">Personnalites</span>
+                    </a>
+
+                    <a routerLink="/web/proposition-lois/list" class="sidebar-menu-link" routerLinkActive="active" 
+                        [routerLinkActiveOptions]="{exact: true}" >
+                        <i class="fi fi-rr-catalog-magazine"></i>
+                        <span class="title">Propositions</span>
+                    </a>
+
+
+                    <a routerLink="/web/text-legaux-titre/list" class="sidebar-menu-link" routerLinkActive="active" 
+                        [routerLinkActiveOptions]="{exact: true}" >
+                        <i class="fi fi-rr-diary-clasp"></i>
+                        <span class="title">Text-legaux titres</span>
+                    </a>
+
+                    <a routerLink="/web/contacts/list" class="sidebar-menu-link" routerLinkActive="active" 
+                        [routerLinkActiveOptions]="{exact: true}" >
+                        <i class="ri-contacts-book-line"></i>
+                        <span class="title">Contacts </span>
+                    </a> 
+
+                    <a routerLink="/web/users/list" class="sidebar-menu-link" routerLinkActive="active" 
+                        [routerLinkActiveOptions]="{exact: true}" >
+                        <i class="fi fi-rr-users-alt"></i>
+                        <span class="title">Utilisateurs</span>
+                    </a>
+                </mat-accordion>
+            </div>
+        </div>
+    </ng-scrollbar>
+</div>

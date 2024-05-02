@@ -1,0 +1,68 @@
+<div class="d-flex justify-content-center" *ngIf="isLoading">
+    <mat-spinner color="warn" [diameter]="30"></mat-spinner> <p class="ml-2"> Patientez-svp...</p>
+</div>
+<div *ngIf="!isLoading">
+    <div class="row mb-25" *ngIf="opinion">
+        <mat-card class="mb-25 personal-info-card tagus-card" [class.component-dark-theme]="themeService.isDark()">
+            <mat-card-header class="border-bottom">
+                <div class="d-flex align-items-center">
+                    <div class="">
+                        <h5 class="mb-5">Opinion</h5> 
+                    </div>
+                </div>
+                <div>
+                    <!-- <button mat-icon-button color="accent"  
+                        [routerLink]="['/web/sondages', opinion.id, 'edit']"
+                        *ngIf="currentUser.accreditation === 'CRUD'" 
+                        matTooltip="Modifier ce document">
+                            <mat-icon>edit</mat-icon>
+                    </button> -->
+                    <button mat-icon-button color="warn" 
+                            (click)="delete(opinion.ID)"
+                        *ngIf="currentUser.accreditation === 'CRUD'" 
+                        matTooltip="Mettre en corbeille ce document">
+                            <mat-icon>delete</mat-icon>
+                    </button>
+                </div>
+            </mat-card-header>
+            <mat-card-content>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <ul class="list ps-0 mb-0">
+                            <li>
+                                <span class="fw-semibold">sondage Id: </span>
+                                <p class="gray-color">{{ opinion.sondage_id }}</p>
+                            </li>  
+                            <li>
+                                <span class="fw-semibold">user Id: </span>
+                                <span class="gray-color">{{ opinion.user_id }}</span>
+                            </li>
+                            <li>
+                                <span class="fw-semibold">choice: </span>
+                                <span class="gray-color">{{ opinion.choice }}</span>
+                            </li>   
+                            <li>
+                                <span class="fw-semibold">Signature: </span>
+                                <span class="gray-color">{{ opinion.signature }}</span>
+                            </li>
+                            <li>
+                                <span class="fw-semibold">Date de creation: </span>
+                                <span class="gray-color">{{ opinion.CreatedAt | date: 'dd/MM/yyyy' }}</span>
+                            </li> 
+                            <li>
+                                <span class="fw-semibold">Mise à jour le: </span>
+                                <span class="gray-color">{{ opinion.UpdatedAt | date: 'dd/MM/yyyy HH:mm' }}</span>
+                            </li>   
+                        </ul>
+                        <ul class="list ps-0 mb-15"> 
+                            <li>
+                                <span class="fw-semibold">Opinion: </span>
+                                <div [innerHTML]="opinion.opinionText"></div>
+                            </li>
+                        </ul>
+                    </div>  
+                </div>
+            </mat-card-content>
+        </mat-card> 
+    </div>
+</div>
