@@ -34,6 +34,7 @@ export class UserViewComponent implements OnInit {
           let id = this.route.snapshot.paramMap.get('id');  // this.route.snapshot.params['id'];
           this.userService.get(Number(id)).subscribe(res => {
             this.user = res.data;
+            console.log("user", this.user)
             this.isLoading = false;
           });
         },

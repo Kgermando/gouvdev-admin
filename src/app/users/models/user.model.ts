@@ -13,7 +13,7 @@ export interface UserModel {
     accreditation: string[]; // Permission
     is_active: boolean;
     trancheage: string;
-    propositionLois: PropositionLoisModel[];
+    proposition_lois: PropositionLoisModel[];
     opinions: OpinionMoodel[];
     CreatedAt: Date;
     UpdatedAt: Date;

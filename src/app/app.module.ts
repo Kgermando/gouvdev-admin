@@ -61,7 +61,6 @@ import { ResetPasswordComponent } from './auth/reset-password/reset-password.com
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ChangePasswordDialogBox, ChangePhotoDialogBox, ProfileComponent, UpdateInfoDialogBox } from './auth/profile/profile.component';
-import { InfoProfileComponent } from './auth/profile/info-profile/info-profile.component';
 import { LimiterTextPipe } from './pipes/limiter-text.pipe'; 
 import { PersonnaliteSectionAddComponent } from './personnalite-sections/personnalite-section-add/personnalite-section-add.component';
 import { PersonnaliteSectionEditComponent } from './personnalite-sections/personnalite-section-edit/personnalite-section-edit.component';
@@ -99,7 +98,7 @@ registerLocaleData(localeFr);
     PersonnaliteListComponent,
     PersonnaliteViewComponent,
     PersonnaliteAddComponent,
-    PersonnaliteEditComponent,
+    PersonnaliteEditComponent, 
     PropositionLoisListComponent,
     PropositionLoisAddComponent,
     PropositionLoisViewComponent,
@@ -124,7 +123,6 @@ registerLocaleData(localeFr);
     UpdateInfoDialogBox,
     ChangePhotoDialogBox,
     ChangePasswordDialogBox,
-    InfoProfileComponent,
 
     CreateActuDialogBox,
     LimiterTextPipe, 

@@ -38,13 +38,14 @@
                                     <span class="gray-color">{{ user.fullname }}</span>
                                 </li>  
                                 <li>
-                                    <span class="fw-semibold">Role: </span>
-                                    <span class="gray-color">{{ user.role }}</span>
-                                </li>
+                                    <span class="fw-semibold">Sexe: </span>
+                                    <span class="gray-color">{{ user.sexe }}</span>
+                                </li> 
                                 <li>
-                                    <span class="fw-semibold">Accreditation: </span>
-                                    <span class="gray-color">{{ user.accreditation }}</span>
-                                </li>  
+                                    <span class="fw-semibold">Tranche Age: </span>
+                                    <span class="gray-color">{{ user.trancheage }} ans</span>
+                                </li> 
+                               
                                 <li>
                                     <span class="fw-semibold">Date de creation: </span>
                                     <span class="gray-color">{{ user.CreatedAt | date: 'dd/MM/yyyy' }}</span>
@@ -56,19 +57,19 @@
                             </ul>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
-                            <ul class="list ps-0 mb-0">
+                            <ul class="list ps-0 mb-0"> 
                                 <li>
                                     <span class="fw-semibold">Email: </span>
                                     <span class="gray-color">{{ user.email }}</span>
                                 </li>
                                 <li>
-                                    <span class="fw-semibold">Sexe: </span>
-                                    <span class="gray-color">{{ user.sexe }}</span>
-                                </li> 
+                                    <span class="fw-semibold">Role: </span>
+                                    <span class="gray-color">{{ user.role }}</span>
+                                </li>
                                 <li>
-                                    <span class="fw-semibold">Tranche Age: </span>
-                                    <span class="gray-color">{{ user.trancheage }} ans</span>
-                                </li> 
+                                    <span class="fw-semibold">Accreditation: </span>
+                                    <span class="gray-color">{{ user.accreditation }}</span>
+                                </li>  
                                 <li>
                                     <span class="fw-semibold">Statut utilisateur: </span> 
                                     <span class="gray-color" *ngIf="user.is_active"> Actif</span>
