@@ -1,4 +1,4 @@
 export const environment = {
-    apiURL:'https://gouvdev.up.railway.app/api',
+    apiURL:'https://gouvdev.onrender.com/api',
     "output-path": "./gouvdev-admin/dist/"
 };
