@@ -77,6 +77,7 @@ export class SondageListComponent implements OnInit {
         this.dataSource.paginator = this.paginator;
         this.totalPages = response.pagination.total_pages;
 
+        console.log(this.ELEMENT_DATA)
         this.isLoading = false;
       }
     );
