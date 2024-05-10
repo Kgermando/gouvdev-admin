@@ -132,7 +132,7 @@ export class PersonnaliteAddComponent implements OnInit {
       territoire_ville: ['', Validators.required],
       secteur_chefferie: ['', Validators.required],
       village: ['', Validators.required],
-      conjoint: ['', Validators.required],
+      conjoint: [''],
       pere: ['', Validators.required],
       mere: ['', Validators.required],
 
