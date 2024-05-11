@@ -1,5 +1,5 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../auth/auth.service';
 import { SondageService } from '../sondage.service';
@@ -68,13 +68,13 @@ export class SondageEditComponent implements OnInit {
           this.sondage = item.data;  
             this.formGroup.patchValue({
               sujet: this.sondage.sujet, 
+              sujet_url: this.sondage.sujet, 
               auteur: this.sondage.auteur, 
               resume: this.sondage.resume, 
               content: this.sondage.content, 
               image: (this.imageUrl) ? this.imageUrl : this.sondage.image, 
               thematique: this.sondage.thematique, 
-              is_publie: this.sondage.is_publie, 
-              // updatedat: new Date()
+              is_publie: this.sondage.is_publie,  
             });
           }
         );

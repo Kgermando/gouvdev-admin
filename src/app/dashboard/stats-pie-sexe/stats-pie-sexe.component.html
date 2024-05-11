@@ -1,0 +1,9 @@
+<mat-card class="mb-25 tagus-card activity-timeline-box" [class.component-dark-theme]="themeService.isDark()">
+    <mat-card-header class="border-bottom">
+        <h5 class="mb-0">Visiteurs par Sexe</h5>
+    </mat-card-header>
+    <mat-card-content>
+        <canvas baseChart [data]="pieChartData" [type]="pieChartType" [options]="pieChartOptions">
+        </canvas>
+    </mat-card-content>
+</mat-card>

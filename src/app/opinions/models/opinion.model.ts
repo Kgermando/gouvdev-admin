@@ -8,7 +8,7 @@ export interface OpinionMoodel {
     sondage_id: SondageModel;
     user_id: UserModel;
     choice: string;
-    opinionText: string;
+    opinion_text: string;
     signature: string;
     CreatedAt: Date;
     UpdatedAt: Date;

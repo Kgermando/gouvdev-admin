@@ -15,7 +15,7 @@
                     <mat-form-field appearance="fill">
                         <i class="ri-edit-2-line"></i>
                         <mat-label>Entrer le sujet</mat-label>
-                        <input matInput type="text" id="sujet" formControlName="sujet" required>
+                        <input matInput type="text" [maxlength]="100" id="sujet" formControlName="sujet" required>
                         <mat-error *ngIf="formGroup.controls['sujet'].hasError('required')">
                             Ce champs est obligatoire
                         </mat-error>
@@ -33,10 +33,10 @@
                     </mat-form-field>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
-                    <label class="d-block mb-12 fw-semibold gray-color">Resume </label>
+                    <label class="d-block mb-12 fw-semibold gray-color">Resumé </label>
                     <mat-form-field appearance="fill">
                         <i class="ri-edit-2-line"></i>
-                        <mat-label>Entrer le resume</mat-label>
+                        <mat-label>Entrer le resumé</mat-label>
                         <input matInput type="text" id="resume" formControlName="resume" required>
                         <mat-error *ngIf="formGroup.controls['resume'].hasError('required')">
                             Ce champs est obligatoire
@@ -56,7 +56,7 @@
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="tagus-form-group">
-                        <label class="d-block mb-12 fw-semibold gray-color">Publié</label>
+                        <label class="d-block mb-12 fw-semibold gray-color">Statut de publication</label>
                         <mat-form-field appearance="fill">
                             <i class="ri-edit-2-line"></i>
                             <mat-label>Valider la publication</mat-label>

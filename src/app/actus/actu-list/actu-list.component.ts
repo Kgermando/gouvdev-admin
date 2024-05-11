@@ -70,8 +70,7 @@ export class ActuListComponent implements OnInit {
   fetchProducts() {
     this.actuService.getPaginated(this.pageSize, this.pageNumber)
       .subscribe(response => {
-        this.ELEMENT_DATA = response.data; 
-        console.log("this.ELEMENT_DATA", this.ELEMENT_DATA)
+        this.ELEMENT_DATA = response.data;  
         this.dataSource = new MatTableDataSource<ActuModel>(this.ELEMENT_DATA);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator; 
@@ -81,11 +80,6 @@ export class ActuListComponent implements OnInit {
       }
     );
   }
-
-  // changePage(pageNumber: number) {
-  //   this.pageNumber = pageNumber;
-  //   this.fetchProducts();
-  // }
 
   handlePageChange(event: PageEvent) {
     this.pageNumber = event.pageIndex;
@@ -101,7 +95,7 @@ export class ActuListComponent implements OnInit {
       .subscribe({
         next: () => {
           this.toastr.info('Supprimé avec succès!', 'Success!');
-          this.router.navigate(['/web/actualites/list']); 
+          this.router.navigate(['/web/flash/list']); 
         },
         error: err => {
           this.toastr.error('Une erreur s\'est produite!', 'Oupss!');

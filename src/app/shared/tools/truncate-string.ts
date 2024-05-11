@@ -1,6 +1,6 @@
 
 
-export function truncateString(value: string, limit: number = 80, trail = ''): string {
+export function truncateString(value: string, limit: number = 100, trail = ''): string {
     if (value.length <= limit) {
       return value;
     }

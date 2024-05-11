@@ -9,7 +9,7 @@ import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-br
 
 import { ToastrModule, provideToastr } from 'ngx-toastr';
 import { NgxEchartsModule } from 'ngx-echarts';
-import { QuillModule } from 'ngx-quill'; 
+import { QuillModule } from 'ngx-quill';
 
 import { CustomizerSettingsComponent } from './common/customizer-settings/customizer-settings.component';
 import { SidebarComponent } from './common/sidebar/sidebar.component';
@@ -27,7 +27,7 @@ import { SharedModule } from './shared/shared.module';
 import { LayoutsComponent } from './layouts/layouts.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
-import { UserListComponent } from './users/user-list/user-list.component'; 
+import { UserListComponent } from './users/user-list/user-list.component';
 import { UserViewComponent } from './users/user-view/user-view.component';
 import { UserEditComponent } from './users/user-edit/user-edit.component';
 import { ContactListComponent } from './contact/contact-list/contact-list.component';
@@ -47,7 +47,7 @@ import { PropositionLoisEditComponent } from './proposition-lois/proposition-loi
 import { SondageListComponent } from './sondages/sondage-list/sondage-list.component';
 import { SondageAddComponent } from './sondages/sondage-add/sondage-add.component';
 import { SondageEditComponent } from './sondages/sondage-edit/sondage-edit.component';
-import { EditSondageDialogBox, SondageViewComponent } from './sondages/sondage-view/sondage-view.component'; 
+import { EditSondageDialogBox, SondageViewComponent } from './sondages/sondage-view/sondage-view.component';
 import { OpinionListComponent } from './opinions/opinion-list/opinion-list.component';
 import { OpinionAddComponent } from './opinions/opinion-add/opinion-add.component';
 import { OpinionEditComponent } from './opinions/opinion-edit/opinion-edit.component';
@@ -61,11 +61,18 @@ import { ResetPasswordComponent } from './auth/reset-password/reset-password.com
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ChangePasswordDialogBox, ChangePhotoDialogBox, ProfileComponent, UpdateInfoDialogBox } from './auth/profile/profile.component';
-import { LimiterTextPipe } from './pipes/limiter-text.pipe'; 
+import { LimiterTextPipe } from './pipes/limiter-text.pipe';
 import { PersonnaliteSectionAddComponent } from './personnalite-sections/personnalite-section-add/personnalite-section-add.component';
 import { PersonnaliteSectionEditComponent } from './personnalite-sections/personnalite-section-edit/personnalite-section-edit.component';
 import { OpinionUserComponent } from './opinions/opinion-user/opinion-user.component';
 import { OpinionSondageComponent } from './opinions/opinion-sondage/opinion-sondage.component';
+import { StatsNumberComponent } from './dashboard/stats-number/stats-number.component';
+import { StatsPieSexeComponent } from './dashboard/stats-pie-sexe/stats-pie-sexe.component';
+import { ActualiteListComponent } from './actualites/actualite/actualite-list/actualite-list.component';
+import { ActualiteAddComponent } from './actualites/actualite/actualite-add/actualite-add.component';
+import { ActualiteEditComponent } from './actualites/actualite/actualite-edit/actualite-edit.component';
+import { ActualiteViewComponent } from './actualites/actualite/actualite-view/actualite-view.component';
+
 
 registerLocaleData(localeFr);
 
@@ -86,19 +93,19 @@ registerLocaleData(localeFr);
     LayoutsComponent,
     LoginComponent,
     RegisterComponent,
-    UserListComponent, 
+    UserListComponent,
     UserViewComponent,
     UserEditComponent,
     ContactListComponent,
     ContactAddComponent,
     ContactEditComponent,
-    ContactViewComponent, 
-    ActuListComponent, 
-    ActuViewComponent, 
+    ContactViewComponent,
+    ActuListComponent,
+    ActuViewComponent,
     PersonnaliteListComponent,
     PersonnaliteViewComponent,
     PersonnaliteAddComponent,
-    PersonnaliteEditComponent, 
+    PersonnaliteEditComponent,
     PropositionLoisListComponent,
     PropositionLoisAddComponent,
     PropositionLoisViewComponent,
@@ -106,7 +113,7 @@ registerLocaleData(localeFr);
     SondageListComponent,
     SondageAddComponent,
     SondageEditComponent,
-    SondageViewComponent, 
+    SondageViewComponent,
     OpinionListComponent,
     OpinionAddComponent,
     OpinionEditComponent,
@@ -114,8 +121,8 @@ registerLocaleData(localeFr);
     TextLegauxAddComponent,
     TextLegauxEditComponent,
     TextLegauxTitreListComponent,
-     TextLegauxTitreViewComponent,
-    AuthComponent, 
+    TextLegauxTitreViewComponent,
+    AuthComponent,
     ResetPasswordComponent,
     ForgotPasswordComponent,
     DashboardComponent,
@@ -125,13 +132,20 @@ registerLocaleData(localeFr);
     ChangePasswordDialogBox,
 
     CreateActuDialogBox,
-    LimiterTextPipe, 
+    LimiterTextPipe,
     EditActuDialogBox,
     CreateTextLegauxTitreDialogBox,
-    EditTextLegauxTitreDialogBox, 
+    EditTextLegauxTitreDialogBox,
     PersonnaliteSectionAddComponent,
-    PersonnaliteSectionEditComponent, 
-    EditSondageDialogBox, OpinionUserComponent, OpinionSondageComponent,
+    PersonnaliteSectionEditComponent,
+    EditSondageDialogBox,
+    OpinionUserComponent,
+    OpinionSondageComponent,
+    StatsNumberComponent, StatsPieSexeComponent,
+    ActualiteListComponent,
+    ActualiteAddComponent,
+    ActualiteEditComponent,
+    ActualiteViewComponent,
   ],
   imports: [
     BrowserModule,
@@ -140,12 +154,10 @@ registerLocaleData(localeFr);
 
     SharedModule,
     NgxEchartsModule.forRoot({
-        echarts: () => import('echarts')
+      echarts: () => import('echarts')
     }),
     QuillModule.forRoot(),
-    ToastrModule.forRoot(), 
-
-    // FileUploader,
+    ToastrModule.forRoot(),
 
   ],
   providers: [
@@ -155,8 +167,8 @@ registerLocaleData(localeFr);
       multi: true
     },
     { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },
-    {provide: LOCALE_ID, useValue: "fr-FR" },
-    {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher},
+    { provide: LOCALE_ID, useValue: "fr-FR" },
+    { provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher },
     provideAnimations(), // required animations providers
     provideToastr(),
     NumberFormatPipe,

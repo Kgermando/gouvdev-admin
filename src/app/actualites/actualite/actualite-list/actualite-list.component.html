@@ -2,13 +2,14 @@
   [class.card-border-radius]="themeService.isCardBorderRadius()">
     <mat-card-header>
         <div>
-            <h4 class="mb-0">Liste des sondages</h4> 
+            <h4 class="mb-0">Liste des actualités</h4> 
         </div>
         <div>
             <button mat-flat-button class="default-btn tagus m-0 margin" 
-                routerLink="/web/sondages/add">
-                <i class="ri-add-fill"></i> Ajouter un sondage
+            routerLink="/web/actualites/add" >
+                <i class="ri-add-fill"></i> Ajouter une actualité
             </button>
+            
         </div>
     </mat-card-header>
     <mat-card-content> 
@@ -21,21 +22,12 @@
         </div>
         <div class="mat-elevation-z8 tagus-mat-table">
             <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
-
-                <ng-container matColumnDef="numero">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>N° </th>
-                    <td mat-cell *matCellDef="let element; let i = index;">
-                        <a [routerLink]="['/web/sondages', element.ID, 'view']">
-                            {{i +1}}
-                        </a>
-                    </td>
-                </ng-container>
- 
+               
                  <!-- Nom Column -->
                  <ng-container matColumnDef="sujet">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>Sujet</th>
                     <td mat-cell *matCellDef="let element">
-                        <a [routerLink]="['/web/sondages', element.ID, 'view']">
+                        <a [routerLink]="['/web/actualites', element.ID, 'view']">
                             {{element.sujet | limiterText: 50}}
                         </a>
                     </td>
@@ -63,23 +55,25 @@
                 </ng-container>
 
                 <ng-container matColumnDef="is_valid">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Statut sondage<th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Statut<th>
                     <td mat-cell *matCellDef="let element"> 
-                        <span class="badge text-bg-success" *ngIf="element.is_valid">Sondage ouvert</span> 
-                        <span class="badge text-bg-danger" *ngIf="!element.is_valid">Sondage fermé</span>  
+                        <span class="badge text-bg-success" *ngIf="element.is_valid">Ouvert</span> 
+                        <span class="badge text-bg-danger" *ngIf="!element.is_valid">Fermé</span>  
                     </td>
                 </ng-container>
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)"></tr>
-            </table>
-            <mat-paginator #paginator (page)="handlePageChange($event)"
-                [length]="totalPages"
-                [pageSize]="pageSize"
-                [pageIndex]="pageNumber"
-                [pageSizeOptions]="[15, 30, 45]">
-            </mat-paginator>
+ 
+            </table> 
 
+            <mat-paginator #paginator (page)="handlePageChange($event)"
+               [length]="totalPages"
+               [pageSize]="pageSize"
+               [pageIndex]="pageNumber"
+               [pageSizeOptions]="[15, 30, 45]">
+            </mat-paginator>
+            
             <div *ngIf="isLoading" 
                 style="display: flex; justify-content: center; align-items: center; background: white;">
                 <mat-progress-spinner [diameter]="30"

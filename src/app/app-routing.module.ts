@@ -37,6 +37,10 @@ import { TextLegauxTitreListComponent } from './text-legaux/text-legaux-titre/te
 import { TextLegauxTitreViewComponent } from './text-legaux/text-legaux-titre/text-legaux-titre-view/text-legaux-titre-view.component';
 import { PersonnaliteSectionAddComponent } from './personnalite-sections/personnalite-section-add/personnalite-section-add.component';
 import { PersonnaliteSectionEditComponent } from './personnalite-sections/personnalite-section-edit/personnalite-section-edit.component';
+import { ActualiteListComponent } from './actualites/actualite/actualite-list/actualite-list.component';
+import { ActualiteAddComponent } from './actualites/actualite/actualite-add/actualite-add.component';
+import { ActualiteEditComponent } from './actualites/actualite/actualite-edit/actualite-edit.component';
+import { ActualiteViewComponent } from './actualites/actualite/actualite-view/actualite-view.component';
  
 const routes: Routes = [
   { path: "auth", component: AuthComponent, children: [
@@ -53,9 +57,9 @@ const routes: Routes = [
     { path: "users/:id/edit", component: UserEditComponent },
     { path: "users/:id/view", component: UserViewComponent },
     
-    // Actu
-    { path: "actualites/list", component: ActuListComponent },  
-    { path: "actualites/:id/view", component: ActuViewComponent },
+    // Flash
+    { path: "flash/list", component: ActuListComponent },  
+    { path: "flash/:id/view", component: ActuViewComponent },
 
     // Contact
     { path: "contacts/list", component: ContactListComponent },
@@ -99,8 +103,12 @@ const routes: Routes = [
     // Text-legaux
     { path: "text-legaux/:id/add", component: TextLegauxAddComponent },
     { path: "text-legaux/:id/edit", component: TextLegauxEditComponent },
-    
 
+    // Actualites
+    { path: "actualites/list", component: ActualiteListComponent },
+    { path: "actualites/add", component: ActualiteAddComponent },
+    { path: "actualites/:id/edit", component: ActualiteEditComponent },
+    { path: "actualites/:id/view", component: ActualiteViewComponent },
 
 
     { path: "", redirectTo: "dashboard", pathMatch: "full"},

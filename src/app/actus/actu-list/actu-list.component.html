@@ -2,12 +2,12 @@
   [class.card-border-radius]="themeService.isCardBorderRadius()">
     <mat-card-header>
         <div>
-            <h4 class="mb-0">Liste des actualites</h4> 
+            <h4 class="mb-0">Liste des flash Infos</h4> 
         </div>
         <div>
             <button mat-flat-button class="default-btn tagus m-0 margin" 
                 (click)="openAddDialog('300ms', '100ms')">
-                <i class="ri-add-fill"></i> Ajouter une actualite
+                <i class="ri-add-fill"></i> Ajouter une flash info
             </button>
             
         </div>
@@ -26,7 +26,7 @@
                 <ng-container matColumnDef="numero">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>N° </th>
                     <td mat-cell *matCellDef="let element; let i = index;">
-                        <a [routerLink]="['/web/users', element.ID, 'view']">
+                        <a [routerLink]="['/web/flash', element.ID, 'view']">
                             {{ i +1 }}
                         </a>
                     </td>
@@ -44,7 +44,7 @@
                  <ng-container matColumnDef="titre">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>Titre</th>
                     <td mat-cell *matCellDef="let element">
-                        <a [routerLink]="['/web/actualites', element.ID, 'view']">
+                        <a [routerLink]="['/web/flash', element.ID, 'view']">
                             {{ element.titre | limiterText: 50 }} 
                         </a>
                     </td>

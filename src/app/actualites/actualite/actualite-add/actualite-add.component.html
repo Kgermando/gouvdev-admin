@@ -1,7 +1,7 @@
 
 <mat-card class="create-project-card tagus-card mb-25">
     <mat-card-header>
-        <h4 class="mb-0" *ngIf="sondage">Modification de sondage</h4>
+        <h4 class="mb-0">Ajouter une actualité </h4>
     </mat-card-header>
     <mat-card-content>
         <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
@@ -9,6 +9,32 @@
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <label class="d-block mb-12 fw-semibold gray-color">Image </label>
                     <input type="file" (change)="onFileSelected($event)" placeholder="select image"> 
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <label class="d-block mb-12 fw-semibold gray-color">Categorie </label>
+                    <mat-form-field appearance="fill">
+                        <i class="ri-group-line"></i>
+                        <mat-label>Select categorie</mat-label>
+                        <mat-select (selectionChange)="onChangeCategory($event)" formControlName="category">
+                            <mat-option *ngFor="let category of categoryList" [value]="category">{{category}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="formGroup.controls['category'].hasError('required')">
+                            Ce champs est obligatoire
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <label class="d-block mb-12 fw-semibold gray-color">Sous categorie </label>
+                    <mat-form-field appearance="fill">
+                        <i class="ri-group-line"></i>
+                        <mat-label>Select sous categorie</mat-label>
+                        <mat-select formControlName="sous_category">
+                            <mat-option *ngFor="let sousCategory of sousCategoryList" [value]="sousCategory">{{sousCategory}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="formGroup.controls['sous_category'].hasError('required')">
+                            Ce champs est obligatoire
+                        </mat-error>
+                    </mat-form-field>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <label class="d-block mb-12 fw-semibold gray-color">Sujet </label>
@@ -20,7 +46,7 @@
                             Ce champs est obligatoire
                         </mat-error>
                     </mat-form-field>
-                </div> 
+                </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <label class="d-block mb-12 fw-semibold gray-color">Auteur </label>
                     <mat-form-field appearance="fill">
@@ -42,18 +68,7 @@
                             Ce champs est obligatoire
                         </mat-error>
                     </mat-form-field>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                    <label class="d-block mb-12 fw-semibold gray-color">Thematique </label>
-                    <mat-form-field appearance="fill">
-                        <i class="ri-edit-2-line"></i>
-                        <mat-label>Entrer le thematique</mat-label>
-                        <input matInput type="text" id="thematique" formControlName="thematique" required>
-                        <mat-error *ngIf="formGroup.controls['thematique'].hasError('required')">
-                            Ce champs est obligatoire
-                        </mat-error>
-                    </mat-form-field>
-                </div>
+                </div> 
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="tagus-form-group">
                         <label class="d-block mb-12 fw-semibold gray-color">Statut de publication</label>
@@ -68,9 +83,24 @@
                             </mat-select>
                         </mat-form-field>
                     </div> 
-                </div>zz
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="tagus-form-group">
+                        <label class="d-block mb-12 fw-semibold gray-color">Statut participation citoyenne</label>
+                        <mat-form-field appearance="fill">
+                            <i class="ri-edit-2-line"></i>
+                            <mat-label>Valider le statut</mat-label>
+                            <mat-select formControlName="is_valid">
+                                <mat-option *ngFor="let isPubie of isPubieList" [value]="isPubie">
+                                    <span *ngIf="isPubie">Ouvert</span>
+                                    <span *ngIf="!isPubie">Fermé</span>
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div> 
+                </div>
                 <div class="col-lg-12 col-md-12 col-sm-12"> 
-                    <label class="d-block mb-12 fw-semibold gray-color">Synthese </label>
+                    <label class="d-block mb-12 fw-semibold gray-color">Contenu de l'article </label>
                     <quill-editor [styles]="{height: '600px'}" (onFocus)="focus($event)" 
                         (onEditorChanged)="changedEditor($event)" (onBlur)="blur($event)" 
                         (onEditorCreated)="created($event)" formControlName="content"></quill-editor> 
