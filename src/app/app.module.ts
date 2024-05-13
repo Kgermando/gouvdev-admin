@@ -72,6 +72,9 @@ import { ActualiteListComponent } from './actualites/actualite/actualite-list/ac
 import { ActualiteAddComponent } from './actualites/actualite/actualite-add/actualite-add.component';
 import { ActualiteEditComponent } from './actualites/actualite/actualite-edit/actualite-edit.component';
 import { ActualiteViewComponent } from './actualites/actualite/actualite-view/actualite-view.component';
+import { CreateGrandTitreDialogBox, GrandTitreComponent } from './text-legaux/grand-titre/grand-titre.component';
+import { EditGrandTitreDialogBox, GrandTitreViewComponent } from './text-legaux/grand-titre/grand-titre-view/grand-titre-view.component';
+import { GtitreViewComponent } from './text-legaux/text-legaux-titre/text-legaux-titre-view/gtitre-view/gtitre-view.component';
 
 
 registerLocaleData(localeFr);
@@ -146,6 +149,11 @@ registerLocaleData(localeFr);
     ActualiteAddComponent,
     ActualiteEditComponent,
     ActualiteViewComponent,
+    GrandTitreComponent,
+    CreateGrandTitreDialogBox,
+    EditGrandTitreDialogBox,
+    GrandTitreViewComponent,
+    GtitreViewComponent,
   ],
   imports: [
     BrowserModule,

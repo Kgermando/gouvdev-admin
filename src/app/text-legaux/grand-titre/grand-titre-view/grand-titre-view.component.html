@@ -1,0 +1,66 @@
+<div class="d-flex justify-content-center" *ngIf="isLoading">
+    <mat-spinner color="warn" [diameter]="30"></mat-spinner>
+    <p class="ml-2"> Patientez-svp...</p>
+</div>
+<div *ngIf="!isLoading">
+    <div class="row mb-25" *ngIf="grandTitre">
+        <mat-card class="mb-25 personal-info-card tagus-card" [class.component-dark-theme]="themeService.isDark()">
+            <mat-card-header class="border-bottom">
+                <div class="d-flex align-items-center">
+                    <div class="">
+                        <h5 class="mb-5">{{ grandTitre.category.toLocaleUpperCase() }} </h5>
+                        <span class="d-block gray-color success" *ngIf="grandTitre.is_publie">Publié</span>
+                        <span class="d-block gray-color danger" *ngIf="!grandTitre.is_publie">En attente</span>
+                        <span class="d-block gray-color mt-5">Visites: {{ grandTitre.counter }}</span>
+                    </div>
+                </div>
+                <div>
+                    <button mat-icon-button color="accent" (click)="openEditDialog('300ms', '100ms', grandTitre.ID)"
+                        *ngIf="currentUser.accreditation === 'CRUD'" matTooltip="Modifier ce document">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-icon-button color="warn" (click)="delete(grandTitre.ID)"
+                        *ngIf="currentUser.accreditation === 'CRUD'" matTooltip="Mettre en corbeille ce document">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </div>
+            </mat-card-header>
+            <mat-card-content>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <ul class="list ps-0 mb-0">
+                            <li>
+                                <span class="fw-semibold">Categorie: </span>
+                                <p class="gray-color">{{ grandTitre.category }}</p>
+                            </li>
+                            <li>
+                                <span class="fw-semibold">Titre: </span>
+                                <p class="gray-color">{{ grandTitre.g_titre }}</p>
+                            </li>
+                            <li>
+                                <span class="fw-semibold">Titre Url: </span>
+                                <p class="gray-color">{{ grandTitre.g_titre_url }}</p>
+                            </li>
+
+                            <li>
+                                <span class="fw-semibold">Signature: </span>
+                                <span class="gray-color">{{ grandTitre.signature }}</span>
+                            </li>
+                            <li>
+                                <span class="fw-semibold">Date de creation: </span>
+                                <span class="gray-color">{{ grandTitre.CreatedAt | date: 'dd/MM/yyyy' }}</span>
+                            </li>
+                            <li>
+                                <span class="fw-semibold">Mise à jour le: </span>
+                                <span class="gray-color">{{ grandTitre.UpdatedAt | date: 'dd/MM/yyyy HH:mm' }}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <hr>
+                <app-text-legaux-titre-list [grand_titre_id]="grandTitre.ID"></app-text-legaux-titre-list>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

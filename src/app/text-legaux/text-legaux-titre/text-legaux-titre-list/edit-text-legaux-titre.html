@@ -1,24 +1,10 @@
 <div class="create-dialog-box">
     <div class="title d-flex align-items-center justify-content-space-between">
-        <h4 class="mb-0">Ajouter actualites</h4>
+        <h4 class="mb-0">Modification grand titre</h4>
         <button class="close-btn bg-transparent p-0 border-none" (click)="close()"><i class="flaticon-close"></i></button>
     </div>
     <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
         <div class="row">
-            <div class="col-lg-12 col-md-12">
-                <div class="tagus-form-group">
-                    <label class="d-block mb-12 fw-semibold gray-color">Categorie</label>
-                    <mat-form-field appearance="fill">
-                        <i class="ri-edit-2-line"></i>
-                        <mat-label>Entrer la categorie</mat-label>
-                        <mat-select formControlName="category">
-                            <mat-option *ngFor="let category of categoryList" [value]="category">
-                                <span>{{ category }}</span> 
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-            </div>
             <div class="col-lg-12 col-md-12">
                 <div class="form-group">
                     <label class="d-block fw-semibold">Titre</label>

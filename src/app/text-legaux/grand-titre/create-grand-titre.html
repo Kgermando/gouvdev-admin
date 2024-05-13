@@ -6,10 +6,24 @@
     <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
         <div class="row">
             <div class="col-lg-12 col-md-12">
+                <div class="tagus-form-group">
+                    <label class="d-block mb-12 fw-semibold gray-color">Categorie</label>
+                    <mat-form-field appearance="fill">
+                        <i class="ri-edit-2-line"></i>
+                        <mat-label>Entrer la categorie</mat-label>
+                        <mat-select formControlName="category">
+                            <mat-option *ngFor="let category of categoryList" [value]="category">
+                                <span>{{ category }}</span> 
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12">
                 <div class="form-group">
-                    <label class="d-block fw-semibold">Titre</label>
-                    <input type="text" class="input-control" placeholder="titre" formControlName="titre">
-                    <mat-error *ngIf="formGroup.controls['titre'].hasError('required')">
+                    <label class="d-block fw-semibold">Grand Titre</label>
+                    <input type="text" class="input-control" placeholder="g_titre" formControlName="g_titre">
+                    <mat-error *ngIf="formGroup.controls['g_titre'].hasError('required')">
                         Ce champs est obligatoire
                     </mat-error>
                 </div>

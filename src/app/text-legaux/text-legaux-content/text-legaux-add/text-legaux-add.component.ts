@@ -56,7 +56,7 @@ export class TextLegauxAddComponent implements OnInit {
 
     this.formGroup = this._formBuilder.group({
       chapitre: ['', Validators.required],
-      // section: ['', Validators.required],
+      section: ['', Validators.required],
       contenu: ['', Validators.required],
       is_valid: ['', Validators.required],
     });

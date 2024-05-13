@@ -43,7 +43,7 @@ export class TextLegauxEditComponent implements OnInit {
     this.id = this.route.snapshot.params['id'];
     this.formGroup = this._formBuilder.group({
       chapitre: [''], 
-      // section: [''],
+      section: [''],
       contenu: [''],
       is_valid: [''],
     });

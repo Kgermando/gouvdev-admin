@@ -1,10 +1,5 @@
-import { Component, Inject, OnInit, ViewChild } from '@angular/core';  
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'; 
-import { MatTableDataSource } from '@angular/material/table';
-import { SelectionModel } from '@angular/cdk/collections';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { MatSort, Sort } from '@angular/material/sort';
-import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { Component, Inject, Input, OnInit } from '@angular/core';  
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';  
 import { CustomizerSettingsService } from '../../../common/customizer-settings/customizer-settings.service';
 import { Router } from '@angular/router'; 
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
@@ -22,25 +17,14 @@ import { truncateString } from '../../../shared/tools/truncate-string';
   styleUrls: ['./text-legaux-titre-list.component.scss']
 })
 export class TextLegauxTitreListComponent implements OnInit {
-  displayedColumns: string[] = ['numero', 'category', 'titre', 'counter', 'is_publie', 'id'];
+  @Input() grand_titre_id!: number; 
   
-  ELEMENT_DATA: TextLegauxTitreModel[] = [];
-  pageSize = 15; // Default page size
-  pageNumber = 1; // Default page number
-  totalPages = 0; // Stores total pages from API response 
-  
-  dataSource = new MatTableDataSource<TextLegauxTitreModel>(this.ELEMENT_DATA);
-  selection = new SelectionModel<TextLegauxTitreModel>(true, []);
-
-  @ViewChild(MatSort) sort: MatSort | any;
-  @ViewChild(MatPaginator) paginator: MatPaginator | any;
-
+  ELEMENT_DATA: TextLegauxTitreModel[] = [];  
 
   isLoading = false;
   currentUser: UserModel | any; 
   
-  constructor(
-      private _liveAnnouncer: LiveAnnouncer,
+  constructor( 
       public themeService: CustomizerSettingsService,
       private router: Router,
       private authService: AuthService,
@@ -71,23 +55,13 @@ export class TextLegauxTitreListComponent implements OnInit {
   }
 
   fetchProducts() {
-    this.textLegauxTitreService.getPaginated(this.pageSize, this.pageNumber)
+    this.textLegauxTitreService.getAllById(this.grand_titre_id)
       .subscribe(response => {
-        this.ELEMENT_DATA = response.data; 
-        this.dataSource = new MatTableDataSource<TextLegauxTitreModel>(this.ELEMENT_DATA);
-        this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator;
-        this.totalPages = response.pagination.total_pages;
+        this.ELEMENT_DATA = response.data;  
 
         this.isLoading = false;
       }
     );
-  }
-
-  handlePageChange(event: PageEvent) {
-    this.pageNumber = event.pageIndex;
-    this.pageSize = event.pageSize;
-    this.fetchProducts(); // Refetch data based on new page and size
   }
 
   delete(id: number): void {
@@ -97,7 +71,7 @@ export class TextLegauxTitreListComponent implements OnInit {
       .subscribe({
         next: () => {
           this.toastr.info('Supprimé avec succès!', 'Success!');
-          this.router.navigate(['/web/text-legaux-titre/list']);
+          // this.router.navigate(['/web/text-legaux-titre/list']);
         },
         error: err => {
           this.toastr.error('Une erreur s\'est produite!', 'Oupss!');
@@ -105,29 +79,16 @@ export class TextLegauxTitreListComponent implements OnInit {
         }
       });
     }
-  }
+  } 
 
- 
-  applyFilter(event: Event) {
-      const filterValue = (event.target as HTMLInputElement).value;
-      this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
-  /** Announce the change in sort state for assistive technology. */
-    announceSortChange(sortState: Sort) { 
-      if (sortState.direction) {
-          this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
-      } else {
-          this._liveAnnouncer.announce('Sorting cleared');
-      }
-  }
- 
-
-  openAddDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+  openAddDialog(enterAnimationDuration: string, exitAnimationDuration: string, id: number): void {
     this.dialog.open(CreateTextLegauxTitreDialogBox, {
       width: '600px',
       enterAnimationDuration,
-      exitAnimationDuration, 
+      exitAnimationDuration,
+      data: {
+        id: id
+      }
     }); 
   } 
  
@@ -164,17 +125,8 @@ export class CreateTextLegauxTitreDialogBox {
 
   isPubieList: boolean[] = [false, true];
 
-  categoryList: string[] = [
-    'Constitution',
-    'Traités et accords internationaux',
-    'Lois régissant les intitutions', 
-    'Arreté',
-    'Circulaire',
-    'Décret',
-    'Ordonance',
-  ]
-
   constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<CreateTextLegauxTitreDialogBox>,
     private router: Router,
     private _formBuilder: FormBuilder,
@@ -194,8 +146,7 @@ export class CreateTextLegauxTitreDialogBox {
       }
     });
 
-    this.formGroup = this._formBuilder.group({
-      category: ['', Validators.required],
+    this.formGroup = this._formBuilder.group({ 
       titre: ['', Validators.required],
       is_publie: ['', Validators.required],
     });
@@ -207,14 +158,12 @@ export class CreateTextLegauxTitreDialogBox {
       if (this.formGroup.valid) {
         this.isLoading = true;
         var body = {
-          category: this.formGroup.value.category,
+          grand_titre_id: parseInt(this.data['id']),
           titre: this.formGroup.value.titre, 
           titre_url: this.transform(truncateString(this.formGroup.value.titre)),
           counter: 0,
           is_publie: this.formGroup.value.is_publie,
           signature: this.currentUser.fullname,
-          createdat: new Date(),
-          updatedat: new Date(),
         };
         this.textLegauxTitreService.create(body).subscribe({
           next: (res) => {
@@ -290,8 +239,7 @@ export class EditTextLegauxTitreDialogBox implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.formGroup = this.formBuilder.group({  
-      category: [''],
+    this.formGroup = this.formBuilder.group({
       titre: [''],
       is_publie: [''],
     }); 
@@ -301,7 +249,7 @@ export class EditTextLegauxTitreDialogBox implements OnInit {
         this.textLegauxTitreService.get(parseInt(this.data['id'])).subscribe(item => {
           var dataItem = item.data;
           this.formGroup.patchValue({
-            category: dataItem.category,
+            grand_titre_id: dataItem.grand_titre_id,
             titre: dataItem.titre,
             titre_url: this.transform(truncateString(dataItem.titre)),
             is_publie: dataItem.is_publie,

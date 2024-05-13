@@ -1,108 +1,61 @@
-<mat-card class="mb-25 tagus-card" [class.component-dark-theme]="themeService.isDark()"
-  [class.card-border-radius]="themeService.isCardBorderRadius()">
-    <mat-card-header>
-        <h4 class="mb-0">Liste des Texts legaux titres</h4>
-        <div>
-            <button mat-flat-button class="default-btn tagus m-0 margin" 
-                (click)="openAddDialog('300ms', '100ms')">
-                <i class="ri-add-fill"></i> Ajouter une actualite
-            </button>
-        </div>
-    </mat-card-header>
-    <mat-card-content>
-        <div class="tagus-form-group">
-            <mat-form-field appearance="fill">
-                <i class="ri-search-line"></i>
-                <mat-label>Filter</mat-label>
-                <input matInput (keyup)="applyFilter($event)" #input>
-            </mat-form-field>
-        </div>
-        <div class="mat-elevation-z8 tagus-mat-table">
-            <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
-               
-                <ng-container matColumnDef="numero">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>N° </th>
-                    <td mat-cell *matCellDef="let element; let i = index;">
-                        <a [routerLink]="['/web/text-legaux-titre', element.ID, 'view']">
-                            {{i +1}}
-                        </a>
-                    </td>   
-                </ng-container>
+  
+<div class="d-flex justify-content-space-between mb-20 mt-25">
+    <h4 class="mb-0">Les titres</h4>
+    <div>
+        <button mat-icon-button  
+            [routerLink]="['/web/text-legaux', grand_titre_id, 'add']"
+            *ngIf="currentUser.accreditation === 'CRUD'" 
+            matTooltip="Add new titre">
+                <mat-icon>add</mat-icon>
+        </button> 
+    </div> 
+</div>
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="fw-semibold main-color">No</th>
+                <th class="fw-semibold gray-color text-start">Titre</th>
+                <th class="fw-semibold gray-color">Statut de publication</th>
+                <th class="fw-semibold gray-color">Action</th> 
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let titre of ELEMENT_DATA; let i = index;">
+                <td class="main-color fw-semibold">{{i +1}}.</td>
+                <td class="text-start fw-semibold">
+                    <a [routerLink]="['/web/text-legaux-titre', titre.ID, 'view']" 
+                        class="d-flex align-items-center product-info"> 
+                        {{titre.titre}}
+                    </a>
+                </td>
+                <td class="gray-color">
+                    <span class="badge text-bg-success" *ngIf="titre.is_publie">Publié</span> 
+                    <span class="badge text-bg-danger" *ngIf="!titre.is_publie">Pas Publié</span> 
+                </td> 
+                <td class="gray-color">
+                    <button type="button" mat-button class="position-relative dot-btn p-0 bg-transparent border-none" 
+                    [matMenuTriggerFor]="actionMenu">
+                    <i class="ri-more-fill"></i>
+                </button>
+                <mat-menu #actionMenu="matMenu" class="dotMenu two monthMenu" xPosition="before">
+                    <button mat-menu-item type="button" 
+                            class="bg-transparent border-none position-relative" 
+                            (click)="openEditDialog('300ms', '100ms', titre.ID)"
+                            *ngIf="currentUser.accreditation === 'CRUD'">
+                            <i class="ri-edit-line"></i> Edit
+                    </button> 
+                    <button mat-menu-item type="button" 
+                            class="bg-transparent border-none position-relative" 
+                            (click)="delete(titre.ID)"
+                            *ngIf="currentUser.accreditation === 'CRUD'">
+                            <i class="ri-delete-bin-3-line"></i> Delete
+                    </button> 
+                </mat-menu>
+                </td>
+            </tr> 
+        </tbody>
+    </table>
+</div>
+
  
-                 <!-- Nom Column -->
-                 <ng-container matColumnDef="category">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Categorie</th>
-                    <td mat-cell *matCellDef="let element">
-                        <a [routerLink]="['/web/text-legaux-titre', element.ID, 'view']">
-                            {{element.category}} 
-                        </a>
-                    </td>
-                </ng-container> 
-
-                <!-- Email Column -->
-                <ng-container matColumnDef="titre">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Titre</th>
-                    <td mat-cell *matCellDef="let element">
-                        {{element.titre}}
-                    </td>
-                </ng-container>
-
-                <ng-container matColumnDef="counter">
-                    <th mat-header-cell *matHeaderCellDef>Visites</th>
-                    <td mat-cell *matCellDef="let element">{{element.counter}}</td>
-                </ng-container>
-
-                <ng-container matColumnDef="is_publie">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Publié</th>
-                    <td mat-cell *matCellDef="let element"> 
-                        <span class="badge text-bg-success" *ngIf="element.is_publie">Publié</span> 
-                        <span class="badge text-bg-danger" *ngIf="!element.is_publie">Pas Publié</span> 
-                    </td>
-                </ng-container>
-
-                <ng-container matColumnDef="id">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
-                    <td mat-cell *matCellDef="let element">
-                        <button type="button" mat-button class="position-relative dot-btn p-0 bg-transparent border-none" 
-                            [matMenuTriggerFor]="actionMenu">
-                            <i class="ri-more-fill"></i>
-                        </button>
-                        <mat-menu #actionMenu="matMenu" class="dotMenu two monthMenu" xPosition="before">
-                            <button mat-menu-item type="button" 
-                                    class="bg-transparent border-none position-relative" 
-                                    (click)="openEditDialog('300ms', '100ms', element.ID)"
-                                    *ngIf="currentUser.accreditation === 'CRUD'">
-                                    <i class="ri-edit-line"></i> Edit
-                            </button> 
-                            <!-- <button mat-menu-item type="button" 
-                                    class="bg-transparent border-none position-relative" 
-                                    (click)="delete(element.ID)"
-                                    *ngIf="currentUser.accreditation === 'CRUD'">
-                                    <i class="ri-delete-bin-3-line"></i> Delete
-                            </button>  -->
-                        </mat-menu>
-                    </td>
-                </ng-container> 
-
-
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)"></tr>
- 
-            </table>
-            <mat-paginator #paginator (page)="handlePageChange($event)"
-                [length]="totalPages"
-                [pageSize]="pageSize"
-                [pageIndex]="pageNumber"
-                [pageSizeOptions]="[15, 30, 45]">
-            </mat-paginator>
-
-            <div *ngIf="isLoading" 
-                style="display: flex; justify-content: center; align-items: center; background: white;">
-                <mat-progress-spinner [diameter]="30"
-                    color="primary" 
-                    mode="indeterminate">
-                </mat-progress-spinner>
-            </div>
-        </div>
-    </mat-card-content>
-</mat-card>

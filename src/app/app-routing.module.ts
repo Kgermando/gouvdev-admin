@@ -41,6 +41,8 @@ import { ActualiteListComponent } from './actualites/actualite/actualite-list/ac
 import { ActualiteAddComponent } from './actualites/actualite/actualite-add/actualite-add.component';
 import { ActualiteEditComponent } from './actualites/actualite/actualite-edit/actualite-edit.component';
 import { ActualiteViewComponent } from './actualites/actualite/actualite-view/actualite-view.component';
+import { GrandTitreComponent } from './text-legaux/grand-titre/grand-titre.component';
+import { GrandTitreViewComponent } from './text-legaux/grand-titre/grand-titre-view/grand-titre-view.component';
  
 const routes: Routes = [
   { path: "auth", component: AuthComponent, children: [
@@ -96,8 +98,11 @@ const routes: Routes = [
     { path: "proposition-lois/:id/view", component: PropositionLoisViewComponent }, 
 
 
+    // Grand-titre
+    { path: "grand-titre/list", component: GrandTitreComponent }, 
+    { path: "grand-titre/:id/view", component: GrandTitreViewComponent },
+
     // Text-legaux-titre
-    { path: "text-legaux-titre/list", component: TextLegauxTitreListComponent }, 
     { path: "text-legaux-titre/:id/view", component: TextLegauxTitreViewComponent },
 
     // Text-legaux
