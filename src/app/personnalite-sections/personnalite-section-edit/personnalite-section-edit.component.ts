@@ -69,22 +69,28 @@ export class PersonnaliteSectionEditComponent implements OnInit {
     });
   }
 
-
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
-    this.personnaliteSectionService.uploadFile(this.selectedFile).subscribe(
-      (response) => {
+    this.personnaliteSectionService.uploadFile(this.selectedFile).subscribe({
+      next: (response) => {
         this.image = response.data;
         console.log('Upload successful!', response.data)
       },
-      (error) => console.error('Upload failed:', error)
-    );
-  }
+      error: (error) => console.error('Upload failed:', error)
+    });
+  } 
 
   onSubmit() {
     try {
       this.isLoading = true;
-      this.personnaliteSectionService.update(this.id, this.formGroup.getRawValue())
+      var body = { 
+        title: this.formGroup.value.title,
+        image: (this.image) ? this.image : this.personnaliteSection.image,
+        content: this.formGroup.value.content,
+        is_valid: this.formGroup.value.is_valid, 
+        signature: this.currentUser.fullname,
+      };
+      this.personnaliteSectionService.update(this.id, body)
         .subscribe({
           next: (res) => {
             this.toastr.success('Modification enregistré!', 'Success!');

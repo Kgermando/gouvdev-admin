@@ -150,13 +150,13 @@ export class PersonnaliteAddComponent implements OnInit {
 
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
-    this.personnaliteService.uploadFile(this.selectedFile).subscribe(
-      (response) => {
+    this.personnaliteService.uploadFile(this.selectedFile).subscribe({
+      next: (response) => {
         this.photo = response.data;
         console.log('Upload successful!', response.data)
       },
-      (error) => console.error('Upload failed:', error)
-    );
+      error: (error) => console.error('Upload failed:', error)
+    });
   }
 
   onChangeCategory(event: any) {

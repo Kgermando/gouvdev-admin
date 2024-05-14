@@ -69,14 +69,14 @@ export class PersonnaliteSectionAddComponent implements OnInit {
 
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
-    this.personnaliteSectionService.uploadFile(this.selectedFile).subscribe(
-      (response) => {
+    this.personnaliteSectionService.uploadFile(this.selectedFile).subscribe({
+      next: (response) => {
         this.image = response.data;
         console.log('Upload successful!', response.data)
       },
-      (error) => console.error('Upload failed:', error)
-    );
-  }
+      error: (error) => console.error('Upload failed:', error)
+    });
+  } 
 
   onSubmit() {
     try {

@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserModel } from '../../../users/models/user.model';
 import { ToastrService } from 'ngx-toastr';
 import Quill from 'quill';
-import { EditorChangeContent, EditorChangeSelection } from 'ngx-quill'; 
+import { EditorChangeContent, EditorChangeSelection } from 'ngx-quill';
 import { TextLegauxTitreModel } from '../../text-legaux-titre/models/text-legaux-titre.model';
 import { TextLegauxService } from '../text-legaux.service';
 import { TextLegauxTitreService } from '../../text-legaux-titre/text-legaux-titre.service';
@@ -70,7 +70,7 @@ export class TextLegauxAddComponent implements OnInit {
         var body = {
           text_legaux_titre_id: Number(this.id),
           chapitre: this.formGroup.value.chapitre,
-          // section: this.formGroup.value.section,
+          section: this.formGroup.value.section,
           contenu: this.formGroup.value.contenu,
           is_valid: this.formGroup.value.is_valid,
           counter: 0,

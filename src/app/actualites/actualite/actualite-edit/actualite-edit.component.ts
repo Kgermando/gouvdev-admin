@@ -8,6 +8,8 @@ import { UserModel } from '../../../users/models/user.model';
 import { ActualiteModel } from '../../models/actualite.model';
 import { AuthService } from '../../../auth/auth.service';
 import { ActualiteService } from '../actualite.service';
+import { replaceSpecialChars } from '../../../shared/tools/replaceSpecialChars';
+import { truncateString } from '../../../shared/tools/truncate-string';
 
 @Component({
   selector: 'app-actualite-edit',
@@ -63,18 +65,17 @@ export class ActualiteEditComponent implements OnInit {
     private toastr: ToastrService) {}
 
 
-
-
+ 
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
-    this.actualiteService.uploadFile(this.selectedFile).subscribe(
-      (response) => {
+    this.actualiteService.uploadFile(this.selectedFile).subscribe({
+      next: (response) => {
         this.imageUrl = response.data;
         console.log('Upload successful!', response.data)
       },
-      (error) => console.error('Upload failed:', error)
-    );
-  }
+      error: (error) => console.error('Upload failed:', error)
+    });
+  } 
 
 
   ngOnInit(): void {
@@ -136,7 +137,20 @@ export class ActualiteEditComponent implements OnInit {
   onSubmit() {
     try {
       this.isLoading = true;
-      this.actualiteService.update(this.id, this.formGroup.getRawValue())
+      var body = { 
+        category: this.formGroup.value.category,
+        sous_category: this.formGroup.value.sous_category,
+        sujet_url: replaceSpecialChars(truncateString(this.formGroup.value.sujet)),
+        sujet: this.formGroup.value.sujet,
+        auteur: this.formGroup.value.auteur,
+        resume: this.formGroup.value.resume,
+        content: this.formGroup.value.content,
+        image: (this.imageUrl) ? this.imageUrl : this.actualite.image,  
+        is_publie: this.formGroup.value.is_publie,
+        is_valid: this.formGroup.value.is_valid,
+        signature: this.currentUser.fullname, 
+      };
+      this.actualiteService.update(this.id, body)
       .subscribe({
         next: () => {
           this.toastr.success('Modification enregistré!', 'Success!');

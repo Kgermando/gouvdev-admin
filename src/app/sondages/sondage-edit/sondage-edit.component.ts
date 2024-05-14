@@ -8,6 +8,8 @@ import Quill from 'quill';
 import { EditorChangeContent, EditorChangeSelection } from 'ngx-quill';
 import { SondageModel } from '../models/sondage.model'; 
 import { UserModel } from '../../users/models/user.model';
+import { replaceSpecialChars } from '../../shared/tools/replaceSpecialChars';
+import { truncateString } from '../../shared/tools/truncate-string';
 
 @Component({
   selector: 'app-sondage-edit',
@@ -37,17 +39,16 @@ export class SondageEditComponent implements OnInit {
 
 
 
-
-  onFileSelected(event: any) {
-    this.selectedFile = event.target.files[0];
-    this.sondageService.uploadFile(this.selectedFile).subscribe(
-      (response) => {
-        this.imageUrl = response.data;
-        console.log('Upload successful!', response.data)
-      },
-      (error) => console.error('Upload failed:', error)
-    );
-  }
+    onFileSelected(event: any) {
+      this.selectedFile = event.target.files[0];
+      this.sondageService.uploadFile(this.selectedFile).subscribe({
+        next: (response) => {
+          this.imageUrl = response.data;
+          console.log('Upload successful!', response.data)
+        },
+        error: (error) => console.error('Upload failed:', error)
+      });
+    } 
 
 
   ngOnInit(): void {
@@ -91,7 +92,18 @@ export class SondageEditComponent implements OnInit {
   onSubmit() {
     try {
       this.isLoading = true;
-      this.sondageService.update(this.id, this.formGroup.getRawValue())
+      var body = {
+        sujet_url: replaceSpecialChars(truncateString(this.formGroup.value.sujet)),
+        sujet: this.formGroup.value.sujet,
+        auteur: this.formGroup.value.auteur,
+        resume: this.formGroup.value.resume,
+        content: this.formGroup.value.content,
+        image: (this.imageUrl) ? this.imageUrl : this.sondage.image, 
+        thematique: this.formGroup.value.thematique, 
+        is_publie: this.formGroup.value.is_publie, 
+        signature: this.currentUser.fullname, 
+      };
+      this.sondageService.update(this.id, body)
       .subscribe({
         next: () => {
           this.toastr.success('Modification enregistré!', 'Success!');

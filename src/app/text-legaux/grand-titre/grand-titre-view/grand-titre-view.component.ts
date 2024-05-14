@@ -13,6 +13,7 @@ import { GrandTitreService } from '../grand-titre.service';
 import { TextLegauxTitreService } from '../../text-legaux-titre/text-legaux-titre.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { truncateString } from '../../../shared/tools/truncate-string';
+import { replaceSpecialChars } from '../../../shared/tools/replaceSpecialChars';
 
 @Component({
   selector: 'app-grand-titre-view',
@@ -176,7 +177,7 @@ export class EditGrandTitreDialogBox implements OnInit {
           this.formGroup.patchValue({
             category: dataItem.category,
             g_titre: dataItem.g_titre,
-            g_titre_url: this.transform(truncateString(dataItem.g_titre)),
+            g_titre_url: replaceSpecialChars(truncateString(dataItem.g_titre)),
             is_publie: dataItem.is_publie,
             signature: this.currentUser.fullname,
           });
@@ -193,7 +194,14 @@ export class EditGrandTitreDialogBox implements OnInit {
   onSubmit() {
     try {
       this.isLoading = true;
-      this.grandTitreService.update(parseInt(this.data['id']), this.formGroup.getRawValue())
+      var body = {
+        category: this.formGroup.value.category,
+        g_titre: this.formGroup.value.g_titre, 
+        g_titre_url: replaceSpecialChars(truncateString(this.formGroup.value.g_titre)), 
+        is_publie: this.formGroup.value.is_publie,
+        signature: this.currentUser.fullname,
+      };
+      this.grandTitreService.update(parseInt(this.data['id']), body)
       .subscribe({
         next: (res) => {
           this.isLoading = false;

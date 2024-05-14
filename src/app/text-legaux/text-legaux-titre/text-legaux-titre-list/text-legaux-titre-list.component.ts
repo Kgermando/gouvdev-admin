@@ -9,6 +9,7 @@ import { UserModel } from '../../../users/models/user.model';
 import { TextLegauxTitreService } from '../text-legaux-titre.service';    
 import { AuthService } from '../../../auth/auth.service';
 import { truncateString } from '../../../shared/tools/truncate-string';
+import { replaceSpecialChars } from '../../../shared/tools/replaceSpecialChars';
 
 
 @Component({
@@ -160,7 +161,7 @@ export class CreateTextLegauxTitreDialogBox {
         var body = {
           grand_titre_id: parseInt(this.data['id']),
           titre: this.formGroup.value.titre, 
-          titre_url: this.transform(truncateString(this.formGroup.value.titre)),
+          titre_url: replaceSpecialChars(truncateString(this.formGroup.value.titre)),
           counter: 0,
           is_publie: this.formGroup.value.is_publie,
           signature: this.currentUser.fullname,
@@ -251,10 +252,9 @@ export class EditTextLegauxTitreDialogBox implements OnInit {
           this.formGroup.patchValue({
             grand_titre_id: dataItem.grand_titre_id,
             titre: dataItem.titre,
-            titre_url: this.transform(truncateString(dataItem.titre)),
+            titre_url: dataItem.titre_url,
             is_publie: dataItem.is_publie,
-            signature: this.currentUser.fullname, 
-            updatedat: new Date(),
+            signature: this.currentUser.fullname,
           });
         });
       },
@@ -269,7 +269,13 @@ export class EditTextLegauxTitreDialogBox implements OnInit {
   onSubmit() {
     try {
       this.isLoading = true;
-      this.textLegauxTitreService.update(parseInt(this.data['id']), this.formGroup.getRawValue())
+      var body = { 
+        titre: this.formGroup.value.titre, 
+        titre_url: replaceSpecialChars(truncateString(this.formGroup.value.titre)),
+        is_publie: this.formGroup.value.is_publie,
+        signature: this.currentUser.fullname,
+      };
+      this.textLegauxTitreService.update(parseInt(this.data['id']), body)
       .subscribe({
         next: (res) => {
           this.isLoading = false;

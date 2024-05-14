@@ -14,6 +14,7 @@ import { AuthService } from '../../auth/auth.service';
 import { UserModel } from '../../users/models/user.model';
 import { CustomizerSettingsService } from '../../common/customizer-settings/customizer-settings.service';
 import { GrandTitreModel } from './models/grand-titre.model';
+import { replaceSpecialChars } from '../../shared/tools/replaceSpecialChars';
 
 
 @Component({
@@ -198,7 +199,7 @@ export class CreateGrandTitreDialogBox {
         var body = {
           category: this.formGroup.value.category,
           g_titre: this.formGroup.value.g_titre, 
-          g_titre_url: this.transform(truncateString(this.formGroup.value.g_titre)),
+          g_titre_url: replaceSpecialChars(truncateString(this.formGroup.value.g_titre)),
           counter: 0,
           is_publie: this.formGroup.value.is_publie,
           signature: this.currentUser.fullname,
@@ -228,9 +229,9 @@ export class CreateGrandTitreDialogBox {
     return (text && text[0].toUpperCase() + text.slice(1).toLowerCase()) || text;
   }
 
-  transform(value: string): string {
-    return value.replace(/ /g, "_");
-  }
+  // transform(value: string): string {
+  //   return value.replace(/ /g, "_");
+  // }
 
 
   close(){

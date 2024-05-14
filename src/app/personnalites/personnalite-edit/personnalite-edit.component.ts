@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from '../../auth/auth.service'; 
+import { AuthService } from '../../auth/auth.service';
 import { PersonnaliteService } from '../personnalite.service';
 import { ToastrService } from 'ngx-toastr';
 import Quill from 'quill';
-import { EditorChangeContent, EditorChangeSelection } from 'ngx-quill'; 
+import { EditorChangeContent, EditorChangeSelection } from 'ngx-quill';
 import { PersonnaliteModel } from '../models/personnalite.model';
 import { TerritoireEquateurList, TerritoireVilleBasUeleList, TerritoireVilleHautKatangaList, TerritoireVilleHautLomamiList, TerritoireVilleHautUeleList, TerritoireVilleIturiList, TerritoireVilleKasaïCentralList, TerritoireVilleKasaïList, TerritoireVilleKasaïOrientalList, TerritoireVilleKinshasaList, TerritoireVilleKongoCentralList, TerritoireVilleKwangoList, TerritoireVilleKwiluList, TerritoireVilleLomaniList, TerritoireVilleLualabaList, TerritoireVilleMaiNdombeList, TerritoireVilleManiemaList, TerritoireVilleMongalaList, TerritoireVilleNordKivuList, TerritoireVilleNordUbanguiList, TerritoireVilleSankuruList, TerritoireVilleSudKivuList, TerritoireVilleSudUbanguiList, TerritoireVilleTanganyikaList, TerritoireVilleTshopoList, TerritoireVilleTshuapaList } from '../../shared/tools/territoire_ville';
 import { ProvinceList } from '../../shared/tools/province-list';
@@ -115,13 +115,13 @@ export class PersonnaliteEditComponent implements OnInit {
 
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
-    this.personnaliteService.uploadFile(this.selectedFile).subscribe(
-      (response) => {
+    this.personnaliteService.uploadFile(this.selectedFile).subscribe({
+      next: (response) => {
         this.photo = response.data;
         console.log('Upload successful!', response.data)
       },
-      (error) => console.error('Upload failed:', error)
-    );
+      error: (error) => console.error('Upload failed:', error)
+    });
   }
 
 
@@ -242,58 +242,58 @@ export class PersonnaliteEditComponent implements OnInit {
 
 
   onChangeProvince(event: any) {
-    if (event.value === "Bas-Uele") { 
+    if (event.value === "Bas-Uele") {
       this.territoireVilleList = TerritoireVilleBasUeleList;
     } else if (event.value === "Equateur") {
-      this.territoireVilleList = TerritoireEquateurList; 
-    }  else if (event.value === "Haut-Lomami") {
-      this.territoireVilleList = TerritoireVilleHautLomamiList; 
-    }  else if (event.value === "Haut-Katanga") {
-      this.territoireVilleList = TerritoireVilleHautKatangaList; 
-    }  else if (event.value === "Haut-Uele") {
-      this.territoireVilleList = TerritoireVilleHautUeleList; 
-    }  else if (event.value === "Ituri") {
-      this.territoireVilleList = TerritoireVilleIturiList; 
-    }  else if (event.value === "Kasaï") {
-      this.territoireVilleList = TerritoireVilleKasaïList; 
-    }  else if (event.value === "Kasaï Central") {
-      this.territoireVilleList = TerritoireVilleKasaïCentralList; 
-    }  else if (event.value === "Kasaï Oriental") {
-      this.territoireVilleList = TerritoireVilleKasaïOrientalList; 
-    }  else if (event.value === "Kinshasa") {
-      this.territoireVilleList = TerritoireVilleKinshasaList; 
-    }  else if (event.value === "Kongo Central") {
-      this.territoireVilleList = TerritoireVilleKongoCentralList; 
-    }  else if (event.value === "Kwango") {
-      this.territoireVilleList = TerritoireVilleKwangoList; 
-    }  else if (event.value === "Kwilu") {
-      this.territoireVilleList = TerritoireVilleKwiluList; 
-    }  else if (event.value === "Lualaba") {
-      this.territoireVilleList = TerritoireVilleLualabaList; 
-    }  else if (event.value === "Lomani") {
-      this.territoireVilleList = TerritoireVilleLomaniList; 
-    }  else if (event.value === "Maniema") {
-      this.territoireVilleList = TerritoireVilleManiemaList; 
-    }  else if (event.value === "Mai-Ndombe") {
-      this.territoireVilleList = TerritoireVilleMaiNdombeList; 
-    }  else if (event.value === "Mongala") {
-      this.territoireVilleList = TerritoireVilleMongalaList; 
-    }  else if (event.value === "Nord Kivu") {
-      this.territoireVilleList = TerritoireVilleNordKivuList; 
-    }  else if (event.value === "Nord-Ubangui") {
-      this.territoireVilleList = TerritoireVilleNordUbanguiList; 
-    }  else if (event.value === "Sankuru") {
-      this.territoireVilleList = TerritoireVilleSankuruList; 
-    }  else if (event.value === "Sud Kivu") {
-      this.territoireVilleList = TerritoireVilleSudKivuList; 
-    }  else if (event.value === "Sud-Ubangui") {
-      this.territoireVilleList = TerritoireVilleSudUbanguiList; 
-    }  else if (event.value === "Tanganyika") {
-      this.territoireVilleList = TerritoireVilleTanganyikaList; 
-    }  else if (event.value === "Tshopo") {
-      this.territoireVilleList = TerritoireVilleTshopoList; 
-    }  else if (event.value === "Tshuapa") {
-      this.territoireVilleList = TerritoireVilleTshuapaList; 
+      this.territoireVilleList = TerritoireEquateurList;
+    } else if (event.value === "Haut-Lomami") {
+      this.territoireVilleList = TerritoireVilleHautLomamiList;
+    } else if (event.value === "Haut-Katanga") {
+      this.territoireVilleList = TerritoireVilleHautKatangaList;
+    } else if (event.value === "Haut-Uele") {
+      this.territoireVilleList = TerritoireVilleHautUeleList;
+    } else if (event.value === "Ituri") {
+      this.territoireVilleList = TerritoireVilleIturiList;
+    } else if (event.value === "Kasaï") {
+      this.territoireVilleList = TerritoireVilleKasaïList;
+    } else if (event.value === "Kasaï Central") {
+      this.territoireVilleList = TerritoireVilleKasaïCentralList;
+    } else if (event.value === "Kasaï Oriental") {
+      this.territoireVilleList = TerritoireVilleKasaïOrientalList;
+    } else if (event.value === "Kinshasa") {
+      this.territoireVilleList = TerritoireVilleKinshasaList;
+    } else if (event.value === "Kongo Central") {
+      this.territoireVilleList = TerritoireVilleKongoCentralList;
+    } else if (event.value === "Kwango") {
+      this.territoireVilleList = TerritoireVilleKwangoList;
+    } else if (event.value === "Kwilu") {
+      this.territoireVilleList = TerritoireVilleKwiluList;
+    } else if (event.value === "Lualaba") {
+      this.territoireVilleList = TerritoireVilleLualabaList;
+    } else if (event.value === "Lomani") {
+      this.territoireVilleList = TerritoireVilleLomaniList;
+    } else if (event.value === "Maniema") {
+      this.territoireVilleList = TerritoireVilleManiemaList;
+    } else if (event.value === "Mai-Ndombe") {
+      this.territoireVilleList = TerritoireVilleMaiNdombeList;
+    } else if (event.value === "Mongala") {
+      this.territoireVilleList = TerritoireVilleMongalaList;
+    } else if (event.value === "Nord Kivu") {
+      this.territoireVilleList = TerritoireVilleNordKivuList;
+    } else if (event.value === "Nord-Ubangui") {
+      this.territoireVilleList = TerritoireVilleNordUbanguiList;
+    } else if (event.value === "Sankuru") {
+      this.territoireVilleList = TerritoireVilleSankuruList;
+    } else if (event.value === "Sud Kivu") {
+      this.territoireVilleList = TerritoireVilleSudKivuList;
+    } else if (event.value === "Sud-Ubangui") {
+      this.territoireVilleList = TerritoireVilleSudUbanguiList;
+    } else if (event.value === "Tanganyika") {
+      this.territoireVilleList = TerritoireVilleTanganyikaList;
+    } else if (event.value === "Tshopo") {
+      this.territoireVilleList = TerritoireVilleTshopoList;
+    } else if (event.value === "Tshuapa") {
+      this.territoireVilleList = TerritoireVilleTshuapaList;
     } else {
       this.territoireVilleList = []
     }
@@ -304,7 +304,39 @@ export class PersonnaliteEditComponent implements OnInit {
   onSubmit() {
     try {
       this.isLoading = true;
-      this.personnaliteService.update(this.id, this.formGroup.getRawValue())
+      var body = {
+        category: this.formGroup.value.category,
+        category_gouv_aff_public: this.formGroup.value.category_gouv_aff_public,
+        category_filtre: this.formGroup.value.category_filtre,
+        top_header: this.formGroup.value.top_header,
+        photo: (this.photo) ? this.photo : this.personnalite.photo,
+        nom: this.capitalizeTest(this.formGroup.value.nom),
+        postnom: this.capitalizeTest(this.formGroup.value.postnom),
+        prenom: this.capitalizeTest(this.formGroup.value.prenom),
+        sexe: this.formGroup.value.sexe,
+        birthday: this.formGroup.value.birthday,
+        lieu_naissance: this.formGroup.value.lieu_naissance,
+        nationalite: this.formGroup.value.nationalite,
+        etat_civile: this.formGroup.value.etat_civile,
+        province: this.formGroup.value.province,
+        territoire_ville: this.formGroup.value.territoire_ville,
+        secteur_chefferie: this.formGroup.value.secteur_chefferie,
+        village: this.formGroup.value.village,
+        conjoint: this.formGroup.value.conjoint,
+        pere: this.formGroup.value.pere,
+        mere: this.formGroup.value.mere,
+        about: this.formGroup.value.about,
+        compte_fb: this.formGroup.value.compte_fb,
+        compte_x: this.formGroup.value.compte_x,
+        compte_linkedIn: this.formGroup.value.compte_linkedIn,
+        compte_instagram: this.formGroup.value.compte_instagram,
+        compte_tiktok: this.formGroup.value.compte_tiktok,
+
+        is_publie: this.formGroup.value.is_publie,
+        signature: this.currentUser.fullname,
+        personnalite_url: `${this.formGroup.value.prenom}_${this.formGroup.value.nom}_${this.formGroup.value.postnom}`.toLocaleLowerCase(),
+      };
+      this.personnaliteService.update(this.id, body)
         .subscribe({
           next: () => {
             this.toastr.success('Modification enregistré!', 'Success!');

@@ -48,9 +48,7 @@ import { SondageListComponent } from './sondages/sondage-list/sondage-list.compo
 import { SondageAddComponent } from './sondages/sondage-add/sondage-add.component';
 import { SondageEditComponent } from './sondages/sondage-edit/sondage-edit.component';
 import { EditSondageDialogBox, SondageViewComponent } from './sondages/sondage-view/sondage-view.component';
-import { OpinionListComponent } from './opinions/opinion-list/opinion-list.component';
-import { OpinionAddComponent } from './opinions/opinion-add/opinion-add.component';
-import { OpinionEditComponent } from './opinions/opinion-edit/opinion-edit.component';
+import { OpinionListComponent } from './opinions/opinion-list/opinion-list.component'; 
 import { OpinionViewComponent } from './opinions/opinion-view/opinion-view.component';
 import { TextLegauxAddComponent } from './text-legaux/text-legaux-content/text-legaux-add/text-legaux-add.component';
 import { TextLegauxEditComponent } from './text-legaux/text-legaux-content/text-legaux-edit/text-legaux-edit.component';
@@ -75,6 +73,7 @@ import { ActualiteViewComponent } from './actualites/actualite/actualite-view/ac
 import { CreateGrandTitreDialogBox, GrandTitreComponent } from './text-legaux/grand-titre/grand-titre.component';
 import { EditGrandTitreDialogBox, GrandTitreViewComponent } from './text-legaux/grand-titre/grand-titre-view/grand-titre-view.component';
 import { GtitreViewComponent } from './text-legaux/text-legaux-titre/text-legaux-titre-view/gtitre-view/gtitre-view.component';
+import { ReplaceSpecialCharsPipe } from './pipes/replace-special-chars.pipe';
 
 
 registerLocaleData(localeFr);
@@ -117,9 +116,7 @@ registerLocaleData(localeFr);
     SondageAddComponent,
     SondageEditComponent,
     SondageViewComponent,
-    OpinionListComponent,
-    OpinionAddComponent,
-    OpinionEditComponent,
+    OpinionListComponent, 
     OpinionViewComponent,
     TextLegauxAddComponent,
     TextLegauxEditComponent,
@@ -154,6 +151,7 @@ registerLocaleData(localeFr);
     EditGrandTitreDialogBox,
     GrandTitreViewComponent,
     GtitreViewComponent,
+    ReplaceSpecialCharsPipe,
   ],
   imports: [
     BrowserModule,

@@ -3,11 +3,11 @@
     <h4 class="mb-0">Les titres</h4>
     <div>
         <button mat-icon-button  
-            [routerLink]="['/web/text-legaux', grand_titre_id, 'add']"
+            (click)="openAddDialog('300ms', '100ms', grand_titre_id)"
             *ngIf="currentUser.accreditation === 'CRUD'" 
             matTooltip="Add new titre">
                 <mat-icon>add</mat-icon>
-        </button> 
+        </button>
     </div> 
 </div>
 <div class="table-responsive">

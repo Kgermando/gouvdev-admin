@@ -10,9 +10,7 @@ import { UserViewComponent } from './users/user-view/user-view.component';
 import { ActuListComponent } from './actus/actu-list/actu-list.component';
 import { ActuViewComponent } from './actus/actu-view/actu-view.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { OpinionListComponent } from './opinions/opinion-list/opinion-list.component';
-import { OpinionAddComponent } from './opinions/opinion-add/opinion-add.component';
-import { OpinionEditComponent } from './opinions/opinion-edit/opinion-edit.component';
+import { OpinionListComponent } from './opinions/opinion-list/opinion-list.component'; 
 import { OpinionViewComponent } from './opinions/opinion-view/opinion-view.component';
 import { PersonnaliteListComponent } from './personnalites/personnalite-list/personnalite-list.component';
 import { PersonnaliteAddComponent } from './personnalites/personnalite-add/personnalite-add.component';
@@ -85,9 +83,7 @@ const routes: Routes = [
     { path: "sondages/:id/view", component: SondageViewComponent },
 
     // Opinions
-    { path: "opinions/list", component: OpinionListComponent },
-    { path: "opinions/add", component: OpinionAddComponent },
-    { path: "opinions/:id/edit", component: OpinionEditComponent },
+    { path: "opinions/list", component: OpinionListComponent }, 
     { path: "opinions/:id/view", component: OpinionViewComponent },
     
 

@@ -4,8 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserModel } from '../../../users/models/user.model';
 import { ToastrService } from 'ngx-toastr';
 import Quill from 'quill';
-import { EditorChangeContent, EditorChangeSelection } from 'ngx-quill';  
-import { TextLegauxService } from '../text-legaux.service'; 
+import { EditorChangeContent, EditorChangeSelection } from 'ngx-quill';
+import { TextLegauxService } from '../text-legaux.service';
 import { TextLegauxModel } from '../models/text-legaux.model';
 import { AuthService } from '../../../auth/auth.service';
 
@@ -35,14 +35,14 @@ export class TextLegauxEditComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private _formBuilder: FormBuilder,
-    private authService: AuthService,  
+    private authService: AuthService,
     private textLegauxService: TextLegauxService,
     private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
     this.formGroup = this._formBuilder.group({
-      chapitre: [''], 
+      chapitre: [''],
       section: [''],
       contenu: [''],
       is_valid: [''],
@@ -50,16 +50,16 @@ export class TextLegauxEditComponent implements OnInit {
 
     this.authService.user().subscribe({
       next: (user) => {
-        this.currentUser = user; 
+        this.currentUser = user;
         this.textLegauxService.get(Number(this.id)).subscribe(res => {
           this.textLegauxModel = res.data;
           this.formGroup.patchValue({
             text_legaux_titre_id: this.textLegauxModel.text_legaux_titre_id,
             chapitre: this.textLegauxModel.chapitre,
-            // section: this.textLegauxModel.section,
+            section: this.textLegauxModel.section,
             contenu: this.textLegauxModel.contenu,
-            is_valid: this.textLegauxModel.is_valid, 
-            signature: this.currentUser.fullname, 
+            is_valid: this.textLegauxModel.is_valid,
+            signature: this.currentUser.fullname,
           });
           this.isLoading = false;
         });
@@ -71,12 +71,18 @@ export class TextLegauxEditComponent implements OnInit {
     });
   }
 
- 
+
   onSubmit() {
     try {
       this.isLoading = true;
-      console.log("id", this.id)
-      this.textLegauxService.update(this.id, this.formGroup.getRawValue())
+      var body = { 
+        chapitre: this.formGroup.value.chapitre,
+        section: this.formGroup.value.section,
+        contenu: this.formGroup.value.contenu,
+        is_valid: this.formGroup.value.is_valid, 
+        signature: this.currentUser.fullname,
+      };
+      this.textLegauxService.update(this.id, body)
         .subscribe({
           next: (res) => {
             this.toastr.success('Modification enregistré!', 'Success!');

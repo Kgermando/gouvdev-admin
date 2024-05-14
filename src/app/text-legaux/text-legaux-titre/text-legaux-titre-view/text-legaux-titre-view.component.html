@@ -5,6 +5,9 @@
     <div class="row mb-25" *ngIf="textLegauxTitre">
         <mat-card class="mb-25 personal-info-card tagus-card" [class.component-dark-theme]="themeService.isDark()">
             <mat-card-header class="border-bottom"> 
+                <h4>
+                    <app-gtitre-view [id]="textLegauxTitre.grand_titre_id"></app-gtitre-view>
+                </h4>
                 <div>
                     <button mat-icon-button color="accent"  
                     (click)="openEditDialog('300ms', '100ms', textLegauxTitre.ID)"
@@ -25,16 +28,13 @@
                     <div class="col-lg-12 col-md-12 col-sm-12">
                         <ul class="list ps-0 mb-0">
                             <li>
-                                <span class="fw-semibold">Grand titre: </span>
-                                <span class="fw-semibold">  
-                                    <app-gtitre-view [id]="textLegauxTitre.grand_titre_id"></app-gtitre-view>
-                                </span> 
-                            </li>  
-                            <li>
                                 <span class="fw-semibold">Titre: </span>
                                 <p class="gray-color">{{ textLegauxTitre.titre }}</p>
                             </li>
-                           
+                            <li>
+                                <span class="fw-semibold">Titre Url: </span>
+                                <p class="gray-color">{{ textLegauxTitre.titre_url }}</p>
+                            </li>
                             <li>
                                 <span class="fw-semibold">Signature: </span>
                                 <span class="gray-color">{{ textLegauxTitre.signature }}</span>

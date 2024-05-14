@@ -8,6 +8,7 @@ import Quill from 'quill';
 import { EditorChangeContent, EditorChangeSelection } from 'ngx-quill'; 
 import { UserModel } from '../../users/models/user.model';
 import { truncateString } from '../../shared/tools/truncate-string';
+import { replaceSpecialChars } from '../../shared/tools/replaceSpecialChars';
 
 @Component({
   selector: 'app-sondage-add',
@@ -54,18 +55,17 @@ export class SondageAddComponent implements OnInit {
       is_publie: ['', Validators.required],
     });
   }
-
-
+ 
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
-    this.sondageService.uploadFile(this.selectedFile).subscribe(
-      (response) => {
+    this.sondageService.uploadFile(this.selectedFile).subscribe({
+      next: (response) => {
         this.imageUrl = response.data;
         console.log('Upload successful!', response.data)
       },
-      (error) => console.error('Upload failed:', error)
-    );
-  }
+      error: (error) => console.error('Upload failed:', error)
+    });
+  } 
 
 
   onSubmit() {
@@ -73,7 +73,7 @@ export class SondageAddComponent implements OnInit {
       if (this.formGroup.valid) {
         this.isLoading = true;
         var body = {
-          sujet_url: this.transform(truncateString(this.formGroup.value.sujet)),
+          sujet_url: replaceSpecialChars(truncateString(this.formGroup.value.sujet)),
           sujet: this.formGroup.value.sujet,
           auteur: this.formGroup.value.auteur,
           resume: this.formGroup.value.resume,

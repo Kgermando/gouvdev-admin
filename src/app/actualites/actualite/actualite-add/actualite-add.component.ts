@@ -8,6 +8,7 @@ import { UserModel } from '../../../users/models/user.model';
 import { AuthService } from '../../../auth/auth.service';
 import { ActualiteService } from '../actualite.service';
 import { truncateString } from '../../../shared/tools/truncate-string';
+import { replaceSpecialChars } from '../../../shared/tools/replaceSpecialChars';
 
 
 @Component({
@@ -37,21 +38,21 @@ export class ActualiteAddComponent implements OnInit {
   sousCategoryList: string[] = [];
 
   politiquesSecuritesList: string[] = [
-    'Politiques',
-    'Sécurités', 
+    'Politique',
+    'Sécurité', 
   ];
   economieDeveloppementList: string[] = [
-    'Economies',
-    'Développements',
+    'Economie',
+    'Développement',
   ];
   societeList: string[] = [ 
-    'Societés',
+    'Societé',
   ];
   environnementsList: string[] = [ 
-    'Environnements', 
+    'Environnement', 
   ];
   recherchesInnovationList: string[] = [ 
-    'Recherches et innovations', 
+    'Recherche et innovation', 
   ];
 
   constructor( 
@@ -88,14 +89,14 @@ export class ActualiteAddComponent implements OnInit {
 
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
-    this.actualiteService.uploadFile(this.selectedFile).subscribe(
-      (response) => {
+    this.actualiteService.uploadFile(this.selectedFile).subscribe({
+      next: (response) => {
         this.imageUrl = response.data;
         console.log('Upload successful!', response.data)
       },
-      (error) => console.error('Upload failed:', error)
-    );
-  }
+      error: (error) => console.error('Upload failed:', error)
+    });
+  } 
 
   onChangeCategory(event: any) {
     if (event.value == "Politiques et sécurités") {
@@ -119,7 +120,7 @@ export class ActualiteAddComponent implements OnInit {
         var body = { 
           category: this.formGroup.value.category,
           sous_category: this.formGroup.value.sous_category,
-          sujet_url: this.transform(truncateString(this.formGroup.value.sujet)),
+          sujet_url: replaceSpecialChars(truncateString(this.formGroup.value.sujet)),
           sujet: this.formGroup.value.sujet,
           auteur: this.formGroup.value.auteur,
           resume: this.formGroup.value.resume,
@@ -134,7 +135,7 @@ export class ActualiteAddComponent implements OnInit {
           next: (res) => {
             this.isLoading = false;
             this.formGroup.reset();
-            this.toastr.success('Ajouter avec succès!', 'Success!'); 
+            this.toastr.success('Ajouter avec succès!', 'Success!');
             this.router.navigate(['/web/actualites/list']);
           },
           error: (err) => {
