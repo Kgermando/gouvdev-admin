@@ -19,7 +19,7 @@ import { ActualiteModel } from '../../models/actualite.model';
   styleUrl: './actualite-list.component.scss'
 })
 export class ActualiteListComponent implements OnInit {
-  displayedColumns: string[] = ['sujet', 'auteur', 'counter', 'is_publie', 'is_valid'];
+  displayedColumns: string[] = ['sous_category', 'sujet', 'auteur', 'counter', 'is_publie', 'is_valid'];
 
   ELEMENT_DATA: ActualiteModel[] = [];
   pageSize = 15; // Default page size

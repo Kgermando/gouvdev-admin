@@ -22,7 +22,14 @@
         </div>
         <div class="mat-elevation-z8 tagus-mat-table">
             <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
-               
+                <!-- sous_category Column -->
+                <ng-container matColumnDef="sous_category">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Sous categorie</th>
+                    <td mat-cell *matCellDef="let element">
+                        {{element.sous_category}}
+                    </td>
+                </ng-container>
+
                  <!-- Nom Column -->
                  <ng-container matColumnDef="sujet">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>Sujet</th>

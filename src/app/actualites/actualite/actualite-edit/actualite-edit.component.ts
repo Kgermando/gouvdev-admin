@@ -38,21 +38,21 @@ export class ActualiteEditComponent implements OnInit {
   sousCategoryList: string[] = [];
 
   politiquesSecuritesList: string[] = [
-    'Politiques',
-    'Sécurités', 
+    'Politique',
+    'Sécurité', 
   ];
   economieDeveloppementList: string[] = [
-    'Economies',
-    'Développements',
+    'Economie',
+    'Développement',
   ];
   societeList: string[] = [ 
-    'Societés',
+    'Societé',
   ];
   environnementsList: string[] = [ 
-    'Environnements', 
+    'Environnement', 
   ];
   recherchesInnovationList: string[] = [ 
-    'Recherches et innovations', 
+    'Recherche et innovation', 
   ];
 
   id: any;

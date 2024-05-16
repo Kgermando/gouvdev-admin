@@ -13,7 +13,8 @@
                     </div>
                 </div>
                 <div>
-                    <button mat-icon-button color="accent" [routerLink]="['/web/actualites', actualite.ID, 'edit']"
+                    <button mat-icon-button color="accent" 
+                        [routerLink]="['/web/actualites', actualite.ID, 'edit']"
                         *ngIf="currentUser.accreditation === 'CRUD'" matTooltip="Modifier ce document">
                         <mat-icon>edit</mat-icon>
                     </button>
@@ -85,7 +86,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="course-details-desc" *ngIf="actualiteOpnionList.length > 0">
+                <div class="course-details-desc">
                     <h2 class="mb-25">Participations citoyennes </h2>
                     <mat-accordion>
                         <mat-expansion-panel *ngFor="let opinion of actualiteOpnionList">

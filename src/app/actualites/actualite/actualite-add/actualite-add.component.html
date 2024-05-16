@@ -41,7 +41,7 @@
                     <mat-form-field appearance="fill">
                         <i class="ri-edit-2-line"></i>
                         <mat-label>Entrer le sujet</mat-label>
-                        <input matInput type="text" [maxlength]="100" id="sujet" formControlName="sujet" required>
+                        <input matInput type="text" [maxlength]="120" id="sujet" formControlName="sujet" required>
                         <mat-error *ngIf="formGroup.controls['sujet'].hasError('required')">
                             Ce champs est obligatoire
                         </mat-error>
