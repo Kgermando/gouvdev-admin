@@ -30,28 +30,28 @@
                     </a>
                 </td>
                 <td class="gray-color">
-                    <span class="badge text-bg-success" *ngIf="titre.is_publie">Publié</span> 
-                    <span class="badge text-bg-danger" *ngIf="!titre.is_publie">Pas Publié</span> 
+                    <span class="badge text-bg-success" *ngIf="titre.is_publie">Publié</span>
+                    <span class="badge text-bg-danger" *ngIf="!titre.is_publie">Pas Publié</span>
                 </td> 
                 <td class="gray-color">
                     <button type="button" mat-button class="position-relative dot-btn p-0 bg-transparent border-none" 
-                    [matMenuTriggerFor]="actionMenu">
-                    <i class="ri-more-fill"></i>
-                </button>
-                <mat-menu #actionMenu="matMenu" class="dotMenu two monthMenu" xPosition="before">
-                    <button mat-menu-item type="button" 
-                            class="bg-transparent border-none position-relative" 
-                            (click)="openEditDialog('300ms', '100ms', titre.ID)"
-                            *ngIf="currentUser.accreditation === 'CRUD'">
-                            <i class="ri-edit-line"></i> Edit
-                    </button> 
-                    <button mat-menu-item type="button" 
-                            class="bg-transparent border-none position-relative" 
-                            (click)="delete(titre.ID)"
-                            *ngIf="currentUser.accreditation === 'CRUD'">
-                            <i class="ri-delete-bin-3-line"></i> Delete
-                    </button> 
-                </mat-menu>
+                        [matMenuTriggerFor]="actionMenu">
+                        <i class="ri-more-fill"></i>
+                    </button>
+                    <mat-menu #actionMenu="matMenu" class="dotMenu two monthMenu" xPosition="before">
+                        <button mat-menu-item type="button" 
+                                class="bg-transparent border-none position-relative" 
+                                (click)="openEditDialog('300ms', '100ms', titre.ID)"
+                                *ngIf="currentUser.accreditation === 'CRUD'">
+                                <i class="ri-edit-line"></i> Edit
+                        </button> 
+                        <button mat-menu-item type="button" 
+                                class="bg-transparent border-none position-relative" 
+                                (click)="delete(titre.ID)"
+                                *ngIf="currentUser.accreditation === 'CRUD'">
+                                <i class="ri-delete-bin-3-line"></i> Delete
+                        </button> 
+                    </mat-menu>
                 </td>
             </tr> 
         </tbody>

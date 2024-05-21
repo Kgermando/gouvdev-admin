@@ -23,7 +23,7 @@ export class TextLegauxTitreListComponent implements OnInit {
   ELEMENT_DATA: TextLegauxTitreModel[] = [];  
 
   isLoading = false;
-  currentUser: UserModel | any; 
+  currentUser: UserModel | any;
   
   constructor( 
       public themeService: CustomizerSettingsService,
@@ -90,8 +90,8 @@ export class TextLegauxTitreListComponent implements OnInit {
       data: {
         id: id
       }
-    }); 
-  } 
+    });
+  }
  
   openEditDialog(enterAnimationDuration: string, exitAnimationDuration: string, id: number): void {
     this.dialog.open(EditTextLegauxTitreDialogBox, {
@@ -102,7 +102,7 @@ export class TextLegauxTitreListComponent implements OnInit {
         id: id
       }
     }); 
-  } 
+  }
 
 
   toggleTheme() {
