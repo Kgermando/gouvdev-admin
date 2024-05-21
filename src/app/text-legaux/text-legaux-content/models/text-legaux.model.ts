@@ -4,7 +4,7 @@ export interface TextLegauxModel {
     ID: number;
     text_legaux_titre_id: TextLegauxTitreModel;
     chapitre: string;
-    section: string;
+    // section: string;
     contenu: string;
     counter: number; 
     is_valid: boolean;

@@ -56,7 +56,7 @@ export class TextLegauxAddComponent implements OnInit {
 
     this.formGroup = this._formBuilder.group({
       chapitre: ['', Validators.required],
-      section: ['', Validators.required],
+      // section: ['', Validators.required],
       contenu: ['', Validators.required],
       is_valid: ['', Validators.required],
     });
@@ -70,7 +70,7 @@ export class TextLegauxAddComponent implements OnInit {
         var body = {
           text_legaux_titre_id: Number(this.id),
           chapitre: this.formGroup.value.chapitre,
-          section: this.formGroup.value.section,
+          // section: this.formGroup.value.section,
           contenu: this.formGroup.value.contenu,
           is_valid: this.formGroup.value.is_valid,
           counter: 0,

@@ -43,7 +43,7 @@ export class TextLegauxEditComponent implements OnInit {
     this.id = this.route.snapshot.params['id'];
     this.formGroup = this._formBuilder.group({
       chapitre: [''],
-      section: [''],
+      // section: [''],
       contenu: [''],
       is_valid: [''],
     });
@@ -56,7 +56,7 @@ export class TextLegauxEditComponent implements OnInit {
           this.formGroup.patchValue({
             text_legaux_titre_id: this.textLegauxModel.text_legaux_titre_id,
             chapitre: this.textLegauxModel.chapitre,
-            section: this.textLegauxModel.section,
+            // section: this.textLegauxModel.section,
             contenu: this.textLegauxModel.contenu,
             is_valid: this.textLegauxModel.is_valid,
             signature: this.currentUser.fullname,
@@ -77,7 +77,7 @@ export class TextLegauxEditComponent implements OnInit {
       this.isLoading = true;
       var body = { 
         chapitre: this.formGroup.value.chapitre,
-        section: this.formGroup.value.section,
+        // section: this.formGroup.value.section,
         contenu: this.formGroup.value.contenu,
         is_valid: this.formGroup.value.is_valid, 
         signature: this.currentUser.fullname,
