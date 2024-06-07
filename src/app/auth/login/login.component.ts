@@ -45,7 +45,7 @@ onSubmit(): void {
     this.authService.login(body).subscribe({
         next: (res) => {
           let user: UserModel = res;
-            let role = JSON.stringify(user.role);
+            let role = JSON.stringify(user.roles);
             localStorage.removeItem('roles');
             localStorage.setItem('role', role);
             this.router.navigate(['/web/dashboard']);

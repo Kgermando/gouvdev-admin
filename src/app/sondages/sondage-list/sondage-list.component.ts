@@ -22,7 +22,7 @@ import { CustomizerSettingsService } from '../../common/customizer-settings/cust
 export class SondageListComponent implements OnInit {
   displayedColumns: string[] = ['numero', 'sujet', 'auteur', 'counter', 'is_publie', 'is_valid'];
   
-  ELEMENT_DATA: SondageModel[] = [];
+  ELEMENT_DATA: SondageModel[] = []; 
   pageSize = 15; // Default page size
   pageNumber = 1; // Default page number
   totalPages = 0; // Stores total pages from API response 

@@ -2,6 +2,7 @@
 <mat-card class="create-project-card tagus-card mb-25">
     <mat-card-header>
         <h4 class="mb-0">Ajouter un sondage</h4>
+       
     </mat-card-header>
     <mat-card-content>
         <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
@@ -33,7 +34,7 @@
                     </mat-form-field>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
-                    <label class="d-block mb-12 fw-semibold gray-color">Resumé </label>
+                    <label class="d-block mb-12 fw-semibold gray-color">Resumé du sondage </label>
                     <mat-form-field appearance="fill">
                         <i class="ri-edit-2-line"></i>
                         <mat-label>Entrer le resumé</mat-label>
@@ -53,7 +54,7 @@
                             Ce champs est obligatoire
                         </mat-error>
                     </mat-form-field>
-                </div>
+                </div> 
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="tagus-form-group">
                         <label class="d-block mb-12 fw-semibold gray-color">Statut de publication</label>
@@ -69,13 +70,60 @@
                         </mat-form-field>
                     </div> 
                 </div>
-                <div class="col-lg-12 col-md-12 col-sm-12"> 
-                    <label class="d-block mb-12 fw-semibold gray-color">Synthese </label>
+                <div class="col-lg-12 col-md-12 col-sm-12 mb-5"> 
+                    <label class="d-block mb-12 fw-semibold gray-color">Synthèse </label>
                     <quill-editor [styles]="{height: '200px'}" (onFocus)="focus($event)" 
                         (onEditorChanged)="changedEditor($event)" (onBlur)="blur($event)" 
                         (onEditorCreated)="created($event)" formControlName="content"></quill-editor> 
-                </div>
+                </div> 
 
+                <!-- <div class="col-lg-12 col-md-12 col-sm-12 mt-5">
+                    <label class="d-block mb-12 fw-semibold gray-color">Mettez les choix  </label>
+                    <form formGroupName='choix'>
+                        <div class="row" *ngFor="let ch of choix.controls; let i = index">
+                            <div class="col-md-10"[formGroupName]="i"> 
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <mat-form-field appearance="fill">
+                                            <i class="ri-edit-2-line"></i>
+                                            <mat-label>N* {{i + 1}} </mat-label>
+                                            <input matInput type="text" placeholder="Numero {{i + 1}}" formControlName="number"> 
+                                        </mat-form-field> 
+                                    </div>
+                                    <div class="col-md-9">
+                                        <mat-form-field appearance="fill">
+                                            <i class="ri-edit-2-line"></i>
+                                            <mat-label>Entrer le choix {{i + 1}} </mat-label>
+                                            <input matInput type="text" placeholder="{{i + 1}} Choix" formControlName="choice"> 
+                                        </mat-form-field>
+                                    </div>
+                                </div> 
+                            </div> 
+                            <div class="col-md-2">
+                                <span class="remove" (click)="removeChoix(i)">x</span>
+                            </div> 
+                        </div>
+                        <button class="button" (click)="addChoix()">+ Cliquez ici pour Ajouter des choix</button>
+                    </form> 
+                </div> -->
+                <div class="col-lg-12 col-md-12 col-sm-12 mt-5">
+                    <label class="d-block mb-12 fw-semibold gray-color">Ajoutez les mots cles  </label>
+                    <form formGroupName='tags'>
+                        <div class="row" *ngFor="let tags of tags.controls; let i = index">
+                            <div class="col-md-9">
+                                <mat-form-field appearance="fill">
+                                    <i class="ri-edit-2-line"></i>
+                                    <mat-label>Entrer le tags {{i + 1}} </mat-label>
+                                    <input matInput type="text" placeholder="Mot cles {{i + 1}}" formControlName="{{i}}"> 
+                                </mat-form-field>  
+                            </div> 
+                            <div class="col-md-3">
+                                <span class="remove" (click)="removeTags(i)">x</span> 
+                            </div> 
+                        </div>
+                        <button class="button" (click)="addTags()">+ Cliquez ici pour Ajouter des choix</button>
+                    </form> 
+                </div>
             </div>
             <div class="d-flex justify-content-center" *ngIf="isLoading">
                 <mat-spinner color="warn" [diameter]="30"></mat-spinner> <p class="ml-2"> Patientez-svp...</p>

@@ -8,7 +8,7 @@
                 <div class="d-flex align-items-center">
                     <img src="assets/img/user/user22.jpg" width="57" class="rounded-circle" alt="user">
                     <div class="ms-15">
-                        <h5 class="mb-5">{{ user.role.toUpperCase() }}</h5>
+                        <h5 class="mb-5">{{ user.roles[0].toUpperCase() }}</h5>
                         <span class="d-block gray-color success" *ngIf="user.is_active">Actif</span>
                         <span class="d-block gray-color danger" *ngIf="!user.is_active">Inactif</span>
                     </div>
@@ -63,8 +63,12 @@
                                     <span class="gray-color">{{ user.email }}</span>
                                 </li>
                                 <li>
-                                    <span class="fw-semibold">Role: </span>
-                                    <span class="gray-color">{{ user.role }}</span>
+                                    <span class="fw-semibold">Roles: </span>
+                                    <span class="gray-color"> 
+                                        <ul *ngFor="let role of user.roles">
+                                            <li>{{role}}</li>
+                                        </ul>
+                                    </span>
                                 </li>
                                 <li>
                                     <span class="fw-semibold">Accreditation: </span>

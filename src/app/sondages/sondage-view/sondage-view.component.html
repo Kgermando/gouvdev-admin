@@ -2,94 +2,107 @@
     <mat-spinner color="warn" [diameter]="30"></mat-spinner>
     <p class="ml-2"> Patientez-svp...</p>
 </div>
-<div *ngIf="!isLoading">
-    <div class="row mb-25" *ngIf="sondage">
-        <mat-card class="mb-25 personal-info-card tagus-card" [class.component-dark-theme]="themeService.isDark()">
-            <mat-card-header class="border-bottom">
-                <div class="d-flex align-items-center">
-                    <div class="">
-                        <h5 class="mb-5">{{ sondage.auteur }}</h5>
-                        <span class="d-block gray-color mt-5">Visites: {{ sondage.counter }}</span>
-                    </div>
+<div class="row mb-25" *ngIf="!isLoading && sondage">
+    <mat-card class="mb-25 personal-info-card tagus-card" [class.component-dark-theme]="themeService.isDark()">
+        <mat-card-header class="border-bottom">
+            <div class="d-flex align-items-center">
+                <div class="">
+                    <h5 class="mb-5">{{ sondage.auteur }}</h5>
+                    <span class="d-block gray-color mt-5">Visites: {{ sondage.counter }}</span>
                 </div>
-                <div>
-                    <button mat-icon-button color="primary" (click)="openEditDialog('300ms', '100ms', sondage.ID)"
-                        *ngIf="currentUser.accreditation === 'CRUD'" matTooltip="Fermée le sondage aux utilisateurs">
-                        <mat-icon>auto_fix_high</mat-icon>
-                    </button>
-                    <button mat-icon-button color="accent" [routerLink]="['/web/sondages', sondage.ID, 'edit']"
-                        *ngIf="currentUser.accreditation === 'CRUD'" matTooltip="Modifier ce document">
-                        <mat-icon>edit</mat-icon>
-                    </button>
-                    <button mat-icon-button color="warn" (click)="delete(sondage.ID)"
-                        *ngIf="currentUser.accreditation === 'CRUD'" matTooltip="Mettre en corbeille ce document">
-                        <mat-icon>delete</mat-icon>
-                    </button>
-                </div>
-            </mat-card-header>
-            <mat-card-content>
-                <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12">
-                        <ul class="list ps-0 mb-0">
-                            <li>
-                                <span class="fw-semibold">Sujet: </span>
-                                <p class="gray-color">{{ sondage.sujet }}</p>
-                            </li>
-                            <li>
-                                <span class="fw-semibold">Sujet url: </span>
-                                <p class="gray-color">{{ sondage.sujet_url }}</p>
-                            </li>
-                            <li>
-                                <span class="fw-semibold">Auteur: </span>
-                                <span class="gray-color">{{ sondage.auteur }}</span>
-                            </li>
-                            <li>
-                                <span class="fw-semibold">Image: </span>
-                                <span class="gray-color">{{ sondage.image }}</span>
-                            </li>
-                            <li>
-                                <span class="fw-semibold">Thematique: </span>
-                                <span class="gray-color">{{ sondage.thematique }}</span>
-                            </li>
-                            <li>
-                                <span class="fw-semibold">Statut de publication: </span>
-                                <span class="badge text-bg-success" *ngIf="sondage.is_publie">Publié</span>
-                                <span class="badge text-bg-danger" *ngIf="!sondage.is_publie">Pas Publié</span>
-                            </li>
-                            <li>
-                                <span class="fw-semibold">Statut du sondage: </span>
-                                <span class="gray-color badge text-bg-success" *ngIf="sondage.is_valid">Sondage
-                                    ouvert</span>
-                                <span class="gray-color badge text-bg-danger" *ngIf="!sondage.is_valid">Sondage
-                                    fermée</span>
-                            </li>
+            </div>
+            <div>
+                <button mat-icon-button color="primary" (click)="openEditDialog('300ms', '100ms', sondage.ID)"
+                    *ngIf="currentUser.accreditation === 'CRUD'" matTooltip="Fermée le sondage aux utilisateurs">
+                    <mat-icon>auto_fix_high</mat-icon>
+                </button>
+                <button mat-icon-button color="accent" [routerLink]="['/web/sondages', sondage.ID, 'edit']"
+                    *ngIf="currentUser.accreditation === 'CRUD'" matTooltip="Modifier ce document">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button color="warn" (click)="delete(sondage.ID)"
+                    *ngIf="currentUser.accreditation === 'CRUD'" matTooltip="Mettre en corbeille ce document">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <ul class="list ps-0 mb-0">
+                        <li>
+                            <span class="fw-semibold">Sujet: </span>
+                            <p class="gray-color">{{ sondage.sujet }}</p>
+                        </li>
+                        <li>
+                            <span class="fw-semibold">Sujet url: </span>
+                            <p class="gray-color">{{ sondage.sujet_url }}</p>
+                        </li>
+                        <li>
+                            <span class="fw-semibold">Auteur: </span>
+                            <span class="gray-color">{{ sondage.auteur }}</span>
+                        </li>
+                        <li>
+                            <span class="fw-semibold">Image: </span>
+                            <span class="gray-color">{{ sondage.image }}</span>
+                        </li>
+                        <li>
+                            <span class="fw-semibold">Thematique: </span>
+                            <span class="gray-color">{{ sondage.thematique }}</span>
+                        </li>
+                        <li>
+                            <span class="fw-semibold">Statut de publication: </span>
+                            <span class="badge text-bg-success" *ngIf="sondage.is_publie">Publié</span>
+                            <span class="badge text-bg-danger" *ngIf="!sondage.is_publie">Pas Publié</span>
+                        </li>
+                        <li>
+                            <span class="fw-semibold">Statut du sondage: </span>
+                            <span class="gray-color badge text-bg-success" *ngIf="sondage.is_valid">Sondage
+                                ouvert</span>
+                            <span class="gray-color badge text-bg-danger" *ngIf="!sondage.is_valid">Sondage
+                                fermée</span>
+                        </li>
 
-                            <li>
-                                <span class="fw-semibold">Signature: </span>
-                                <span class="gray-color">{{ sondage.signature }}</span>
-                            </li>
-                            <li>
-                                <span class="fw-semibold">Date de creation: </span>
-                                <span class="gray-color">{{ sondage.CreatedAt | date: 'dd/MM/yyyy' }}</span>
-                            </li>
-                            <li>
-                                <span class="fw-semibold">Mise à jour le: </span>
-                                <span class="gray-color">{{ sondage.UpdatedAt | date: 'dd/MM/yyyy HH:mm' }}</span>
-                            </li>
-                        </ul>
-                        <ul class="list ps-0 mb-15">
-                            <li>
-                                <span class="fw-semibold">Resume: </span>
-                                <p class="gray-color">{{ sondage.resume }}</p>
-                            </li>
-                            <li>
-                                <span class="fw-semibold">Synthese: </span>
-                                <div [innerHTML]="sondage.content"></div>
-                            </li>
-                        </ul>
-                    </div>
+                        <li>
+                            <span class="fw-semibold">Signature: </span>
+                            <span class="gray-color">{{ sondage.signature }}</span>
+                        </li>
+                        <li>
+                            <span class="fw-semibold">Date de creation: </span>
+                            <span class="gray-color">{{ sondage.CreatedAt | date: 'dd/MM/yyyy' }}</span>
+                        </li>
+                        <li>
+                            <span class="fw-semibold">Mise à jour le: </span>
+                            <span class="gray-color">{{ sondage.UpdatedAt | date: 'dd/MM/yyyy HH:mm' }}</span>
+                        </li>
+                    </ul>
+                    <ul class="list ps-0 mb-15">
+                        <li>
+                            <span class="fw-semibold">Resume: </span>
+                            <p class="gray-color">{{ sondage.resume }}</p>
+                        </li>
+                        <li>
+                            <span class="fw-semibold">Synthese: </span>
+                            <div [innerHTML]="sondage.content"></div>
+                        </li>
+                    </ul>
+                    <h6 class="mb-5">Mot cles</h6>
+                    <ul class="list ps-0 mb-15" *ngFor="let tags of sondage.tags; let i=index">
+                        <li>
+                            <span class="gray-color">{{i}}. {{ tags }}</span>
+                        </li>
+                    </ul>
+
+                    <h6 class="mb-5">Choix</h6>
+                    <ul class="list ps-0 mb-15" *ngFor="let choix of choixList; let i=index">
+                        <li>
+                            <span class="gray-color">{{choix.number}}. {{ choix.choice }}</span>
+                        </li>
+                    </ul>
+
+                  
                 </div>
-            </mat-card-content>
-        </mat-card>
-    </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
 </div>

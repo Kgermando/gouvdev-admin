@@ -74,6 +74,7 @@ import { CreateGrandTitreDialogBox, GrandTitreComponent } from './text-legaux/gr
 import { EditGrandTitreDialogBox, GrandTitreViewComponent } from './text-legaux/grand-titre/grand-titre-view/grand-titre-view.component';
 import { GtitreViewComponent } from './text-legaux/text-legaux-titre/text-legaux-titre-view/gtitre-view/gtitre-view.component';
 import { ReplaceSpecialCharsPipe } from './pipes/replace-special-chars.pipe';
+import { ChoiceComponent } from './sondages/choice/choice.component';
 
 
 registerLocaleData(localeFr);
@@ -152,6 +153,7 @@ registerLocaleData(localeFr);
     GrandTitreViewComponent,
     GtitreViewComponent,
     ReplaceSpecialCharsPipe,
+    ChoiceComponent,
   ],
   imports: [
     BrowserModule,

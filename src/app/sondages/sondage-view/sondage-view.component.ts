@@ -1,13 +1,14 @@
 import { Component, Inject, OnInit } from '@angular/core'; 
 import { ActivatedRoute, Router } from '@angular/router'; 
 import { ToastrService } from 'ngx-toastr'; 
-import { SondageModel } from '../models/sondage.model'; 
+import { ChoixModel, SondageModel } from '../models/sondage.model'; 
 import { SondageService } from '../sondage.service';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog'; 
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { UserModel } from '../../users/models/user.model';
 import { CustomizerSettingsService } from '../../common/customizer-settings/customizer-settings.service';
 import { AuthService } from '../../auth/auth.service';
+import { ChoiceService } from '../choice/choice.service';
 
 @Component({
   selector: 'app-sondage-view',
@@ -18,6 +19,7 @@ export class SondageViewComponent implements OnInit {
   isLoading = false;
 
   sondage!: SondageModel;
+  choixList: ChoixModel[] = [];
 
   currentUser: UserModel | any;
 
@@ -26,7 +28,8 @@ export class SondageViewComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
-    private sondageService: SondageService, 
+    private sondageService: SondageService,
+    private choiceService: ChoiceService, 
     public dialog: MatDialog,
     private toastr: ToastrService) {}
 
@@ -52,8 +55,20 @@ export class SondageViewComponent implements OnInit {
     fetchProduct(id: any) {
       this.sondageService.get(Number(id)).subscribe(res => {
         this.sondage = res.data;
+        this.choiceService.refreshDataList$.subscribe(() => {
+          this.fetchProducts();
+        });
+        this.fetchProducts();
         this.isLoading = false;
       });
+    }
+
+    fetchProducts() {  
+      this.choiceService.getAllById(this.sondage.ID)
+        .subscribe(response => {
+          this.choixList = response.data;
+        }
+      );
     }
 
 

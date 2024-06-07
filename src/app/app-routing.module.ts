@@ -41,6 +41,7 @@ import { ActualiteEditComponent } from './actualites/actualite/actualite-edit/ac
 import { ActualiteViewComponent } from './actualites/actualite/actualite-view/actualite-view.component';
 import { GrandTitreComponent } from './text-legaux/grand-titre/grand-titre.component';
 import { GrandTitreViewComponent } from './text-legaux/grand-titre/grand-titre-view/grand-titre-view.component';
+import { ChoiceComponent } from './sondages/choice/choice.component';
  
 const routes: Routes = [
   { path: "auth", component: AuthComponent, children: [
@@ -81,6 +82,7 @@ const routes: Routes = [
     { path: "sondages/add", component: SondageAddComponent },
     { path: "sondages/:id/edit", component: SondageEditComponent },
     { path: "sondages/:id/view", component: SondageViewComponent },
+    { path: "sondages/:id/choices", component: ChoiceComponent },
 
     // Opinions
     { path: "opinions/list", component: OpinionListComponent }, 

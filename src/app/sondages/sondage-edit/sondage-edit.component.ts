@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../auth/auth.service';
 import { SondageService } from '../sondage.service';
@@ -57,8 +57,10 @@ export class SondageEditComponent implements OnInit {
       sujet: [''],
       auteur: [''],
       resume: [''],
+      choix: this._formBuilder.array([]),
       content: [''],
       thematique: [''],
+      tags: this._formBuilder.array([]),
       is_publie: [''],
     });
 
@@ -71,11 +73,14 @@ export class SondageEditComponent implements OnInit {
               sujet: this.sondage.sujet, 
               sujet_url: this.sondage.sujet, 
               auteur: this.sondage.auteur, 
+              choix: this.sondage.choix,
               resume: this.sondage.resume, 
               content: this.sondage.content, 
+              tags: this.sondage.tags,
               image: (this.imageUrl) ? this.imageUrl : this.sondage.image, 
               thematique: this.sondage.thematique, 
               is_publie: this.sondage.is_publie,  
+              counter: this.sondage.counter,  
             });
           }
         );
@@ -89,6 +94,34 @@ export class SondageEditComponent implements OnInit {
 
 
 
+  get choix() {
+    return this.formGroup.get('choix') as FormArray;
+  }
+  addChoix() {
+    const choice = new FormControl('');
+    this.choix.push(choice);
+    console.log(this.choix.value);
+  }
+  removeChoix(index: number) {
+    this.choix.removeAt(index);
+    console.log(this.choix.value);
+  }
+
+
+  get tags() {
+    return this.formGroup.get('tags') as FormArray;
+  }
+  addTags() {
+    const tag = new FormControl('');
+    this.tags.push(tag);
+    console.log(this.tags.value);
+  }
+  removeTags(index: number) {
+    this.tags.removeAt(index);
+    console.log(this.tags.value);
+  }
+
+
   onSubmit() {
     try {
       this.isLoading = true;
@@ -98,8 +131,10 @@ export class SondageEditComponent implements OnInit {
         auteur: this.formGroup.value.auteur,
         resume: this.formGroup.value.resume,
         content: this.formGroup.value.content,
+        choix: this.choix.value,
         image: (this.imageUrl) ? this.imageUrl : this.sondage.image, 
         thematique: this.formGroup.value.thematique, 
+        tags: this.tags.value,
         is_publie: this.formGroup.value.is_publie, 
         signature: this.currentUser.fullname, 
       };

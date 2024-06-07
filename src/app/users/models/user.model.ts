@@ -9,8 +9,8 @@ export interface UserModel {
     fullname: string;
     sexe: string;
     // emailVerified: boolean;
-    role: string; // User, Admin, Support, Abonner, ... 
-    accreditation: string[]; // Permission
+    roles: string[]; // User, Admin, Support, Abonner, ... 
+    accreditation: string; // Permission
     is_active: boolean;
     trancheage: string;
     proposition_lois: PropositionLoisModel[];
