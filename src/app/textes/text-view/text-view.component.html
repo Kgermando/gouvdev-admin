@@ -1,0 +1,70 @@
+<div class="d-flex justify-content-center" *ngIf="isLoading">
+    <mat-spinner color="warn" [diameter]="30"></mat-spinner>
+    <p class="ml-2"> Patientez-svp...</p>
+</div>
+<div *ngIf="!isLoading">
+    <div class="row mb-25" *ngIf="texte">
+        <mat-card class="mb-25 personal-info-card tagus-card" [class.component-dark-theme]="themeService.isDark()">
+            <mat-card-header class="border-bottom">
+                <div class="d-flex align-items-center">
+                    <div class="">
+                        <h5 class="mb-5">{{ texte.category }}</h5>
+                        <span class="d-block gray-color mt-5">Visites: {{ texte.counter }}</span>
+                    </div>
+                </div>
+                <div>
+                    <button mat-icon-button color="accent" 
+                        [routerLink]="['/web/textes', texte.ID, 'edit']"
+                        *ngIf="currentUser.accreditation === 'CRUD'" matTooltip="Modifier ce document">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-icon-button color="warn" (click)="delete(texte.ID)"
+                        *ngIf="currentUser.accreditation === 'CRUD'" matTooltip="Mettre en corbeille ce document">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </div>
+            </mat-card-header>
+            <mat-card-content>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <ul class="list ps-0 mb-0"> 
+                            <li>
+                                <span class="fw-semibold">Titre: </span>
+                                <p class="gray-color">{{ texte.titre }}</p>
+                            </li>
+                            <li>
+                                <span class="fw-semibold">Titre url: </span>
+                                <p class="gray-color">{{ texte.titre_url }}</p>
+                            </li> 
+                            <li>
+                                <span class="fw-semibold">Statut de publication: </span>
+                                <span class="badge text-bg-success" *ngIf="texte.is_publie">Publié</span>
+                                <span class="badge text-bg-danger" *ngIf="!texte.is_publie">Pas Publié</span>
+                            </li> 
+
+                            <li>
+                                <span class="fw-semibold">Signature: </span>
+                                <span class="gray-color">{{ texte.signature }}</span>
+                            </li>
+                            <li>
+                                <span class="fw-semibold">Date de creation: </span>
+                                <span class="gray-color">{{ texte.CreatedAt | date: 'dd/MM/yyyy' }}</span>
+                            </li>
+                            <li>
+                                <span class="fw-semibold">Mise à jour le: </span>
+                                <span class="gray-color">{{ texte.UpdatedAt | date: 'dd/MM/yyyy HH:mm' }}</span>
+                            </li>
+                        </ul>
+                        <ul class="list ps-0 mb-15"> 
+                            <li>
+                                <span class="fw-semibold">Corps du texte: </span>
+                                <div [innerHTML]="texte.body"></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

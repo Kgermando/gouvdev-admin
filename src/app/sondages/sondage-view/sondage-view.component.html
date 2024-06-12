@@ -13,8 +13,12 @@
             </div>
             <div>
                 <button mat-icon-button color="primary" (click)="openEditDialog('300ms', '100ms', sondage.ID)"
-                    *ngIf="currentUser.accreditation === 'CRUD'" matTooltip="Fermée le sondage aux utilisateurs">
+                    *ngIf="currentUser.accreditation === 'CRUD'" matTooltip="Fermée/Ouvrir le sondage aux utilisateurs">
                     <mat-icon>auto_fix_high</mat-icon>
+                </button>
+                <button mat-icon-button color="primary" [routerLink]="['/web/sondages', sondage.ID, 'choices']"
+                    *ngIf="currentUser.accreditation === 'CRUD'" matTooltip="Modifier les choix">
+                    <mat-icon>check_circle</mat-icon>
                 </button>
                 <button mat-icon-button color="accent" [routerLink]="['/web/sondages', sondage.ID, 'edit']"
                     *ngIf="currentUser.accreditation === 'CRUD'" matTooltip="Modifier ce document">

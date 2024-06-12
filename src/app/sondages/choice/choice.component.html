@@ -32,7 +32,12 @@
                             <span class="fw-semibold">
                                 {{choix.number}}. {{choix.choice}}  
                             </span> 
-                            <span class="remove" (click)="removeChoix(choix.ID)">x</span>
+                            <span class="edit" (click)="openEditDialog('300ms', '100ms', choix.ID)">
+                                <mat-icon>edit</mat-icon>
+                            </span>
+                            <span class="remove" (click)="removeChoix(choix.ID)">
+                                <mat-icon>close</mat-icon>
+                            </span>
                         </li>
                     </ul> 
                 </div>
@@ -67,13 +72,14 @@
                         <mat-spinner color="warn" [diameter]="30"></mat-spinner> <p class="ml-2"> Patientez-svp...</p>
                     </div>
                     <div *ngIf="!isLoadingChoice">
-                        <div *ngIf="currentUser">
+                        <div class="d-flex justify-content-space-between" *ngIf="currentUser">
                             <button mat-button type="submit" class="default-btn mt-25"
                                 *ngIf="currentUser.accreditation === 'CRUD'">
                                 Soumettre
                             </button>
-                            <a mat-button class="default-btn mt-25" >
-                                12132
+                            <a mat-button class="ml-5 mt-25" 
+                                [routerLink]="['/web/sondages', sondage.ID, 'view']">
+                                Fermer
                             </a>
                         </div>
                     </div> 

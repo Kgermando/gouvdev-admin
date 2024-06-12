@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserModel } from '../../users/models/user.model';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -7,6 +7,8 @@ import { ChoiceService } from './choice.service';
 import { SondageService } from '../sondage.service';
 import { CustomizerSettingsService } from '../../common/customizer-settings/customizer-settings.service';
 import { ChoixModel, SondageModel } from '../models/sondage.model';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-choice',
@@ -30,6 +32,7 @@ export class ChoiceComponent implements OnInit {
     private authService: AuthService,
     private choiceService: ChoiceService, 
     private sondageService: SondageService, 
+    public dialog: MatDialog,
   ) { }
   
 
@@ -121,4 +124,95 @@ export class ChoiceComponent implements OnInit {
   toggleTheme() {
     this.themeService.toggleTheme();
   }
+
+
+  openEditDialog(enterAnimationDuration: string, exitAnimationDuration: string, id: number): void {
+    this.dialog.open(EditChoiceDialogBox, {
+      width: '600px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+      data: {
+        id: id
+      }
+    }); 
+  } 
+}
+
+
+
+@Component({
+  selector: 'edit-choice-dialog',
+  templateUrl: './choice-edit.html',
+})
+export class EditChoiceDialogBox implements OnInit {
+  isLoading = false;
+
+  formGroup!: FormGroup;
+ 
+
+  currentUser: UserModel | any;  
+
+  isPubieList: boolean[] = [false, true];
+
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+      public dialogRef: MatDialogRef<EditChoiceDialogBox>,
+      private formBuilder: FormBuilder,
+      private router: Router,
+      private authService: AuthService, 
+      private toastr: ToastrService, 
+      private choiceService: ChoiceService,  
+  ) {}
+
+  ngOnInit(): void {
+    this.formGroup = this.formBuilder.group({
+      number: [''],
+      choice: [''],
+    });
+    this.authService.user().subscribe({
+      next: (user) => {
+        this.currentUser = user;
+        this.choiceService.get(parseInt(this.data['id'])).subscribe(item => {
+          var dataItem = item.data;
+          this.formGroup.patchValue({ 
+            // sondage_id: dataItem.ID,
+            number: dataItem.number,
+            choice: dataItem.choice, 
+          });
+        });
+      },
+      error: (error) => {
+        this.router.navigate(['/auth/login']);
+        console.log(error);
+      }
+    }); 
+  } 
+
+
+  onSubmit() {
+    try {
+      this.isLoading = true;
+      this.choiceService.update(parseInt(this.data['id']), this.formGroup.getRawValue())
+      .subscribe({
+        next: (res) => {
+          this.isLoading = false;
+          this.toastr.success('Modification enregistré!', 'Success!');
+          this.close();
+        },
+        error: err => {
+          this.isLoading = false;
+          console.log(err);
+          this.toastr.error('Une erreur s\'est produite!', 'Oupss!');
+        }
+      });
+    } catch (error) {
+      this.isLoading = false;
+      console.log(error);
+    }
+  }
+
+  close(){
+      this.dialogRef.close(true);
+  } 
+
 }

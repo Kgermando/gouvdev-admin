@@ -1,33 +1,30 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { UserModel } from '../../../users/models/user.model';
-import { ActualiteModel, ActualiteOpinionModel } from '../../models/actualite.model';
-import { CustomizerSettingsService } from '../../../common/customizer-settings/customizer-settings.service';
-import { AuthService } from '../../../auth/auth.service';
-import { ActualiteService } from '../actualite.service';
-import { ActualiteOpinionService } from '../actualite-opinion.service';
+import { ToastrService } from 'ngx-toastr'; 
+import { TexteModel } from '../models/texte.model';
+import { UserModel } from '../../users/models/user.model';
+import { CustomizerSettingsService } from '../../common/customizer-settings/customizer-settings.service';
+import { AuthService } from '../../auth/auth.service';
+import { TexteService } from '../texte.service';
 
 @Component({
-  selector: 'app-actualite-view',
-  templateUrl: './actualite-view.component.html',
-  styleUrl: './actualite-view.component.scss'
+  selector: 'app-text-view',
+  templateUrl: './text-view.component.html',
+  styleUrl: './text-view.component.scss'
 })
-export class ActualiteViewComponent implements OnInit {
+export class TextViewComponent implements OnInit {
   isLoading = false;
 
-  actualite!: ActualiteModel;
-  actualiteOpnionList: ActualiteOpinionModel[] = [];
+  texte!: TexteModel;
 
-  currentUser: UserModel | any;
+  currentUser!: UserModel; 
 
   constructor(
     public themeService: CustomizerSettingsService,
     private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
-    private actualiteService: ActualiteService,
-    private actualiteOpinionService: ActualiteOpinionService,
+    private texteService: TexteService,
     private toastr: ToastrService) { }
 
   ngOnInit(): void {
@@ -36,7 +33,7 @@ export class ActualiteViewComponent implements OnInit {
       next: (user) => {
         this.currentUser = user;
         let id = this.route.snapshot.paramMap.get('id');  // this.route.snapshot.params['id'];
-        this.actualiteService.refreshData$.subscribe(() => {
+        this.texteService.refreshData$.subscribe(() => {
           this.fetchProduct(id);
         });
         this.fetchProduct(id);
@@ -50,24 +47,21 @@ export class ActualiteViewComponent implements OnInit {
   }
 
   fetchProduct(id: any) {
-    this.actualiteService.get(Number(id)).subscribe(res => {
-      this.actualite = res.data;
-      this.actualiteOpinionService.getAllById(this.actualite.ID).subscribe(response => {
-        this.actualiteOpnionList = response.data;
-        this.isLoading = false;
-      });
+    this.texteService.get(Number(id)).subscribe(res => {
+      this.texte = res.data;
+      this.isLoading = false;
     });
   }
 
 
   delete(id: number): void {
     if (confirm('Êtes-vous sûr de vouloir supprimer cet enregistrement ?')) {
-      this.actualiteService
+      this.texteService
         .delete(id)
         .subscribe({
           next: () => {
             this.toastr.info('Supprimé avec succès!', 'Success!');
-            this.router.navigate(['/web/actualites/list']);
+            this.router.navigate(['/web/textes/list']);
           },
           error: err => {
             this.toastr.error('Une erreur s\'est produite!', 'Oupss!');

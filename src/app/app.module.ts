@@ -49,11 +49,7 @@ import { SondageAddComponent } from './sondages/sondage-add/sondage-add.componen
 import { SondageEditComponent } from './sondages/sondage-edit/sondage-edit.component';
 import { EditSondageDialogBox, SondageViewComponent } from './sondages/sondage-view/sondage-view.component';
 import { OpinionListComponent } from './opinions/opinion-list/opinion-list.component'; 
-import { OpinionViewComponent } from './opinions/opinion-view/opinion-view.component';
-import { TextLegauxAddComponent } from './text-legaux/text-legaux-content/text-legaux-add/text-legaux-add.component';
-import { TextLegauxEditComponent } from './text-legaux/text-legaux-content/text-legaux-edit/text-legaux-edit.component';
-import { CreateTextLegauxTitreDialogBox, EditTextLegauxTitreDialogBox, TextLegauxTitreListComponent } from './text-legaux/text-legaux-titre/text-legaux-titre-list/text-legaux-titre-list.component';
-import { TextLegauxTitreViewComponent } from './text-legaux/text-legaux-titre/text-legaux-titre-view/text-legaux-titre-view.component';
+import { OpinionViewComponent } from './opinions/opinion-view/opinion-view.component'; 
 import { AuthComponent } from './auth/auth.component';
 import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
@@ -69,14 +65,17 @@ import { StatsPieSexeComponent } from './dashboard/stats-pie-sexe/stats-pie-sexe
 import { ActualiteListComponent } from './actualites/actualite/actualite-list/actualite-list.component';
 import { ActualiteAddComponent } from './actualites/actualite/actualite-add/actualite-add.component';
 import { ActualiteEditComponent } from './actualites/actualite/actualite-edit/actualite-edit.component';
-import { ActualiteViewComponent } from './actualites/actualite/actualite-view/actualite-view.component';
-import { CreateGrandTitreDialogBox, GrandTitreComponent } from './text-legaux/grand-titre/grand-titre.component';
-import { EditGrandTitreDialogBox, GrandTitreViewComponent } from './text-legaux/grand-titre/grand-titre-view/grand-titre-view.component';
-import { GtitreViewComponent } from './text-legaux/text-legaux-titre/text-legaux-titre-view/gtitre-view/gtitre-view.component';
+import { ActualiteViewComponent } from './actualites/actualite/actualite-view/actualite-view.component'; 
 import { ReplaceSpecialCharsPipe } from './pipes/replace-special-chars.pipe';
-import { ChoiceComponent } from './sondages/choice/choice.component';
+import { ChoiceComponent, EditChoiceDialogBox } from './sondages/choice/choice.component';
+import { CreateCategoryPersonDialogBox, EditCategoryPersonDialogBox, PersonCategoryFiltreComponent } from './person-category-filtre/person-category-filtre.component';
+import { AssociateJoinPersonCategoryDialogBox, JonctionPersonCategoryComponent } from './jonction-person-category/jonction-person-category.component';
+import { TextListComponent } from './textes/text-list/text-list.component'; 
+import { TextAddComponent } from './textes/text-add/text-add.component';
+import { TextEditComponent } from './textes/text-edit/text-edit.component';
+import { TextViewComponent } from './textes/text-view/text-view.component';
 
-
+ 
 registerLocaleData(localeFr);
 
 @NgModule({
@@ -118,11 +117,7 @@ registerLocaleData(localeFr);
     SondageEditComponent,
     SondageViewComponent,
     OpinionListComponent, 
-    OpinionViewComponent,
-    TextLegauxAddComponent,
-    TextLegauxEditComponent,
-    TextLegauxTitreListComponent,
-    TextLegauxTitreViewComponent,
+    OpinionViewComponent, 
     AuthComponent,
     ResetPasswordComponent,
     ForgotPasswordComponent,
@@ -134,9 +129,7 @@ registerLocaleData(localeFr);
 
     CreateActuDialogBox,
     LimiterTextPipe,
-    EditActuDialogBox,
-    CreateTextLegauxTitreDialogBox,
-    EditTextLegauxTitreDialogBox,
+    EditActuDialogBox, 
     PersonnaliteSectionAddComponent,
     PersonnaliteSectionEditComponent,
     EditSondageDialogBox,
@@ -146,14 +139,17 @@ registerLocaleData(localeFr);
     ActualiteListComponent,
     ActualiteAddComponent,
     ActualiteEditComponent,
-    ActualiteViewComponent,
-    GrandTitreComponent,
-    CreateGrandTitreDialogBox,
-    EditGrandTitreDialogBox,
-    GrandTitreViewComponent,
-    GtitreViewComponent,
+    ActualiteViewComponent, 
     ReplaceSpecialCharsPipe,
     ChoiceComponent,
+    EditChoiceDialogBox,
+    PersonCategoryFiltreComponent,
+    JonctionPersonCategoryComponent,
+    CreateCategoryPersonDialogBox,
+    EditCategoryPersonDialogBox, 
+    AssociateJoinPersonCategoryDialogBox, TextListComponent, 
+    TextAddComponent, TextEditComponent, TextViewComponent,
+    
   ],
   imports: [
     BrowserModule,

@@ -80,7 +80,7 @@ export class SondageEditComponent implements OnInit {
               image: (this.imageUrl) ? this.imageUrl : this.sondage.image, 
               thematique: this.sondage.thematique, 
               is_publie: this.sondage.is_publie,  
-              counter: this.sondage.counter,  
+              // counter: this.sondage.counter,  
             });
           }
         );
@@ -91,23 +91,7 @@ export class SondageEditComponent implements OnInit {
       }
     });
   }
-
-
-
-  get choix() {
-    return this.formGroup.get('choix') as FormArray;
-  }
-  addChoix() {
-    const choice = new FormControl('');
-    this.choix.push(choice);
-    console.log(this.choix.value);
-  }
-  removeChoix(index: number) {
-    this.choix.removeAt(index);
-    console.log(this.choix.value);
-  }
-
-
+ 
   get tags() {
     return this.formGroup.get('tags') as FormArray;
   }
@@ -130,8 +114,7 @@ export class SondageEditComponent implements OnInit {
         sujet: this.formGroup.value.sujet,
         auteur: this.formGroup.value.auteur,
         resume: this.formGroup.value.resume,
-        content: this.formGroup.value.content,
-        choix: this.choix.value,
+        content: this.formGroup.value.content, 
         image: (this.imageUrl) ? this.imageUrl : this.sondage.image, 
         thematique: this.formGroup.value.thematique, 
         tags: this.tags.value,

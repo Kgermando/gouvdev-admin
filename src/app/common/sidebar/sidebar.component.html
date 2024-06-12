@@ -52,29 +52,39 @@
                         </i>
                         <span class="title">Opinions</span>
                     </a>
+ 
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = true">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <i class="material-symbols-outlined">groups</i>
+                                <span class="title">Portrait solutions</span> 
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <ul class="sidebar-sub-menu">
+                            <li class="sidemenu-item">
+                                <a routerLink="/web/personnalites/list" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                    Personnalites
+                                </a>
+                            </li>
+                            <li class="sidemenu-item">
+                                <a routerLink="/web/personnalites/person-category-filtre" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                    Categorie filtre
+                                </a>
+                            </li>
+                            <li class="sidemenu-item">
+                                <a routerLink="/web/personnalites/jonction-person-category" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                    Palmares
+                                </a>
+                            </li>
+                        </ul>
+                    </mat-expansion-panel> 
 
-                    <a routerLink="/web/personnalites/list" class="sidebar-menu-link" routerLinkActive="active"
-                        [routerLinkActiveOptions]="{exact: true}">
-                        <i class="material-symbols-outlined">
-                            groups
-                        </i>
-                        <span class="title">Personnalites</span>
-                    </a>
-
-                    <a routerLink="/web/proposition-lois/list" class="sidebar-menu-link" routerLinkActive="active"
-                        [routerLinkActiveOptions]="{exact: true}">
-                        <i class="material-symbols-outlined">
-                            partner_exchange
-                        </i>
-                        <span class="title">Propositions</span>
-                    </a>
-
-                    <a routerLink="/web/grand-titre/list" class="sidebar-menu-link" routerLinkActive="active"
+                    <a routerLink="/web/textes/list" class="sidebar-menu-link" routerLinkActive="active"
                         [routerLinkActiveOptions]="{exact: true}">
                         <i class="material-symbols-outlined">
                             edit_note
                         </i>
-                        <span class="title">Grand titres</span>
+                        <span class="title">Textes</span>
                     </a>
 
                     <a routerLink="/web/contacts/list" class="sidebar-menu-link" routerLinkActive="active"
@@ -91,6 +101,15 @@
                             group
                         </i>
                         <span class="title">Utilisateurs</span>
+                    </a>
+
+
+                    <a routerLink="/web/proposition-lois/list" class="sidebar-menu-link" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{exact: true}">
+                        <i class="material-symbols-outlined">
+                            partner_exchange
+                        </i>
+                        <span class="title">Propositions</span>
                     </a>
                 </mat-accordion>
             </div>

@@ -1,0 +1,40 @@
+<div class="create-dialog-box">
+    <div class="title d-flex align-items-center justify-content-space-between">
+        <h4 class="mb-0">Modification des choix</h4>
+        <button class="close-btn bg-transparent p-0 border-none" (click)="close()"><i class="flaticon-close"></i></button>
+    </div>
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="form-group">
+                    <label class="d-block fw-semibold">Numero</label>
+                    <input type="text" class="input-control" placeholder="Entrer le Numero" formControlName="number"> 
+                </div>
+            </div> 
+            <div class="col-lg-12 col-md-12">
+                <div class="form-group">
+                    <label class="d-block fw-semibold">Question</label>
+                    <input type="text" class="input-control" placeholder="Entrer la question" formControlName="choice"> 
+                </div>
+            </div> 
+        </div>
+        <div class="text-end">
+            <button type="button" class="gray" (click)="close()">
+                <i class="ri-close-fill"></i> 
+                Annuler
+            </button>
+            <button type="submit">
+                <span *ngIf="isLoading">
+                    <mat-progress-spinner [diameter]="30"
+                        color="primary" 
+                        mode="indeterminate">
+                    </mat-progress-spinner>
+                </span>
+                <span *ngIf="!isLoading">
+                    <i class="ri-add-fill"></i> 
+                    Soumettre
+                </span> 
+            </button>
+        </div>
+    </form>
+</div>

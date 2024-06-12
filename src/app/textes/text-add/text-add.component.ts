@@ -1,44 +1,63 @@
-
-import { Component, OnInit, inject } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../auth/auth.service';
-import { SondageService } from '../sondage.service';
 import { ToastrService } from 'ngx-toastr';
 import Quill from 'quill';
 import { EditorChangeContent, EditorChangeSelection } from 'ngx-quill';
+import { AuthService } from '../../auth/auth.service';
 import { UserModel } from '../../users/models/user.model';
-import { truncateString } from '../../shared/tools/truncate-string';
+import { TexteService } from '../texte.service';
 import { replaceSpecialChars } from '../../shared/tools/replaceSpecialChars';
+import { Observable } from 'rxjs/internal/Observable';
+import { startWith } from 'rxjs/internal/operators/startWith';
+import { map } from 'rxjs/operators';
+import { TexteModel } from '../models/texte.model';
 
 @Component({
-  selector: 'app-sondage-add',
-  templateUrl: './sondage-add.component.html',
-  styleUrls: ['./sondage-add.component.scss']
+  selector: 'app-text-add',
+  templateUrl: './text-add.component.html',
+  styleUrl: './text-add.component.scss'
 })
-export class SondageAddComponent implements OnInit {
+export class TextAddComponent implements OnInit {
   isLoading: boolean = false;
   formGroup!: FormGroup;
+
+  // g_titre = new FormControl('');
+  textList: string[] = [];
+  ELEMENT_DATA: TexteModel[] = [];
+  filteredOptions!: Observable<string[]>;
 
   currentUser!: UserModel;
 
   isPubieList: boolean[] = [false, true];
 
-  selectedFile!: File;
-  imageUrl!: string
+  categoryList: string[] = [
+    'Constitution',
+    'Traités et accords internationaux',
+    'Lois régissant les intitutions',
+    'Arreté',
+    'Circulaire',
+    'Décret',
+    'Ordonance',
+    "Programme d'actions du gouvernennement 2024-2028",
+  ]
 
   constructor(
     private router: Router,
     private _formBuilder: FormBuilder,
     private authService: AuthService,
-    private sondageService: SondageService,
+    private texteService: TexteService,
     private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
+
     this.authService.user().subscribe({
       next: (user) => {
         this.currentUser = user;
+        // this.texteService.getAll().subscribe(res => {
+        //   this.ELEMENT_DATA = res.data;
+        // })
       },
       error: (error) => {
         this.router.navigate(['/auth/login']);
@@ -47,66 +66,51 @@ export class SondageAddComponent implements OnInit {
     });
 
     this.formGroup = this._formBuilder.group({
-      sujet: ['', Validators.required],
-      auteur: ['', Validators.required],
-      resume: ['', Validators.required], 
-      content: ['', Validators.required],
-      tags: this._formBuilder.array([]),
-      thematique: ['', Validators.required],
+      category: ['', Validators.required],
+      g_titre: ['', Validators.required],
+      titre: ['', Validators.required],
+      titre_url: [''],
+      body: ['', Validators.required],
+      counter: [''],
       is_publie: ['', Validators.required],
+      signature: [''],
     });
+
+    // this.filteredOptions = this.formGroup.valueChanges.pipe(
+    //   startWith(''),
+    //   map(value => this._filter(value || '')),
+    // );
   }
 
-  onFileSelected(event: any) {
-    this.selectedFile = event.target.files[0];
-    this.sondageService.uploadFile(this.selectedFile).subscribe({
-      next: (response) => {
-        this.imageUrl = response.data;
-        console.log('Upload successful!', response.data)
-      },
-      error: (error) => console.error('Upload failed:', error)
-    });
-  }
- 
 
-  get tags() {
-    return this.formGroup.get('tags') as FormArray;
-  }
-  addTags() {
-    const tag = new FormControl('');
-    this.tags.push(tag);
-    console.log(this.tags.value);
-  }
-  removeTags(index: number) {
-    this.tags.removeAt(index);
-    console.log(this.tags.value);
-  }
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
 
+    var dataList = this.ELEMENT_DATA.map(item => item.g_titre);
+
+    return dataList.filter(option => option.toLowerCase().includes(filterValue));
+  }
 
   onSubmit() {
     try {
       if (this.formGroup.valid) {
         this.isLoading = true;
         var body = {
-          sujet_url: replaceSpecialChars(truncateString(this.formGroup.value.sujet)),
-          sujet: this.formGroup.value.sujet,
-          auteur: this.formGroup.value.auteur,
-          resume: this.formGroup.value.resume,
-          content: this.formGroup.value.content, 
-          image: this.imageUrl,
-          thematique: this.formGroup.value.thematique,
-          tags: this.tags.value,
+          category: this.formGroup.value.category,
+          g_titre: this.formGroup.value.g_titre,
+          titre: this.formGroup.value.titre,
+          titre_url: replaceSpecialChars(this.formGroup.value.titre),
+          body: this.formGroup.value.body,
           counter: 0,
           is_publie: this.formGroup.value.is_publie,
-          is_valid: false,
           signature: this.currentUser.fullname,
         };
-        this.sondageService.create(body).subscribe({
+        this.texteService.create(body).subscribe({
           next: (res) => {
             this.isLoading = false;
             this.formGroup.reset();
             this.toastr.success('Ajouter avec succès!', 'Success!');
-            this.router.navigate(['/web/sondages', res.data.ID, 'choices']);
+            this.router.navigate(['/web/textes/list']);
           },
           error: (err) => {
             this.isLoading = false;
@@ -147,6 +151,5 @@ export class SondageAddComponent implements OnInit {
   capitalizeTest(text: string): string {
     return (text && text[0].toUpperCase() + text.slice(1).toLowerCase()) || text;
   }
-
 
 }

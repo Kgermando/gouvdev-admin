@@ -23,25 +23,25 @@ import { PropositionLoisViewComponent } from './proposition-lois/proposition-loi
 import { SondageListComponent } from './sondages/sondage-list/sondage-list.component';
 import { SondageAddComponent } from './sondages/sondage-add/sondage-add.component';
 import { SondageEditComponent } from './sondages/sondage-edit/sondage-edit.component';
-import { SondageViewComponent } from './sondages/sondage-view/sondage-view.component';
-import { TextLegauxAddComponent } from './text-legaux/text-legaux-content/text-legaux-add/text-legaux-add.component';
-import { TextLegauxEditComponent } from './text-legaux/text-legaux-content/text-legaux-edit/text-legaux-edit.component';
+import { SondageViewComponent } from './sondages/sondage-view/sondage-view.component'; 
 import { ProfileComponent } from './auth/profile/profile.component';
 import { ContactListComponent } from './contact/contact-list/contact-list.component';
 import { ContactAddComponent } from './contact/contact-add/contact-add.component';
 import { ContactEditComponent } from './contact/contact-edit/contact-edit.component';
-import { ContactViewComponent } from './contact/contact-view/contact-view.component';
-import { TextLegauxTitreListComponent } from './text-legaux/text-legaux-titre/text-legaux-titre-list/text-legaux-titre-list.component';
-import { TextLegauxTitreViewComponent } from './text-legaux/text-legaux-titre/text-legaux-titre-view/text-legaux-titre-view.component';
+import { ContactViewComponent } from './contact/contact-view/contact-view.component'; 
 import { PersonnaliteSectionAddComponent } from './personnalite-sections/personnalite-section-add/personnalite-section-add.component';
 import { PersonnaliteSectionEditComponent } from './personnalite-sections/personnalite-section-edit/personnalite-section-edit.component';
 import { ActualiteListComponent } from './actualites/actualite/actualite-list/actualite-list.component';
 import { ActualiteAddComponent } from './actualites/actualite/actualite-add/actualite-add.component';
 import { ActualiteEditComponent } from './actualites/actualite/actualite-edit/actualite-edit.component';
-import { ActualiteViewComponent } from './actualites/actualite/actualite-view/actualite-view.component';
-import { GrandTitreComponent } from './text-legaux/grand-titre/grand-titre.component';
-import { GrandTitreViewComponent } from './text-legaux/grand-titre/grand-titre-view/grand-titre-view.component';
+import { ActualiteViewComponent } from './actualites/actualite/actualite-view/actualite-view.component'; 
 import { ChoiceComponent } from './sondages/choice/choice.component';
+import { PersonCategoryFiltreComponent } from './person-category-filtre/person-category-filtre.component';
+import { JonctionPersonCategoryComponent } from './jonction-person-category/jonction-person-category.component';
+import { TextListComponent } from './textes/text-list/text-list.component';
+import { TextViewComponent } from './textes/text-view/text-view.component';
+import { TextAddComponent } from './textes/text-add/text-add.component';
+import { TextEditComponent } from './textes/text-edit/text-edit.component';
  
 const routes: Routes = [
   { path: "auth", component: AuthComponent, children: [
@@ -77,6 +77,9 @@ const routes: Routes = [
     { path: "personnalites/personnalite-section/:id/add", component: PersonnaliteSectionAddComponent },
     { path: "personnalites/personnalite-section/:id/edit", component: PersonnaliteSectionEditComponent }, 
 
+    { path: "personnalites/person-category-filtre", component: PersonCategoryFiltreComponent },
+    { path: "personnalites/jonction-person-category", component: JonctionPersonCategoryComponent },
+
     // Sondages
     { path: "sondages/list", component: SondageListComponent },
     { path: "sondages/add", component: SondageAddComponent },
@@ -95,17 +98,11 @@ const routes: Routes = [
     { path: "proposition-lois/:id/edit", component: PropositionLoisEditComponent },
     { path: "proposition-lois/:id/view", component: PropositionLoisViewComponent }, 
 
-
-    // Grand-titre
-    { path: "grand-titre/list", component: GrandTitreComponent }, 
-    { path: "grand-titre/:id/view", component: GrandTitreViewComponent },
-
-    // Text-legaux-titre
-    { path: "text-legaux-titre/:id/view", component: TextLegauxTitreViewComponent },
-
-    // Text-legaux
-    { path: "text-legaux/:id/add", component: TextLegauxAddComponent },
-    { path: "text-legaux/:id/edit", component: TextLegauxEditComponent },
+    // Textes
+    { path: "textes/list", component: TextListComponent }, 
+    { path: "textes/add", component: TextAddComponent },
+    { path: "textes/:id/edit", component: TextEditComponent },
+    { path: "textes/:id/view", component: TextViewComponent },
 
     // Actualites
     { path: "actualites/list", component: ActualiteListComponent },

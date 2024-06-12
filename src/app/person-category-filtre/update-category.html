@@ -1,0 +1,51 @@
+<div class="create-dialog-box">
+    <div class="title d-flex align-items-center justify-content-space-between">
+        <h4 class="mb-0">Modification de la categorie</h4>
+        <button class="close-btn bg-transparent p-0 border-none" (click)="close()"><i class="flaticon-close"></i></button>
+    </div>
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="tagus-form-group">
+                    <label class="d-block mb-12 fw-semibold gray-color">Type</label>
+                    <mat-form-field appearance="fill">
+                        <i class="ri-edit-2-line"></i>
+                        <mat-label>Type</mat-label>
+                        <mat-select formControlName="type" (selectionChange)="onChange($event)">
+                            <mat-option *ngFor="let politique of politiquesList" [value]="politique">
+                               {{ politique }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div> 
+            </div>
+            <div class="col-lg-12 col-md-12">
+                <div class="form-group">
+                    <label class="d-block fw-semibold">{{title}}</label>
+                    <input type="text" class="input-control" placeholder="name" formControlName="name">
+                    <mat-error *ngIf="formGroup.controls['name'].hasError('required')">
+                        Ce champs est obligatoire
+                    </mat-error>
+                </div>
+            </div>  
+        </div>
+        <div class="text-end">
+            <button type="button" class="gray" (click)="close()">
+                <i class="ri-close-fill"></i> 
+                Annuler
+            </button>
+            <button type="submit">
+                <span *ngIf="isLoading">
+                    <mat-progress-spinner [diameter]="30"
+                        color="primary" 
+                        mode="indeterminate">
+                    </mat-progress-spinner>
+                </span>
+                <span *ngIf="!isLoading">
+                    <i class="ri-add-fill"></i> 
+                    Soumettre
+                </span> 
+            </button>
+        </div>
+    </form>
+</div>
