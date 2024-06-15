@@ -41,6 +41,14 @@
                                 <p class="gray-color">{{ team.grade }}</p>
                             </li> 
                             <li>
+                                <span class="fw-semibold">Image: </span>
+                                <p class="gray-color">{{ team.image }}</p>
+                            </li> 
+                            <li>
+                                <span class="fw-semibold">Document scan: </span>
+                                <p class="gray-color">{{ team.scan_doc }}</p>
+                            </li> 
+                            <li>
                                 <span class="fw-semibold">Statut de publication: </span>
                                 <span class="badge text-bg-success" *ngIf="team.is_publie">Publié</span>
                                 <span class="badge text-bg-danger" *ngIf="!team.is_publie">Pas Publié</span>

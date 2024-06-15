@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <label class="d-block mb-12 fw-semibold gray-color">Image </label>
-                    <input type="file" (change)="onFileSelected($event)" placeholder="select image"> 
+                    <input type="file" (change)="onFileSelected($event)" accept="image/png,image/jpeg" placeholder="select image"> 
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="tagus-form-group">
@@ -49,7 +49,7 @@
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <label class="d-block mb-12 fw-semibold gray-color">Uploader le document </label>
-                    <input type="file" (change)="onFileScanSelected($event)" placeholder="select scan_doc"> 
+                    <input type="file" (change)="onFileScanSelected($event)" accept="image/png,image/jpeg" placeholder="select scan_doc"> 
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <label class="d-block mb-12 fw-semibold gray-color">Facebook </label>

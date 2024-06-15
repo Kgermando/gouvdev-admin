@@ -49,7 +49,7 @@ export class TeamEditComponent implements OnInit {
       grade: [''],
       content: [''],
       facebook: [''],
-      compteX: [''],
+      comptex: [''],
       linkedin: [''], 
       is_publie: [''],
     });
