@@ -8,10 +8,9 @@ import { AuthService } from '../../auth/auth.service';
 import { UserModel } from '../../users/models/user.model';
 import { TexteService } from '../texte.service';
 import { replaceSpecialChars } from '../../shared/tools/replaceSpecialChars';
-import { Observable } from 'rxjs/internal/Observable';
-import { startWith } from 'rxjs/internal/operators/startWith';
-import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs/internal/Observable'; 
 import { TexteModel } from '../models/texte.model';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-text-add',
@@ -21,11 +20,10 @@ import { TexteModel } from '../models/texte.model';
 export class TextAddComponent implements OnInit {
   isLoading: boolean = false;
   formGroup!: FormGroup;
-
-  // g_titre = new FormControl('');
-  textList: string[] = [];
-  ELEMENT_DATA: TexteModel[] = [];
-  filteredOptions!: Observable<string[]>;
+ 
+  myControl = new FormControl<string | TexteModel>('');
+  options: TexteModel[] = [];
+  filteredOptions!: Observable<TexteModel[]>;
 
   currentUser!: UserModel;
 
@@ -42,6 +40,8 @@ export class TextAddComponent implements OnInit {
     "Programme d'actions du gouvernennement 2024-2028",
   ]
 
+ 
+
   constructor(
     private router: Router,
     private _formBuilder: FormBuilder,
@@ -50,14 +50,13 @@ export class TextAddComponent implements OnInit {
     private toastr: ToastrService
   ) { }
 
-  ngOnInit(): void {
-
+  ngOnInit(): void { 
     this.authService.user().subscribe({
       next: (user) => {
         this.currentUser = user;
-        // this.texteService.getAll().subscribe(res => {
-        //   this.ELEMENT_DATA = res.data;
-        // })
+        this.texteService.getAll().subscribe(res => {
+          this.options = res.data;
+        })
       },
       error: (error) => {
         this.router.navigate(['/auth/login']);
@@ -65,6 +64,7 @@ export class TextAddComponent implements OnInit {
       }
     });
 
+    
     this.formGroup = this._formBuilder.group({
       category: ['', Validators.required],
       g_titre: ['', Validators.required],
@@ -75,20 +75,25 @@ export class TextAddComponent implements OnInit {
       is_publie: ['', Validators.required],
       signature: [''],
     });
-
-    // this.filteredOptions = this.formGroup.valueChanges.pipe(
-    //   startWith(''),
-    //   map(value => this._filter(value || '')),
-    // );
+ 
+    this.filteredOptions = this.formGroup.valueChanges.pipe(
+      startWith(''),
+      map(value => {
+        const g_titre = typeof value === 'string' ? value : value?.g_titre;
+       
+        return g_titre ? this._filter(g_titre as string) : this.options.slice();
+      }),
+    );
   }
 
-
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-
-    var dataList = this.ELEMENT_DATA.map(item => item.g_titre);
-
-    return dataList.filter(option => option.toLowerCase().includes(filterValue));
+  displayFn(texte: TexteModel): string {
+    return texte && texte.g_titre ? texte.g_titre : '';
+  }
+ 
+  private _filter(name: string): TexteModel[] {
+    const filterValue = name.toLowerCase();
+    console.log("filterValue", filterValue)
+    return this.options.filter(option => option.g_titre.toLowerCase().includes(filterValue));
   }
 
   onSubmit() {

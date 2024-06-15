@@ -17,7 +17,10 @@
                         <mat-label>Select categorie</mat-label>
                         <mat-select (selectionChange)="onChangeCategory($event)" formControlName="category">
                             <mat-option *ngFor="let category of categoryList" [value]="category">{{category}}</mat-option>
-                        </mat-select> 
+                        </mat-select>
+                        <mat-error *ngIf="formGroup.controls['category'].hasError('required')">
+                            Ce champs est obligatoire
+                        </mat-error>
                     </mat-form-field>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
@@ -27,7 +30,10 @@
                         <mat-label>Select sous categorie</mat-label>
                         <mat-select formControlName="sous_category">
                             <mat-option *ngFor="let sousCategory of sousCategoryList" [value]="sousCategory">{{sousCategory}}</mat-option>
-                        </mat-select> 
+                        </mat-select>
+                        <mat-error *ngIf="formGroup.controls['sous_category'].hasError('required')">
+                            Ce champs est obligatoire
+                        </mat-error>
                     </mat-form-field>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
@@ -35,7 +41,10 @@
                     <mat-form-field appearance="fill">
                         <i class="ri-edit-2-line"></i>
                         <mat-label>Entrer le sujet</mat-label>
-                        <input matInput type="text" [maxlength]="120" id="sujet" formControlName="sujet" required> 
+                        <input matInput type="text" [maxlength]="120" id="sujet" formControlName="sujet" required>
+                        <mat-error *ngIf="formGroup.controls['sujet'].hasError('required')">
+                            Ce champs est obligatoire
+                        </mat-error>
                     </mat-form-field>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
@@ -43,7 +52,10 @@
                     <mat-form-field appearance="fill">
                         <i class="ri-edit-2-line"></i>
                         <mat-label>Entrer le Auteur</mat-label>
-                        <input matInput type="text" id="auteur" formControlName="auteur" required> 
+                        <input matInput type="text" id="auteur" formControlName="auteur" required>
+                        <mat-error *ngIf="formGroup.controls['auteur'].hasError('required')">
+                            Ce champs est obligatoire
+                        </mat-error>
                     </mat-form-field>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
@@ -51,10 +63,13 @@
                     <mat-form-field appearance="fill">
                         <i class="ri-edit-2-line"></i>
                         <mat-label>Entrer le resumé</mat-label>
-                        <input matInput type="text" id="resume" formControlName="resume" required> 
+                        <input matInput type="text" id="resume" formControlName="resume" required>
+                        <mat-error *ngIf="formGroup.controls['resume'].hasError('required')">
+                            Ce champs est obligatoire
+                        </mat-error>
                     </mat-form-field>
                 </div> 
-                <div class="col-lg-6 col-md-6 col-sm-6">
+                <!-- <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="tagus-form-group">
                         <label class="d-block mb-12 fw-semibold gray-color">Statut de publication</label>
                         <mat-form-field appearance="fill">
@@ -83,14 +98,13 @@
                             </mat-select>
                         </mat-form-field>
                     </div> 
-                </div>
+                </div> -->
                 <div class="col-lg-12 col-md-12 col-sm-12"> 
                     <label class="d-block mb-12 fw-semibold gray-color">Contenu de l'article </label>
                     <quill-editor [styles]="{height: '600px'}" (onFocus)="focus($event)" 
                         (onEditorChanged)="changedEditor($event)" (onBlur)="blur($event)" 
                         (onEditorCreated)="created($event)" formControlName="content"></quill-editor> 
                 </div>
-
             </div>
             <div class="d-flex justify-content-center" *ngIf="isLoading">
                 <mat-spinner color="warn" [diameter]="30"></mat-spinner> <p class="ml-2"> Patientez-svp...</p>

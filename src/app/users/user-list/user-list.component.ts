@@ -19,7 +19,7 @@ import { CustomizerSettingsService } from '../../common/customizer-settings/cust
   styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent implements OnInit {
-  displayedColumns: string[] = ['numero', 'fullname', 'email', 'sexe', 'id'];
+  displayedColumns: string[] = ['numero', 'fullname', 'email', 'sexe', 'role', 'id'];
   
   ELEMENT_DATA: UserModel[] = [];
   pageSize = 15; // Default page size

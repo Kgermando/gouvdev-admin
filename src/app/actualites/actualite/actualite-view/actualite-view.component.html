@@ -13,8 +13,16 @@
                     </div>
                 </div>
                 <div>
-                    <button mat-icon-button color="accent" 
-                        [routerLink]="['/web/actualites', actualite.ID, 'edit']"
+                    <button mat-icon-button color="primary" (click)="openEditDialog('300ms', '100ms', actualite.ID)"
+                        *ngIf="currentUser.accreditation === 'CRUD'" matTooltip="Statut de publication">
+                        <mat-icon>auto_fix_high</mat-icon>
+                    </button>
+                    <button mat-icon-button color="primary" (click)="openIsValidDialog('300ms', '100ms', actualite.ID)"
+                        *ngIf="currentUser.accreditation === 'CRUD'"
+                        matTooltip="Fermée/Ouvrir le sondage aux utilisateurs">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-icon-button color="accent" [routerLink]="['/web/actualites', actualite.ID, 'edit']"
                         *ngIf="currentUser.accreditation === 'CRUD'" matTooltip="Modifier ce document">
                         <mat-icon>edit</mat-icon>
                     </button>
@@ -47,7 +55,7 @@
                             <li>
                                 <span class="fw-semibold">Image: </span>
                                 <span class="gray-color">{{ actualite.image }}</span>
-                            </li> 
+                            </li>
                             <li>
                                 <span class="fw-semibold">Statut de publication: </span>
                                 <span class="badge text-bg-success" *ngIf="actualite.is_publie">Publié</span>
@@ -94,20 +102,20 @@
                                 <mat-panel-title>
                                     {{ opinion.fullname }}
                                 </mat-panel-title>
-                            </mat-expansion-panel-header>  
+                            </mat-expansion-panel-header>
                             <ul class="mb-0 mt-0 ps-0 content-list">
                                 <li class="d-flex align-items-center justify-content-space-between">
                                     <span class="d-block gray-color fw-medium position-relative">
-                                        <i class="ri-user-line"></i> {{ opinion.fullname }}</span> 
-                                        <button mat-icon-button color="warn" (click)="delete(opinion.ID)"
-                                            *ngIf="currentUser.accreditation === 'CRUD'" 
-                                                matTooltip="Supprimer cette opinion">
-                                            <mat-icon>delete</mat-icon>
-                                        </button>
-                                </li> 
+                                        <i class="ri-user-line"></i> {{ opinion.fullname }}</span>
+                                    <button mat-icon-button color="warn" (click)="delete(opinion.ID)"
+                                        *ngIf="currentUser.accreditation === 'CRUD'"
+                                        matTooltip="Supprimer cette opinion">
+                                        <mat-icon>delete</mat-icon>
+                                    </button>
+                                </li>
                             </ul>
                             <p>{{ opinion.opinion_text }}</p>
-                        </mat-expansion-panel> 
+                        </mat-expansion-panel>
                     </mat-accordion>
                 </div>
             </mat-card-content>

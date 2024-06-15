@@ -6,7 +6,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserModel } from '../models/user.model';
 import { RoleDataList } from '../../shared/tools/role-list';
-import { permissionDataList } from '../../shared/tools/permission-list';
+import { accreditationDataList, permissionListDataList } from '../../shared/tools/permission-list';
 
 @Component({
   selector: 'app-user-edit',
@@ -33,8 +33,10 @@ export class UserEditComponent  implements OnInit {
     "55-65",
     "55+",
   ]
-  roleList: string[] = RoleDataList;
-  permissionList = permissionDataList;
+
+  roleList = RoleDataList;
+  accreditationList = accreditationDataList;
+  permissionList = permissionListDataList;
 
   id: any;
 
@@ -53,6 +55,7 @@ export class UserEditComponent  implements OnInit {
       sexe: [''],
       role: [''],  
       accreditation: [''], 
+      permissions: [''], 
       trancheage: [''],
       is_active: [''], 
     });
@@ -67,9 +70,9 @@ export class UserEditComponent  implements OnInit {
               sexe: this.user.sexe,
               role: this.user.role,
               accreditation: this.user.accreditation,
+              permissions: this.user.permissions,
               trancheage: this.user.trancheage,
               is_active: this.user.is_active, 
-              UpdatedAt: new Date()
             });
           }
         );

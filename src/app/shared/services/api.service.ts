@@ -82,6 +82,13 @@ export abstract class ApiService {
     }));
   }
 
+  updateIsPublie(id: number, data: any): Observable<any> {
+    return this.http.put(`${this.endpoint}/publie/${id}`, data).pipe(tap(() => {
+      this._refreshDataList$.next();
+      this._refreshData$.next();
+    }));
+  }
+
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.endpoint}/${id}`).pipe(tap(() => {
       this._refreshDataList$.next();

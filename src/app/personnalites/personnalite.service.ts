@@ -8,3 +8,4 @@ import { environment } from '../../environments/environment.development';
 export class PersonnaliteService extends ApiService {
   endpoint: string = `${environment.apiURL}/personnalites`; 
 }
+ 

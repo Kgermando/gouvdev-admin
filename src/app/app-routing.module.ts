@@ -36,12 +36,16 @@ import { ActualiteAddComponent } from './actualites/actualite/actualite-add/actu
 import { ActualiteEditComponent } from './actualites/actualite/actualite-edit/actualite-edit.component';
 import { ActualiteViewComponent } from './actualites/actualite/actualite-view/actualite-view.component'; 
 import { ChoiceComponent } from './sondages/choice/choice.component';
-import { PersonCategoryFiltreComponent } from './person-category-filtre/person-category-filtre.component';
-import { JonctionPersonCategoryComponent } from './jonction-person-category/jonction-person-category.component';
+import { PersonCategoryFiltreComponent } from './person-category-filtre/person-category-filtre.component'; 
 import { TextListComponent } from './textes/text-list/text-list.component';
 import { TextViewComponent } from './textes/text-view/text-view.component';
 import { TextAddComponent } from './textes/text-add/text-add.component';
 import { TextEditComponent } from './textes/text-edit/text-edit.component';
+import { TeamListComponent } from './teams/team-list/team-list.component';
+import { TeamAddComponent } from './teams/team-add/team-add.component';
+import { TeamEditComponent } from './teams/team-edit/team-edit.component';
+import { TeamViewComponent } from './teams/team-view/team-view.component';
+import { ActualitesGuard, ContactGuard, PersonnalitesGuard, PropositionsLoisGuard, SondagesGuard, TeamsGuard, TextesGuard, UsersGuard, dashboardGuard } from './shared/guard/role.guard';
  
 const routes: Routes = [
   { path: "auth", component: AuthComponent, children: [
@@ -51,64 +55,68 @@ const routes: Routes = [
   ]},
   { path: "web", component: LayoutsComponent, children: [
     { path: 'profil', component: ProfileComponent },
-    { path: "dashboard", component: DashboardComponent },
+    { path: "dashboard", component: DashboardComponent, canActivate: [dashboardGuard] },
 
     // User
-    { path: "users/list", component: UserListComponent }, 
-    { path: "users/:id/edit", component: UserEditComponent },
-    { path: "users/:id/view", component: UserViewComponent },
+    { path: "users/list", component: UserListComponent, canActivate: [UsersGuard] }, 
+    { path: "users/:id/edit", component: UserEditComponent, canActivate: [UsersGuard] },
+    { path: "users/:id/view", component: UserViewComponent, canActivate: [UsersGuard] },
     
     // Flash
     { path: "flash/list", component: ActuListComponent },  
     { path: "flash/:id/view", component: ActuViewComponent },
 
     // Contact
-    { path: "contacts/list", component: ContactListComponent },
-    { path: "contacts/add", component: ContactAddComponent },
-    { path: "contacts/:id/edit", component: ContactEditComponent },
-    { path: "contacts/:id/view", component: ContactViewComponent }, 
+    { path: "contacts/list", component: ContactListComponent, canActivate: [ContactGuard] },
+    { path: "contacts/add", component: ContactAddComponent, canActivate: [ContactGuard] },
+    { path: "contacts/:id/edit", component: ContactEditComponent, canActivate: [ContactGuard] },
+    { path: "contacts/:id/view", component: ContactViewComponent, canActivate: [ContactGuard] }, 
 
     // Personnalites
-    { path: "personnalites/list", component: PersonnaliteListComponent },
-    { path: "personnalites/add", component: PersonnaliteAddComponent },
-    { path: "personnalites/:id/edit", component: PersonnaliteEditComponent },
-    { path: "personnalites/:id/view", component: PersonnaliteViewComponent },
+    { path: "personnalites/list", component: PersonnaliteListComponent, canActivate: [PersonnalitesGuard] },
+    { path: "personnalites/add", component: PersonnaliteAddComponent, canActivate: [PersonnalitesGuard] },
+    { path: "personnalites/:id/edit", component: PersonnaliteEditComponent, canActivate: [PersonnalitesGuard] },
+    { path: "personnalites/:id/view", component: PersonnaliteViewComponent, canActivate: [PersonnalitesGuard] },
 
-    { path: "personnalites/personnalite-section/:id/add", component: PersonnaliteSectionAddComponent },
-    { path: "personnalites/personnalite-section/:id/edit", component: PersonnaliteSectionEditComponent }, 
+    { path: "personnalites/personnalite-section/:id/add", component: PersonnaliteSectionAddComponent, canActivate: [PersonnalitesGuard] },
+    { path: "personnalites/personnalite-section/:id/edit", component: PersonnaliteSectionEditComponent, canActivate: [PersonnalitesGuard] }, 
 
-    { path: "personnalites/person-category-filtre", component: PersonCategoryFiltreComponent },
-    { path: "personnalites/jonction-person-category", component: JonctionPersonCategoryComponent },
+    { path: "personnalites/person-category-filtre", component: PersonCategoryFiltreComponent, canActivate: [PersonnalitesGuard] }, 
 
     // Sondages
-    { path: "sondages/list", component: SondageListComponent },
-    { path: "sondages/add", component: SondageAddComponent },
-    { path: "sondages/:id/edit", component: SondageEditComponent },
-    { path: "sondages/:id/view", component: SondageViewComponent },
-    { path: "sondages/:id/choices", component: ChoiceComponent },
+    { path: "sondages/list", component: SondageListComponent, canActivate: [SondagesGuard] },
+    { path: "sondages/add", component: SondageAddComponent, canActivate: [SondagesGuard] },
+    { path: "sondages/:id/edit", component: SondageEditComponent, canActivate: [SondagesGuard] },
+    { path: "sondages/:id/view", component: SondageViewComponent, canActivate: [SondagesGuard] },
+    { path: "sondages/:id/choices", component: ChoiceComponent, canActivate: [SondagesGuard] },
 
     // Opinions
-    { path: "opinions/list", component: OpinionListComponent }, 
-    { path: "opinions/:id/view", component: OpinionViewComponent },
+    { path: "opinions/list", component: OpinionListComponent, canActivate: [SondagesGuard] }, 
+    { path: "opinions/:id/view", component: OpinionViewComponent, canActivate: [SondagesGuard] },
     
-
     // Propositions lois
-    { path: "proposition-lois/list", component: PropositionLoisListComponent },
-    { path: "proposition-lois/add", component: PropositionLoisAddComponent },
-    { path: "proposition-lois/:id/edit", component: PropositionLoisEditComponent },
-    { path: "proposition-lois/:id/view", component: PropositionLoisViewComponent }, 
+    { path: "proposition-lois/list", component: PropositionLoisListComponent, canActivate: [PropositionsLoisGuard] },
+    { path: "proposition-lois/add", component: PropositionLoisAddComponent, canActivate: [PropositionsLoisGuard]},
+    { path: "proposition-lois/:id/edit", component: PropositionLoisEditComponent, canActivate: [PropositionsLoisGuard] },
+    { path: "proposition-lois/:id/view", component: PropositionLoisViewComponent, canActivate: [PropositionsLoisGuard] }, 
 
     // Textes
-    { path: "textes/list", component: TextListComponent }, 
-    { path: "textes/add", component: TextAddComponent },
-    { path: "textes/:id/edit", component: TextEditComponent },
-    { path: "textes/:id/view", component: TextViewComponent },
+    { path: "textes/list", component: TextListComponent , canActivate: [TextesGuard]}, 
+    { path: "textes/add", component: TextAddComponent , canActivate: [TextesGuard]},
+    { path: "textes/:id/edit", component: TextEditComponent , canActivate: [TextesGuard]},
+    { path: "textes/:id/view", component: TextViewComponent , canActivate: [TextesGuard]},
 
     // Actualites
-    { path: "actualites/list", component: ActualiteListComponent },
-    { path: "actualites/add", component: ActualiteAddComponent },
-    { path: "actualites/:id/edit", component: ActualiteEditComponent },
-    { path: "actualites/:id/view", component: ActualiteViewComponent },
+    { path: "actualites/list", component: ActualiteListComponent , canActivate: [ActualitesGuard]},
+    { path: "actualites/add", component: ActualiteAddComponent, canActivate: [ActualitesGuard] },
+    { path: "actualites/:id/edit", component: ActualiteEditComponent, canActivate: [ActualitesGuard] },
+    { path: "actualites/:id/view", component: ActualiteViewComponent, canActivate: [ActualitesGuard] },
+
+    // Teams
+    { path: "teams/list", component: TeamListComponent, canActivate: [TeamsGuard] },
+    { path: "teams/add", component: TeamAddComponent , canActivate: [TeamsGuard]},
+    { path: "teams/:id/edit", component: TeamEditComponent , canActivate: [TeamsGuard]},
+    { path: "teams/:id/view", component: TeamViewComponent, canActivate: [TeamsGuard] },
 
 
     { path: "", redirectTo: "dashboard", pathMatch: "full"},

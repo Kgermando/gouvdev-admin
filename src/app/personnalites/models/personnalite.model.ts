@@ -7,9 +7,9 @@ export interface PersonnaliteModel {
     // Liste de tous les elements dans personnalite
     category: string; // Category Personnalite ex: politiques, religieuses, ...
     category_gouv_aff_public: string;
-    category_filtre: string; // Filtre sur les mandants, les premiers ministres,...
+    category_filtre_name_url: string[]; // Filtre sur les mandants, les premiers ministres,...
     top_header: string; // Pour ceux/celles qui ne le sont pas c'est none
-
+    
     // Identite
     photo: string;
     nom: string;

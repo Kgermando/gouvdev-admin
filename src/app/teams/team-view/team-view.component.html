@@ -3,22 +3,22 @@
     <p class="ml-2"> Patientez-svp...</p>
 </div>
 <div *ngIf="!isLoading">
-    <div class="row mb-25" *ngIf="texte">
+    <div class="row mb-25" *ngIf="team">
         <mat-card class="mb-25 personal-info-card tagus-card" [class.component-dark-theme]="themeService.isDark()">
             <mat-card-header class="border-bottom">
                 <div class="d-flex align-items-center">
                     <div class="">
-                        <h5 class="mb-5">{{ texte.category }}</h5>
-                        <span class="d-block gray-color mt-5">Visites: {{ texte.counter }}</span>
+                        <h5 class="mb-5">{{ team.fullname }}</h5>
+                        <span class="d-block gray-color mt-5">Visites: {{ team.counter }}</span>
                     </div>
                 </div>
                 <div>
                     <button mat-icon-button color="accent" 
-                        [routerLink]="['/web/textes', texte.ID, 'edit']"
+                        [routerLink]="['/web/teams', team.ID, 'edit']"
                         *ngIf="currentUser.accreditation === 'CRUD'" matTooltip="Modifier ce document">
                         <mat-icon>edit</mat-icon>
                     </button>
-                    <button mat-icon-button color="warn" (click)="delete(texte.ID)"
+                    <button mat-icon-button color="warn" (click)="delete(team.ID)"
                         *ngIf="currentUser.accreditation === 'CRUD'" matTooltip="Mettre en corbeille ce document">
                         <mat-icon>delete</mat-icon>
                     </button>
@@ -29,45 +29,44 @@
                     <div class="col-lg-12 col-md-12 col-sm-12">
                         <ul class="list ps-0 mb-0"> 
                             <li>
-                                <span class="fw-semibold">Grand Titre: </span>
-                                <p class="gray-color">{{ texte.g_titre }}</p>
+                                <span class="fw-semibold">Nom complet: </span>
+                                <p class="gray-color">{{ team.fullname }}</p>
                             </li>
                             <li>
-                                <span class="fw-semibold">Titre: </span>
-                                <p class="gray-color">{{ texte.titre }}</p>
+                                <span class="fw-semibold">fullname_url: </span>
+                                <p class="gray-color">{{ team.fullname_url }}</p>
                             </li>
                             <li>
-                                <span class="fw-semibold">Titre url: </span>
-                                <p class="gray-color">{{ texte.titre_url }}</p>
+                                <span class="fw-semibold">Grade: </span>
+                                <p class="gray-color">{{ team.grade }}</p>
                             </li> 
                             <li>
                                 <span class="fw-semibold">Statut de publication: </span>
-                                <span class="badge text-bg-success" *ngIf="texte.is_publie">Publié</span>
-                                <span class="badge text-bg-danger" *ngIf="!texte.is_publie">Pas Publié</span>
+                                <span class="badge text-bg-success" *ngIf="team.is_publie">Publié</span>
+                                <span class="badge text-bg-danger" *ngIf="!team.is_publie">Pas Publié</span>
                             </li> 
 
                             <li>
                                 <span class="fw-semibold">Signature: </span>
-                                <span class="gray-color">{{ texte.signature }}</span>
+                                <span class="gray-color">{{ team.signature }}</span>
                             </li>
                             <li>
                                 <span class="fw-semibold">Date de creation: </span>
-                                <span class="gray-color">{{ texte.CreatedAt | date: 'dd/MM/yyyy' }}</span>
+                                <span class="gray-color">{{ team.CreatedAt | date: 'dd/MM/yyyy' }}</span>
                             </li>
                             <li>
                                 <span class="fw-semibold">Mise à jour le: </span>
-                                <span class="gray-color">{{ texte.UpdatedAt | date: 'dd/MM/yyyy HH:mm' }}</span>
+                                <span class="gray-color">{{ team.UpdatedAt | date: 'dd/MM/yyyy HH:mm' }}</span>
                             </li>
                         </ul>
                         <ul class="list ps-0 mb-15"> 
                             <li>
-                                <span class="fw-semibold">Corps du texte: </span>
-                                <div [innerHTML]="texte.body"></div>
+                                <span class="fw-semibold">Parcours: </span>
+                                <div [innerHTML]="team.content"></div>
                             </li>
                         </ul>
                     </div>
                 </div>
-                
             </mat-card-content>
         </mat-card>
     </div>

@@ -67,7 +67,7 @@
                 <div *ngIf="currentUser">
                     <button mat-icon-button [matMenuTriggerFor]="profileMenu" class="profile-btn main-color border-none bg-transparent position-relative">
                         <img src="assets/img/admin.jpg" class="rounded-circle" alt="admin">
-                        {{currentUser.roles[0].toUpperCase()}}
+                        {{currentUser.role.toUpperCase()}}
                         <span class="fw-semibold">{{currentUser.fullname}}</span>
                     </button>
                     <mat-menu class="profile-menu-dropdown" #profileMenu="matMenu" xPosition="before">

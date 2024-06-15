@@ -87,8 +87,8 @@ export class ActualiteEditComponent implements OnInit {
       auteur: [''],
       resume: [''],
       content: [''],
-      is_publie: [''],
-      is_valid: [''], 
+      // is_publie: [''],
+      // is_valid: [''], 
     });
 
     this.authService.user().subscribe({
@@ -105,8 +105,8 @@ export class ActualiteEditComponent implements OnInit {
               resume: this.actualite.resume, 
               content: this.actualite.content, 
               image: (this.imageUrl) ? this.imageUrl : this.actualite.image,  
-              is_publie: this.actualite.is_publie,  
-              is_valid: this.actualite.is_valid,  
+              // is_publie: this.actualite.is_publie,  
+              // is_valid: this.actualite.is_valid,  
             });
           }
         );
@@ -146,8 +146,8 @@ export class ActualiteEditComponent implements OnInit {
         resume: this.formGroup.value.resume,
         content: this.formGroup.value.content,
         image: (this.imageUrl) ? this.imageUrl : this.actualite.image,  
-        is_publie: this.formGroup.value.is_publie,
-        is_valid: this.formGroup.value.is_valid,
+        // is_publie: this.formGroup.value.is_publie,
+        // is_valid: this.formGroup.value.is_valid,
         signature: this.currentUser.fullname, 
       };
       this.actualiteService.update(this.id, body)

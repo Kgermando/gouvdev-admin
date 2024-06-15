@@ -81,8 +81,8 @@ export class ActualiteAddComponent implements OnInit {
       auteur: ['', Validators.required],
       resume: ['', Validators.required],
       content: ['', Validators.required],
-      is_publie: ['', Validators.required],
-      is_valid: ['', Validators.required], 
+      // is_publie: ['', Validators.required],
+      // is_valid: ['', Validators.required], 
     });
   }
 
@@ -127,8 +127,8 @@ export class ActualiteAddComponent implements OnInit {
           content: this.formGroup.value.content,
           image: this.imageUrl, 
           counter: 0,
-          is_publie: this.formGroup.value.is_publie,
-          is_valid: this.formGroup.value.is_valid,
+          // is_publie: this.formGroup.value.is_publie,
+          // is_valid: this.formGroup.value.is_valid,
           signature: this.currentUser.fullname, 
         };
         this.actualiteService.create(body).subscribe({

@@ -15,7 +15,10 @@
                     </div>
                 </div>
                 <div>
-                    
+                    <button mat-icon-button color="primary" (click)="openEditDialog('300ms', '100ms', personnalite.ID)"
+                        *ngIf="currentUser.accreditation === 'CRUD'" matTooltip="Statut de publication">
+                        <mat-icon>auto_fix_high</mat-icon>
+                    </button>
                     <button mat-icon-button color="accent"  
                         [routerLink]="['/web/personnalites', personnalite.ID, 'edit']"
                         *ngIf="currentUser.accreditation === 'CRUD'" 
@@ -44,8 +47,8 @@
                                     <span class="gray-color">{{ personnalite.category_gouv_aff_public }}</span>
                                 </li>  
                                 <li>
-                                    <span class="fw-semibold">Fonction: </span>
-                                    <span class="gray-color">{{ personnalite.category_filtre }}</span>
+                                    <span class="fw-semibold">Categorie personnalite: </span>
+                                    <span class="gray-color">{{ personnalite.category_filtre_name_url }}</span>
                                 </li>  
                                 <li>
                                     <span class="fw-semibold">top_header: </span>
@@ -84,7 +87,7 @@
                                     <span class="gray-color">{{ personnalite.signature }}</span>
                                 </li>
                                 <li>
-                                    <span class="fw-semibold">Date de creation: </span>
+                                    <span class="fw-semibold">Date de création: </span>
                                     <span class="gray-color">{{ personnalite.CreatedAt | date: 'dd/MM/yyyy' }}</span>
                                 </li>  
                                 <li>

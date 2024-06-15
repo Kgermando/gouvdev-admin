@@ -14,31 +14,35 @@
     </div>
     <ng-scrollbar visibility="hover" style="height: 100vh;">
         <div class="sidebar-inner">
-            <div class="sidebar-menu">
+            <div class="sidebar-menu" *ngIf="currentUser">
                 <mat-accordion>
                     <span class="sub-title gray-color">MAIN</span>
                     <a routerLink="/web/dashboard" class="sidebar-menu-link" routerLinkActive="active"
-                        [routerLinkActiveOptions]="{exact: true}">
+                        [routerLinkActiveOptions]="{exact: true}"
+                        *ngIf="currentUser.permissions.includes('Dashboard')">
                         <i class="flaticon-menu-1"></i>
                         <span class="title">Dashboard</span>
                     </a>
 
-                    <a routerLink="/web/flash/list" class="sidebar-menu-link" routerLinkActive="active"
-                        [routerLinkActiveOptions]="{exact: true}">
+                    <!-- <a routerLink="/web/flash/list" class="sidebar-menu-link" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{exact: true}"
+                        *ngIf="currentUser.permissions.includes('Dashboard')">
                         <i class="material-symbols-outlined">
                             receipt_long
                         </i> 
                         <span class="title">Flash infos</span>
-                    </a>
+                    </a> -->
 
                     <a routerLink="/web/actualites/list" class="sidebar-menu-link" routerLinkActive="active"
-                        [routerLinkActiveOptions]="{exact: true}">
+                        [routerLinkActiveOptions]="{exact: true}"
+                        *ngIf="currentUser.permissions.includes('Actualites')">
                         <i class="ri-slideshow-line"></i>
                         <span class="title">Actualites</span>
                     </a>
 
                     <a routerLink="/web/sondages/list" class="sidebar-menu-link" routerLinkActive="active"
-                        [routerLinkActiveOptions]="{exact: true}">
+                        [routerLinkActiveOptions]="{exact: true}"
+                        *ngIf="currentUser.permissions.includes('Sondages')">
                         <i class="material-symbols-outlined">
                             ar_stickers
                         </i>
@@ -46,14 +50,16 @@
                     </a>
 
                     <a routerLink="/web/opinions/list" class="sidebar-menu-link" routerLinkActive="active"
-                        [routerLinkActiveOptions]="{exact: true}">
+                        [routerLinkActiveOptions]="{exact: true}"
+                        *ngIf="currentUser.permissions.includes('Sondages')">
                         <i class="material-symbols-outlined">
                             diversity_3
                         </i>
                         <span class="title">Opinions</span>
                     </a>
  
-                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = true">
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = true"
+                    *ngIf="currentUser.permissions.includes('Personnalites')">
                         <mat-expansion-panel-header>
                             <mat-panel-title>
                                 <i class="material-symbols-outlined">groups</i>
@@ -71,16 +77,12 @@
                                     Categorie filtre
                                 </a>
                             </li>
-                            <li class="sidemenu-item">
-                                <a routerLink="/web/personnalites/jonction-person-category" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
-                                    Palmares
-                                </a>
-                            </li>
                         </ul>
                     </mat-expansion-panel> 
 
                     <a routerLink="/web/textes/list" class="sidebar-menu-link" routerLinkActive="active"
-                        [routerLinkActiveOptions]="{exact: true}">
+                        [routerLinkActiveOptions]="{exact: true}"
+                        *ngIf="currentUser.permissions.includes('Textes')">
                         <i class="material-symbols-outlined">
                             edit_note
                         </i>
@@ -88,7 +90,8 @@
                     </a>
 
                     <a routerLink="/web/contacts/list" class="sidebar-menu-link" routerLinkActive="active"
-                        [routerLinkActiveOptions]="{exact: true}">
+                        [routerLinkActiveOptions]="{exact: true}"
+                        *ngIf="currentUser.permissions.includes('Contact')">
                         <i class="material-symbols-outlined">
                             alternate_email
                         </i>
@@ -96,16 +99,27 @@
                     </a>
 
                     <a routerLink="/web/users/list" class="sidebar-menu-link" routerLinkActive="active"
-                        [routerLinkActiveOptions]="{exact: true}">
+                        [routerLinkActiveOptions]="{exact: true}"
+                        *ngIf="currentUser.permissions.includes('Users')"> 
                         <i class="material-symbols-outlined">
                             group
                         </i>
                         <span class="title">Utilisateurs</span>
                     </a>
 
+                    <a routerLink="/web/teams/list" class="sidebar-menu-link" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{exact: true}"
+                        *ngIf="currentUser.permissions.includes('Teams')">
+                        <i class="material-symbols-outlined">
+                            group
+                        </i>
+                        <span class="title">Team</span>
+                    </a>
+
 
                     <a routerLink="/web/proposition-lois/list" class="sidebar-menu-link" routerLinkActive="active"
-                        [routerLinkActiveOptions]="{exact: true}">
+                        [routerLinkActiveOptions]="{exact: true}"
+                        *ngIf="currentUser.permissions.includes('PropositionsLois')"> 
                         <i class="material-symbols-outlined">
                             partner_exchange
                         </i>

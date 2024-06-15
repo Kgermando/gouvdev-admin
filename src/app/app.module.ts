@@ -37,7 +37,7 @@ import { ContactViewComponent } from './contact/contact-view/contact-view.compon
 import { ActuListComponent, CreateActuDialogBox, EditActuDialogBox } from './actus/actu-list/actu-list.component';
 import { ActuViewComponent } from './actus/actu-view/actu-view.component';
 import { PersonnaliteListComponent } from './personnalites/personnalite-list/personnalite-list.component';
-import { PersonnaliteViewComponent } from './personnalites/personnalite-view/personnalite-view.component';
+import { IsPubliePersonnaliteDialogBox, PersonnaliteViewComponent } from './personnalites/personnalite-view/personnalite-view.component';
 import { PersonnaliteAddComponent } from './personnalites/personnalite-add/personnalite-add.component';
 import { PersonnaliteEditComponent } from './personnalites/personnalite-edit/personnalite-edit.component';
 import { PropositionLoisListComponent } from './proposition-lois/proposition-lois-list/proposition-lois-list.component';
@@ -65,15 +65,18 @@ import { StatsPieSexeComponent } from './dashboard/stats-pie-sexe/stats-pie-sexe
 import { ActualiteListComponent } from './actualites/actualite/actualite-list/actualite-list.component';
 import { ActualiteAddComponent } from './actualites/actualite/actualite-add/actualite-add.component';
 import { ActualiteEditComponent } from './actualites/actualite/actualite-edit/actualite-edit.component';
-import { ActualiteViewComponent } from './actualites/actualite/actualite-view/actualite-view.component'; 
+import { ActualiteIsValidDialogBox, ActualiteViewComponent, IsPublieActualiteDialogBox } from './actualites/actualite/actualite-view/actualite-view.component'; 
 import { ReplaceSpecialCharsPipe } from './pipes/replace-special-chars.pipe';
 import { ChoiceComponent, EditChoiceDialogBox } from './sondages/choice/choice.component';
 import { CreateCategoryPersonDialogBox, EditCategoryPersonDialogBox, PersonCategoryFiltreComponent } from './person-category-filtre/person-category-filtre.component';
-import { AssociateJoinPersonCategoryDialogBox, JonctionPersonCategoryComponent } from './jonction-person-category/jonction-person-category.component';
 import { TextListComponent } from './textes/text-list/text-list.component'; 
 import { TextAddComponent } from './textes/text-add/text-add.component';
 import { TextEditComponent } from './textes/text-edit/text-edit.component';
-import { TextViewComponent } from './textes/text-view/text-view.component';
+import { TextViewComponent } from './textes/text-view/text-view.component'; 
+import { TeamListComponent } from './teams/team-list/team-list.component';
+import { TeamAddComponent } from './teams/team-add/team-add.component';
+import { TeamEditComponent } from './teams/team-edit/team-edit.component';
+import { TeamViewComponent } from './teams/team-view/team-view.component';
 
  
 registerLocaleData(localeFr);
@@ -143,12 +146,20 @@ registerLocaleData(localeFr);
     ReplaceSpecialCharsPipe,
     ChoiceComponent,
     EditChoiceDialogBox,
-    PersonCategoryFiltreComponent,
-    JonctionPersonCategoryComponent,
+    PersonCategoryFiltreComponent, 
     CreateCategoryPersonDialogBox,
-    EditCategoryPersonDialogBox, 
-    AssociateJoinPersonCategoryDialogBox, TextListComponent, 
-    TextAddComponent, TextEditComponent, TextViewComponent,
+    EditCategoryPersonDialogBox,  
+    TextListComponent, 
+    TextAddComponent, 
+    TextEditComponent, 
+    TextViewComponent, 
+    TeamListComponent, 
+    TeamAddComponent, 
+    TeamEditComponent, 
+    TeamViewComponent,
+    IsPubliePersonnaliteDialogBox,
+    ActualiteIsValidDialogBox,
+    IsPublieActualiteDialogBox,
     
   ],
   imports: [

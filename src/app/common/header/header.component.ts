@@ -1,11 +1,11 @@
 import { Component, HostListener } from '@angular/core';
 import { ToggleService } from './toggle.service';
-import { DatePipe } from '@angular/common'; 
+import { DatePipe } from '@angular/common';
 import { CustomizerSettingsService } from '../customizer-settings/customizer-settings.service';
-import { Auth } from '../classes/auth'; 
+import { Auth } from '../classes/auth';
 import { AuthService } from '../../auth/auth.service';
 import { UserModel } from '../../users/models/user.model';
- 
+
 
 @Component({
     selector: 'app-header',
@@ -30,15 +30,15 @@ export class HeaderComponent {
 
     loading = false;
     currentUser: UserModel | any;
- 
+
     notificationList: any[] = [];
     isLoading: boolean = false;
-    
+
     constructor(
         private toggleService: ToggleService,
         private datePipe: DatePipe,
         public themeService: CustomizerSettingsService,
-        private authService: AuthService,  
+        private authService: AuthService,
     ) {
         this.toggleService.isToggled$.subscribe(isToggled => {
             this.isToggled = isToggled;
@@ -49,18 +49,18 @@ export class HeaderComponent {
         this.loading = true;
         Auth.userEmitter.subscribe(
             user => {
-              this.currentUser = user;  
-              this.loading = false; 
+                this.currentUser = user;
+                this.loading = false;
             }
         );
     }
-  
+
     logOut() {
         this.authService.logout().subscribe(res => {
             console.log(res);
             localStorage.removeItem('jwt');
             localStorage.removeItem('roles');
-               localStorage.clear();
+            localStorage.clear();
         });
     }
 
@@ -94,7 +94,7 @@ export class HeaderComponent {
     toggleCardBorderRadiusTheme() {
         this.themeService.toggleCardBorderRadiusTheme();
     }
- 
+
     currentDate: Date = new Date();
     formattedDate: any = this.datePipe.transform(this.currentDate, 'dd MMMM yyyy', 'fr-FR');
 

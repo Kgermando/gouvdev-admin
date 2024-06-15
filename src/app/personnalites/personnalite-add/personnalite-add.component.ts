@@ -9,6 +9,8 @@ import { EditorChangeContent, EditorChangeSelection } from 'ngx-quill';
 import { TerritoireEquateurList, TerritoireVilleBasUeleList, TerritoireVilleHautKatangaList, TerritoireVilleHautLomamiList, TerritoireVilleHautUeleList, TerritoireVilleIturiList, TerritoireVilleKasaïCentralList, TerritoireVilleKasaïList, TerritoireVilleKasaïOrientalList, TerritoireVilleKinshasaList, TerritoireVilleKongoCentralList, TerritoireVilleKwangoList, TerritoireVilleKwiluList, TerritoireVilleLomaniList, TerritoireVilleLualabaList, TerritoireVilleMaiNdombeList, TerritoireVilleManiemaList, TerritoireVilleMongalaList, TerritoireVilleNordKivuList, TerritoireVilleNordUbanguiList, TerritoireVilleSankuruList, TerritoireVilleSudKivuList, TerritoireVilleSudUbanguiList, TerritoireVilleTanganyikaList, TerritoireVilleTshopoList, TerritoireVilleTshuapaList } from '../../shared/tools/territoire_ville';
 import { UserModel } from '../../users/models/user.model';
 import { ProvinceList } from '../../shared/tools/province-list';
+import { PersonCategoryFiltreModel } from '../../person-category-filtre/models/person-category-filter.model';
+import { PersonCategoryFiltreService } from '../../person-category-filtre/person-category-filtre.service';
 
 @Component({
   selector: 'app-personnalite-add',
@@ -24,6 +26,7 @@ export class PersonnaliteAddComponent implements OnInit {
 
   selectedFile!: File;
   photo!: string;
+  isUploaded: boolean = true;
 
 
   categoryList: string[] = [
@@ -50,6 +53,7 @@ export class PersonnaliteAddComponent implements OnInit {
     '-',
   ]
 
+  categorFiltreLists: PersonCategoryFiltreModel[] = [];
   categorFiltreList: string[] = []
 
   gouvernementsList: string[] = [
@@ -100,12 +104,17 @@ export class PersonnaliteAddComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private authService: AuthService,
     private personnaliteService: PersonnaliteService,
+    private personCategoryFiltreService: PersonCategoryFiltreService, 
     private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.authService.user().subscribe({
       next: (user) => {
         this.currentUser = user;
+        this.personCategoryFiltreService.refreshDataList$.subscribe(() => {
+          this.fetchProducts();
+        });
+        this.fetchProducts();
       },
       error: (error) => {
         this.router.navigate(['/auth/login']);
@@ -116,7 +125,7 @@ export class PersonnaliteAddComponent implements OnInit {
     this.formGroup = this._formBuilder.group({
       category: [''],
       category_gouv_aff_public: ['', Validators.required],
-      category_filtre: ['', Validators.required],
+      category_filtre_name_url: ['', Validators.required],
       top_header: ['', Validators.required],
       // photo: [''],
       nom: ['', Validators.required],
@@ -147,12 +156,22 @@ export class PersonnaliteAddComponent implements OnInit {
     });
   }
 
+  fetchProducts() {
+    this.personCategoryFiltreService.getAll()
+      .subscribe(response => {
+        this.categorFiltreLists = response.data;  
+      }
+    );
+  }
+
 
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
+    this.isUploaded = false;
     this.personnaliteService.uploadFile(this.selectedFile).subscribe({
       next: (response) => {
         this.photo = response.data;
+        this.isUploaded = true;
         console.log('Upload successful!', response.data)
       },
       error: (error) => console.error('Upload failed:', error)
@@ -169,16 +188,16 @@ export class PersonnaliteAddComponent implements OnInit {
 
   onChangeCategoryGouvAffpublic(event: any) {
     if (event.value === "Gouvernement") {
-      this.categorFiltreList = this.gouvernementsList;
+      this.categorFiltreList = this.categorFiltreLists.filter(v => v.type == 'Gouvernement').map(value => value.name_url); // this.gouvernementsList;
       this.top_header = ['-']
     } else if (event.value === "Député provincial") {
-      this.categorFiltreList = this.deputeProvinciauxList;
+      this.categorFiltreList = this.categorFiltreLists.filter(v => v.type == 'Député provincial').map(value => value.name_url); // this.deputeProvinciauxList;
       this.top_header = ['-']
     } else if (event.value === "Gourverneur") {
-      this.categorFiltreList = this.gourverneursList;
+      this.categorFiltreList = this.categorFiltreLists.filter(v => v.type == 'Gourverneur').map(value => value.name_url); // this.gourverneursList;
       this.top_header = ['-']
     } else if (event.value === "Sénateur" || event.value === "Député national") {
-      this.categorFiltreList = this.deputeProvinciauxList;
+      this.categorFiltreList = this.categorFiltreLists.filter(v => v.type == 'Député national').map(value => value.name_url); // this.deputeProvinciauxList;
       this.top_header = this.deputeNationalSenatList;
     } else {
       this.categorFiltreList = ['-']
@@ -253,7 +272,7 @@ export class PersonnaliteAddComponent implements OnInit {
         var body = {
           category: this.formGroup.value.category,
           category_gouv_aff_public: this.formGroup.value.category_gouv_aff_public,
-          category_filtre: this.formGroup.value.category_filtre,
+          category_filtre_name_url: this.formGroup.value.category_filtre_name_url,
           top_header: this.formGroup.value.top_header,
 
           photo: this.photo,

@@ -40,9 +40,9 @@
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="tagus-form-group">
                         <label class="d-block mb-12 fw-semibold gray-color">Statut utilisateur</label>
-                        <mat-checkbox class="example-margin" id="is_active" formControlName="is_active">
-                            Statut 
-                        </mat-checkbox> 
+                        <mat-checkbox class="example-margin" id="is_active" formControlName="is_active" multiple>
+                            Statut
+                        </mat-checkbox>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
@@ -52,7 +52,9 @@
                             <mat-label>Select role</mat-label>
                             <i class="ri-list-check"></i>
                             <mat-select formControlName="role">
-                                <mat-option *ngFor="let role of roleList" [value]="role">{{role}}</mat-option>
+                                <mat-option *ngFor="let role of roleList" [value]="role">
+                                    {{role}}
+                                </mat-option>
                             </mat-select> 
                         </mat-form-field>
                     </div> 
@@ -64,13 +66,27 @@
                             <i class="ri-edit-2-line"></i>
                             <mat-label>Accreditation</mat-label>
                             <mat-select formControlName="accreditation">
-                                <mat-option *ngFor="let accreditation of permissionList" [value]="accreditation">
+                                <mat-option *ngFor="let accreditation of accreditationList" [value]="accreditation">
                                     {{accreditation}}
                                 </mat-option>
                             </mat-select>
                         </mat-form-field>
                     </div>
                 </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="tagus-form-group">
+                        <label class="d-block mb-12 fw-semibold gray-color">Permissions</label>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Select permissions</mat-label>
+                            <i class="ri-list-check"></i>
+                            <mat-select formControlName="permissions" multiple>
+                                <mat-option *ngFor="let permission of permissionList" [value]="permission">
+                                    {{permission}}
+                                </mat-option>
+                            </mat-select> 
+                        </mat-form-field>
+                    </div> 
+                </div> 
             </div>
             <div class="d-flex justify-content-center" *ngIf="isLoading">
                 <mat-spinner color="warn" [diameter]="30"></mat-spinner> <p class="ml-2"> Patientez-svp...</p>

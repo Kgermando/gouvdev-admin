@@ -4,13 +4,13 @@ import { PropositionLoisModel } from "../../proposition-lois/models/proposition-
 
 export interface UserModel {
     ID: number;
-    email: string;
-    // password: string;
+    email: string; 
     fullname: string;
     sexe: string;
-    // emailVerified: boolean;
-    roles: string[]; // User, Admin, Support, Abonner, ... 
-    accreditation: string; // Permission
+    emailVerified: boolean;
+    role: string; // User, Admin, Support, Abonner, ... 
+    accreditation: string; // CRUD, CDU
+    permissions: string[]; // Acces au dossier ex: Actualite, user, 
     is_active: boolean;
     trancheage: string;
     proposition_lois: PropositionLoisModel[];

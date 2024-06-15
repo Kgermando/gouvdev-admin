@@ -1,6 +1,6 @@
 <div class="create-dialog-box">
     <div class="title d-flex align-items-center justify-content-space-between">
-        <h4 class="mb-0">Statut du sondage</h4>
+        <h4 class="mb-0">Statut de publication</h4>
         <button class="close-btn bg-transparent p-0 border-none" (click)="close()"><i class="flaticon-close"></i></button>
     </div>
     <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
@@ -10,17 +10,17 @@
                     <label class="d-block mb-12 fw-semibold gray-color">Statut</label>
                     <mat-form-field appearance="fill">
                         <i class="ri-edit-2-line"></i>
-                        <mat-label>Fermé le sondage</mat-label> 
-                        <mat-select formControlName="is_valid">
-                            <mat-option *ngFor="let isValid of isValidList" [value]="isValid">
-                                <span *ngIf="!isValid">Fermée le sondage</span>
-                                <span *ngIf="isValid">Ouvrir le sondage</span>
+                        <mat-label>Statut</mat-label>
+                        <mat-select formControlName="is_publie">
+                            <mat-option *ngFor="let is_publie of isPublieList" [value]="is_publie">
+                                <span *ngIf="!is_publie">Ne pas publié</span>
+                                <span *ngIf="is_publie">Publié</span>
                             </mat-option>
                         </mat-select>
                     </mat-form-field> 
                 </div>
             </div>
-        </div>
+        </div>  
         <div class="text-end">
             <button type="button" class="gray" (click)="close()">
                 <i class="ri-close-fill"></i> 

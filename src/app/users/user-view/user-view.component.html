@@ -8,7 +8,7 @@
                 <div class="d-flex align-items-center">
                     <img src="assets/img/user/user22.jpg" width="57" class="rounded-circle" alt="user">
                     <div class="ms-15">
-                        <h5 class="mb-5">{{ user.roles[0].toUpperCase() }}</h5>
+                        <h5 class="mb-5">{{ user.role.toUpperCase() }}</h5>
                         <span class="d-block gray-color success" *ngIf="user.is_active">Actif</span>
                         <span class="d-block gray-color danger" *ngIf="!user.is_active">Inactif</span>
                     </div>
@@ -38,14 +38,17 @@
                                     <span class="gray-color">{{ user.fullname }}</span>
                                 </li>  
                                 <li>
+                                    <span class="fw-semibold">Email: </span>
+                                    <span class="gray-color">{{ user.email }}</span>
+                                </li>
+                                <li>
                                     <span class="fw-semibold">Sexe: </span>
                                     <span class="gray-color">{{ user.sexe }}</span>
                                 </li> 
                                 <li>
                                     <span class="fw-semibold">Tranche Age: </span>
                                     <span class="gray-color">{{ user.trancheage }} ans</span>
-                                </li> 
-                               
+                                </li>  
                                 <li>
                                     <span class="fw-semibold">Date de creation: </span>
                                     <span class="gray-color">{{ user.CreatedAt | date: 'dd/MM/yyyy' }}</span>
@@ -57,28 +60,30 @@
                             </ul>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
-                            <ul class="list ps-0 mb-0"> 
-                                <li>
-                                    <span class="fw-semibold">Email: </span>
-                                    <span class="gray-color">{{ user.email }}</span>
-                                </li>
-                                <li>
-                                    <span class="fw-semibold">Roles: </span>
-                                    <span class="gray-color"> 
-                                        <ul *ngFor="let role of user.roles">
-                                            <li>{{role}}</li>
-                                        </ul>
-                                    </span>
-                                </li>
-                                <li>
-                                    <span class="fw-semibold">Accreditation: </span>
-                                    <span class="gray-color">{{ user.accreditation }}</span>
-                                </li>  
+                            <ul class="list ps-0 mb-0">
                                 <li>
                                     <span class="fw-semibold">Statut utilisateur: </span> 
                                     <span class="gray-color" *ngIf="user.is_active"> Actif</span>
                                     <span class="gray-color" *ngIf="!user.is_active"> Inactif</span>
                                 </li> 
+                                <li>
+                                    <span class="fw-semibold">Role: </span>
+                                    <span class="gray-color">{{ user.role }}</span>
+                                </li> 
+                                <li>
+                                    <span class="fw-semibold">Accreditation: </span>
+                                    <span class="gray-color">{{ user.accreditation }}</span>
+                                </li> 
+                                <li>
+                                    <span class="fw-semibold">Permissions: </span>
+                                    <span class="gray-color"> 
+                                        <ul *ngFor="let permission of user.permissions">
+                                            <li>{{permission}}</li>
+                                        </ul>
+                                    </span>
+                                </li>
+                                 
+                               
                                 
                             </ul>
                         </div> 

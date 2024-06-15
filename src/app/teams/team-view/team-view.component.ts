@@ -1,29 +1,30 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UserService } from '../user.service';
 import { ToastrService } from 'ngx-toastr';
-import { UserModel } from '../models/user.model';
-import { AuthService } from '../../auth/auth.service';
+import { UserModel } from '../../users/models/user.model';
 import { CustomizerSettingsService } from '../../common/customizer-settings/customizer-settings.service';
+import { AuthService } from '../../auth/auth.service'; 
+import { TeamModel } from '../models/team.model';
+import { TeamService } from '../team.service';
 
 @Component({
-  selector: 'app-user-view',
-  templateUrl: './user-view.component.html',
-  styleUrls: ['./user-view.component.scss']
+  selector: 'app-team-view',
+  templateUrl: './team-view.component.html',
+  styleUrl: './team-view.component.scss'
 })
-export class UserViewComponent implements OnInit {
+export class TeamViewComponent implements OnInit {
   isLoading = false;
 
-  user!: UserModel;
+  team!: TeamModel;
 
-  currentUser: UserModel | any;
+  currentUser!: UserModel; 
 
   constructor(
     public themeService: CustomizerSettingsService,
     private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
-    private userService: UserService,
+    private teamService: TeamService,
     private toastr: ToastrService) { }
 
   ngOnInit(): void {
@@ -32,7 +33,7 @@ export class UserViewComponent implements OnInit {
       next: (user) => {
         this.currentUser = user;
         let id = this.route.snapshot.paramMap.get('id');  // this.route.snapshot.params['id'];
-        this.userService.refreshData$.subscribe(() => {
+        this.teamService.refreshData$.subscribe(() => {
           this.fetchProduct(id);
         });
         this.fetchProduct(id);
@@ -46,8 +47,8 @@ export class UserViewComponent implements OnInit {
   }
 
   fetchProduct(id: any) {
-    this.userService.get(Number(id)).subscribe(res => {
-      this.user = res.data;
+    this.teamService.get(Number(id)).subscribe(res => {
+      this.team = res.data;
       this.isLoading = false;
     });
   }
@@ -55,12 +56,12 @@ export class UserViewComponent implements OnInit {
 
   delete(id: number): void {
     if (confirm('Êtes-vous sûr de vouloir supprimer cet enregistrement ?')) {
-      this.userService
+      this.teamService
         .delete(id)
         .subscribe({
           next: () => {
             this.toastr.info('Supprimé avec succès!', 'Success!');
-            this.router.navigate(['/web/users/list']);
+            this.router.navigate(['/web/teams/list']);
           },
           error: err => {
             this.toastr.error('Une erreur s\'est produite!', 'Oupss!');
@@ -77,3 +78,4 @@ export class UserViewComponent implements OnInit {
   }
 
 }
+
