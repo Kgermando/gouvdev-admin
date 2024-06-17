@@ -59,7 +59,7 @@ export class HeaderComponent {
         this.authService.logout().subscribe(res => {
             console.log(res);
             localStorage.removeItem('jwt');
-            localStorage.removeItem('roles');
+            localStorage.removeItem('permissions'); 
             localStorage.clear();
         });
     }

@@ -59,7 +59,7 @@ export class RegisterComponent implements OnInit {
           sexe: this.formGroup.value.sexe,
           adresse: this.formGroup.value.adresse,
           matricule: `admin-${val}`.toLowerCase(),
-          roles: this.roleList,
+          role: "User",
           permission: 'CRUD',
           signature: '-',
           created: new Date(),
@@ -72,7 +72,7 @@ export class RegisterComponent implements OnInit {
             this.isLoading = false;
             this.formGroup.reset();
             this.toastr.success('Ajouter avec succès!', 'Success!');
-            this.router.navigate(['/layouts/auth/login']);
+            this.router.navigate(['/web/auth/login']);
           },
           error: (err) => {
             this.isLoading = false;
