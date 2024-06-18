@@ -9,6 +9,7 @@ import { AuthService } from '../../../auth/auth.service';
 import { ActualiteService } from '../actualite.service';
 import { truncateString } from '../../../shared/tools/truncate-string';
 import { replaceSpecialChars } from '../../../shared/tools/replaceSpecialChars';
+import { HttpClient, HttpEventType } from '@angular/common/http';
 
 
 @Component({
@@ -26,6 +27,7 @@ export class ActualiteAddComponent implements OnInit {
 
   selectedFile!: File;
   imageUrl!: string
+  progress = 0;
 
 
   categoryList: string[] = [
@@ -60,6 +62,7 @@ export class ActualiteAddComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private authService: AuthService,
     private actualiteService: ActualiteService,  
+    private httpClient: HttpClient,
     private toastr: ToastrService
   ) {}
 
@@ -87,16 +90,36 @@ export class ActualiteAddComponent implements OnInit {
   }
 
 
-  onFileSelected(event: any) {
+  // onFileSelected(event: any) {
+  //   this.selectedFile = event.target.files[0];
+  //   this.actualiteService.uploadFile(this.selectedFile).subscribe({
+  //     next: (response) => {
+  //       this.imageUrl = response.data;
+  //       console.log('Upload successful!', response)
+  //     },
+  //     error: (error) => console.error('Upload failed:', error)
+  //   });
+  // }
+
+
+  uploadFile(event: any) {
     this.selectedFile = event.target.files[0];
-    this.actualiteService.uploadFile(this.selectedFile).subscribe({
-      next: (response) => {
-        this.imageUrl = response.data;
-        console.log('Upload successful!', response.data)
+    this.actualiteService.uploadFile(this.selectedFile)
+    .subscribe({
+      next: (event) => { 
+        this.imageUrl = event.body?.data; 
+        if (event.type === HttpEventType.UploadProgress) {
+          const progress = Math.round((event.loaded / (event.total ?? 1)) * 100); // Use optional chaining
+          this.progress = progress;
+        }
       },
-      error: (error) => console.error('Upload failed:', error)
+      error: (error) => {
+        console.error(error);
+      }
     });
-  } 
+  }
+   
+
 
   onChangeCategory(event: any) {
     if (event.value == "Politiques et sécurités") {

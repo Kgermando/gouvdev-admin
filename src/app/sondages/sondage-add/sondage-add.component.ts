@@ -10,6 +10,7 @@ import { EditorChangeContent, EditorChangeSelection } from 'ngx-quill';
 import { UserModel } from '../../users/models/user.model';
 import { truncateString } from '../../shared/tools/truncate-string';
 import { replaceSpecialChars } from '../../shared/tools/replaceSpecialChars';
+import { HttpEventType } from '@angular/common/http';
 
 @Component({
   selector: 'app-sondage-add',
@@ -26,6 +27,7 @@ export class SondageAddComponent implements OnInit {
 
   selectedFile!: File;
   imageUrl!: string
+  progress = 0;
 
   constructor(
     private router: Router,
@@ -56,15 +58,22 @@ export class SondageAddComponent implements OnInit {
       is_publie: ['', Validators.required],
     });
   }
+ 
 
-  onFileSelected(event: any) {
+  uploadFile(event: any) {
     this.selectedFile = event.target.files[0];
-    this.sondageService.uploadFile(this.selectedFile).subscribe({
-      next: (response) => {
-        this.imageUrl = response.data;
-        console.log('Upload successful!', response.data)
+    this.sondageService.uploadFile(this.selectedFile)
+    .subscribe({
+      next: (event) => { 
+        this.imageUrl = event.body?.data; 
+        if (event.type === HttpEventType.UploadProgress) {
+          const progress = Math.round((event.loaded / (event.total ?? 1)) * 100); // Use optional chaining
+          this.progress = progress;
+        }
       },
-      error: (error) => console.error('Upload failed:', error)
+      error: (error) => {
+        console.error(error);
+      }
     });
   }
  

@@ -8,6 +8,7 @@ import { UserModel } from '../../users/models/user.model';
 import { AuthService } from '../../auth/auth.service';
 import { TeamService } from '../team.service';
 import { replaceSpecialChars } from '../../shared/tools/replaceSpecialChars';
+import { HttpEventType } from '@angular/common/http';
 
 @Component({
   selector: 'app-team-add',
@@ -28,6 +29,8 @@ export class TeamAddComponent implements OnInit {
 
   selectedScanFile!: File;
   scanDocUrl!: string
+  progress = 0;
+  progress2 = 0;
  
 
   constructor( 
@@ -60,29 +63,39 @@ export class TeamAddComponent implements OnInit {
     });
   }
 
-
-  onFileSelected(event: any) {
+  uploadFile(event: any) {
     this.selectedFile = event.target.files[0];
-    this.teamService.uploadFile(this.selectedFile).subscribe({
-      next: (response) => {
-        this.imageUrl = response.data;
-        console.log('Upload successful!', response.data)
+    this.teamService.uploadFile(this.selectedFile)
+    .subscribe({
+      next: (event) => { 
+        this.imageUrl = event.body?.data; 
+        if (event.type === HttpEventType.UploadProgress) {
+          const progress = Math.round((event.loaded / (event.total ?? 1)) * 100); // Use optional chaining
+          this.progress = progress;
+        }
       },
-      error: (error) => console.error('Upload failed:', error)
+      error: (error) => {
+        console.error(error);
+      }
     });
   }
-  
+
   onFileScanSelected(event: any) {
-    this.selectedScanFile = event.target.files[0];
-    this.teamService.uploadFile(this.selectedScanFile).subscribe({
-      next: (response) => {
-        this.scanDocUrl = response.data;
-        console.log('Upload successful!', response.data)
+    this.selectedFile = event.target.files[0];
+    this.teamService.uploadFile(this.selectedFile)
+    .subscribe({
+      next: (event) => { 
+        this.scanDocUrl = event.body?.data; 
+        if (event.type === HttpEventType.UploadProgress) {
+          const progress = Math.round((event.loaded / (event.total ?? 1)) * 100); // Use optional chaining
+          this.progress2 = progress;
+        }
       },
-      error: (error) => console.error('Upload failed:', error)
+      error: (error) => {
+        console.error(error);
+      }
     });
   }
- 
   onSubmit() {
     try {
       if (this.formGroup.valid) {

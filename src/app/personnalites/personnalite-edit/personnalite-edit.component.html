@@ -6,14 +6,11 @@
     <mat-card-content>
         <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
             <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div *ngIf="isUploaded">
-                        <label class="d-block mb-12 fw-semibold gray-color">Photo profile </label>
-                        <input type="file" (change)="onFileSelected($event)" value="{{photo}}" placeholder="select image">
-                    </div>
-                    <div *ngIf="!isUploaded">
-                        <mat-icon>task_alt</mat-icon>
-                    </div>
+                <div class="col-lg-6 col-md-6 col-sm-6"> 
+                    <label class="d-block mb-12 fw-semibold gray-color">Photo profile </label>
+                    <input type="file" (change)="uploadFile($event)" placeholder="select image">
+                    <mat-progress-bar mode="determinate" value="{{progress}}"></mat-progress-bar>
+                    <div style="text-align: center;" *ngIf="progress == 100">{{progress}} %</div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <label class="d-block mb-12 fw-semibold gray-color">Personnalité </label>

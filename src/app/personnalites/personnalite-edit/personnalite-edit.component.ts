@@ -12,6 +12,7 @@ import { ProvinceList } from '../../shared/tools/province-list';
 import { UserModel } from '../../users/models/user.model';
 import { PersonCategoryFiltreModel } from '../../person-category-filtre/models/person-category-filter.model';
 import { PersonCategoryFiltreService } from '../../person-category-filtre/person-category-filtre.service';
+import { HttpEventType } from '@angular/common/http';
 
 
 @Component({
@@ -33,6 +34,7 @@ export class PersonnaliteEditComponent implements OnInit {
 
   photo!: string;
   isUploaded: boolean = true;
+  progress = 0;
 
 
   categoryList: string[] = [
@@ -117,18 +119,22 @@ export class PersonnaliteEditComponent implements OnInit {
     private toastr: ToastrService) { }
 
 
-    onFileSelected(event: any) {
-      this.selectedFile = event.target.files[0];
-      this.isUploaded = false;
-      this.personnaliteService.uploadFile(this.selectedFile).subscribe({
-        next: (response) => {
-          this.photo = response.data;
-          this.isUploaded = true;
-          console.log('Upload successful!', response.data)
+  uploadFile(event: any) {
+    this.selectedFile = event.target.files[0];
+    this.personnaliteService.uploadFile(this.selectedFile)
+      .subscribe({
+        next: (event) => {
+          this.photo = event.body?.data;
+          if (event.type === HttpEventType.UploadProgress) {
+            const progress = Math.round((event.loaded / (event.total ?? 1)) * 100); // Use optional chaining
+            this.progress = progress;
+          }
         },
-        error: (error) => console.error('Upload failed:', error)
+        error: (error) => {
+          console.error(error);
+        }
       });
-    }
+  }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
@@ -221,12 +227,12 @@ export class PersonnaliteEditComponent implements OnInit {
   fetchProducts() {
     this.personCategoryFiltreService.getAll()
       .subscribe(response => {
-        this.categorFiltreLists = response.data;  
+        this.categorFiltreLists = response.data;
         console.log("categorFiltreLists", this.categorFiltreLists)
       }
-    );
+      );
   }
- 
+
 
   onChangeCategory(event: any) {
     if (event.value === "Politique") {

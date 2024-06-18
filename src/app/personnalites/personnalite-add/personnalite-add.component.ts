@@ -11,6 +11,7 @@ import { UserModel } from '../../users/models/user.model';
 import { ProvinceList } from '../../shared/tools/province-list';
 import { PersonCategoryFiltreModel } from '../../person-category-filtre/models/person-category-filter.model';
 import { PersonCategoryFiltreService } from '../../person-category-filtre/person-category-filtre.service';
+import { HttpEventType } from '@angular/common/http';
 
 @Component({
   selector: 'app-personnalite-add',
@@ -25,8 +26,8 @@ export class PersonnaliteAddComponent implements OnInit {
   currentUser: UserModel | any;
 
   selectedFile!: File;
-  photo!: string;
-  isUploaded: boolean = true;
+  photo!: string; 
+  progress =0;
 
 
   categoryList: string[] = [
@@ -163,20 +164,26 @@ export class PersonnaliteAddComponent implements OnInit {
       }
     );
   }
+ 
 
-
-  onFileSelected(event: any) {
+  uploadFile(event: any) {
     this.selectedFile = event.target.files[0];
-    this.isUploaded = false;
-    this.personnaliteService.uploadFile(this.selectedFile).subscribe({
-      next: (response) => {
-        this.photo = response.data;
-        this.isUploaded = true;
-        console.log('Upload successful!', response.data)
-      },
-      error: (error) => console.error('Upload failed:', error)
-    });
+    this.personnaliteService.uploadFile(this.selectedFile)
+      .subscribe({
+        next: (event) => {
+          this.photo = event.body?.data;
+          if (event.type === HttpEventType.UploadProgress) {
+            const progress = Math.round((event.loaded / (event.total ?? 1)) * 100); // Use optional chaining
+            this.progress = progress;
+          }
+        },
+        error: (error) => {
+          console.error(error);
+        }
+      });
   }
+
+
 
   onChangeCategory(event: any) {
     if (event.value === "Politique") {

@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../auth/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import Quill from 'quill';
-import { EditorChangeContent, EditorChangeSelection } from 'ngx-quill';
+import { EditorChangeContent, EditorChangeSelection, QuillEditorComponent } from 'ngx-quill';
 import { PersonnaliteSectionService } from '../personnalite-section.service';
 import { PersonnaliteSectionModel } from '../models/personnalite-section.model';
 import { UserModel } from '../../users/models/user.model';
+import { HttpEventType } from '@angular/common/http';
 
 @Component({
   selector: 'app-personnalite-section-edit',
@@ -28,6 +29,11 @@ export class PersonnaliteSectionEditComponent implements OnInit {
 
   selectedFile!: File;
   image!: string;
+  progress = 0;
+
+  @ViewChild('quillEditor') quillEditor!: QuillEditorComponent;
+  @ViewChild('quillFile', { static: false }) quillFile!: ElementRef;
+
 
 
   constructor(
@@ -68,17 +74,24 @@ export class PersonnaliteSectionEditComponent implements OnInit {
       }
     });
   }
-
-  onFileSelected(event: any) {
+ 
+  uploadFile(event: any) {
     this.selectedFile = event.target.files[0];
-    this.personnaliteSectionService.uploadFile(this.selectedFile).subscribe({
-      next: (response) => {
-        this.image = response.data;
-        console.log('Upload successful!', response.data)
-      },
-      error: (error) => console.error('Upload failed:', error)
-    });
-  } 
+    this.personnaliteSectionService.uploadFile(this.selectedFile)
+      .subscribe({
+        next: (event) => {
+          this.image = event.body?.data;
+          if (event.type === HttpEventType.UploadProgress) {
+            const progress = Math.round((event.loaded / (event.total ?? 1)) * 100); // Use optional chaining
+            this.progress = progress;
+          }
+        },
+        error: (error) => {
+          console.error(error);
+        }
+      });
+  }
+
 
   onSubmit() {
     try {

@@ -1,15 +1,16 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from '../../auth/auth.service'; 
+import { AuthService } from '../../auth/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import Quill from 'quill';
 import { EditorChangeContent, EditorChangeSelection, QuillEditorComponent } from 'ngx-quill';
-import { PersonnaliteSectionService } from '../personnalite-section.service'; 
+import { PersonnaliteSectionService } from '../personnalite-section.service';
 import { Validators } from 'ngx-editor';
 import { PersonnaliteModel } from '../../personnalites/models/personnalite.model';
 import { UserModel } from '../../users/models/user.model';
 import { PersonnaliteService } from '../../personnalites/personnalite.service';
+import { HttpEventType } from '@angular/common/http';
 
 @Component({
   selector: 'app-personnalite-section-add',
@@ -30,24 +31,25 @@ export class PersonnaliteSectionAddComponent implements OnInit {
 
   selectedFile!: File;
   image!: string;
+  progress = 0;
 
   @ViewChild('quillEditor') quillEditor!: QuillEditorComponent;
-@ViewChild('quillFile', { static: false }) quillFile!: ElementRef;
+  @ViewChild('quillFile', { static: false }) quillFile!: ElementRef;
 
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private _formBuilder: FormBuilder,
-    private authService: AuthService, 
-    private personnaliteService: PersonnaliteService, 
+    private authService: AuthService,
+    private personnaliteService: PersonnaliteService,
     private personnaliteSectionService: PersonnaliteSectionService,
     private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
     this.formGroup = this._formBuilder.group({
-      title: ['', Validators.required], 
+      title: ['', Validators.required],
       content: ['', Validators.required],
       is_valid: ['', Validators.required],
     });
@@ -66,28 +68,34 @@ export class PersonnaliteSectionAddComponent implements OnInit {
       }
     });
   }
-
-  onFileSelected(event: any) {
+ 
+  uploadFile(event: any) {
     this.selectedFile = event.target.files[0];
-    this.personnaliteSectionService.uploadFile(this.selectedFile).subscribe({
-      next: (response) => {
-        this.image = response.data;
-        console.log('Upload successful!', response.data)
-      },
-      error: (error) => console.error('Upload failed:', error)
-    });
-  } 
+    this.personnaliteSectionService.uploadFile(this.selectedFile)
+      .subscribe({
+        next: (event) => {
+          this.image = event.body?.data;
+          if (event.type === HttpEventType.UploadProgress) {
+            const progress = Math.round((event.loaded / (event.total ?? 1)) * 100); // Use optional chaining
+            this.progress = progress;
+          }
+        },
+        error: (error) => {
+          console.error(error);
+        }
+      });
+  }
 
   onSubmit() {
     try {
-      if (this.formGroup.valid) { 
+      if (this.formGroup.valid) {
         this.isLoading = true;
         var body = {
-          personnalite_id: Number(this.id), 
+          personnalite_id: Number(this.id),
           title: this.formGroup.value.title,
           image: (this.image) ? this.image : '',
           content: this.formGroup.value.content,
-          is_valid: this.formGroup.value.is_valid, 
+          is_valid: this.formGroup.value.is_valid,
           signature: this.currentUser.fullname,
         };
         // const range = this.quillEditor.quillEditor.getSelection();
@@ -122,7 +130,7 @@ export class PersonnaliteSectionAddComponent implements OnInit {
 
   changedEditor(event: EditorChangeContent | EditorChangeSelection) { }
 
-  
+
   focus($event: any) {
     this.focused = true
     this.blurred = false

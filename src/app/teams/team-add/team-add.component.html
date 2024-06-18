@@ -5,10 +5,12 @@
     </mat-card-header>
     <mat-card-content>
         <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="row"> 
+                <div class="col-lg-6 col-md-6 col-sm-6"> 
                     <label class="d-block mb-12 fw-semibold gray-color">Image </label>
-                    <input type="file" (change)="onFileSelected($event)" accept="image/png,image/jpeg" placeholder="select image"> 
+                    <input type="file" (change)="uploadFile($event)" accept="image/png,image/jpeg" placeholder="select image">
+                    <mat-progress-bar mode="determinate" value="{{progress}}"></mat-progress-bar>
+                    <div style="text-align: center;" *ngIf="progress == 100">{{progress}} %</div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="tagus-form-group">
@@ -50,6 +52,8 @@
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <label class="d-block mb-12 fw-semibold gray-color">Uploader le document </label>
                     <input type="file" (change)="onFileScanSelected($event)" accept="image/png,image/jpeg" placeholder="select scan_doc"> 
+                    <mat-progress-bar mode="determinate" value="{{progress2}}"></mat-progress-bar>
+                    <div style="text-align: center;" *ngIf="progress2 == 100">{{progress2}} %</div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <label class="d-block mb-12 fw-semibold gray-color">Facebook </label>

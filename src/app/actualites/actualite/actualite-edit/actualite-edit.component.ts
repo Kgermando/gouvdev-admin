@@ -10,6 +10,7 @@ import { AuthService } from '../../../auth/auth.service';
 import { ActualiteService } from '../actualite.service';
 import { replaceSpecialChars } from '../../../shared/tools/replaceSpecialChars';
 import { truncateString } from '../../../shared/tools/truncate-string';
+import { HttpEventType } from '@angular/common/http';
 
 @Component({
   selector: 'app-actualite-edit',
@@ -27,6 +28,7 @@ export class ActualiteEditComponent implements OnInit {
 
   selectedFile!: File;
   imageUrl!: string
+  progress = 0;
 
   categoryList: string[] = [
     'Politiques et sécurités',
@@ -66,16 +68,33 @@ export class ActualiteEditComponent implements OnInit {
 
 
  
-  onFileSelected(event: any) {
+  // onFileSelected(event: any) {
+  //   this.selectedFile = event.target.files[0];
+  //   this.actualiteService.uploadFile(this.selectedFile).subscribe({
+  //     next: (response) => {
+  //       this.imageUrl = response.data;
+  //       console.log('Upload successful!', response.data)
+  //     },
+  //     error: (error) => console.error('Upload failed:', error)
+  //   });
+  // } 
+
+  uploadFile(event: any) {
     this.selectedFile = event.target.files[0];
-    this.actualiteService.uploadFile(this.selectedFile).subscribe({
-      next: (response) => {
-        this.imageUrl = response.data;
-        console.log('Upload successful!', response.data)
+    this.actualiteService.uploadFile(this.selectedFile)
+    .subscribe({
+      next: (event) => { 
+        this.imageUrl = event.body?.data; 
+        if (event.type === HttpEventType.UploadProgress) {
+          const progress = Math.round((event.loaded / (event.total ?? 1)) * 100); // Use optional chaining
+          this.progress = progress;
+        }
       },
-      error: (error) => console.error('Upload failed:', error)
+      error: (error) => {
+        console.error(error);
+      }
     });
-  } 
+  }
 
 
   ngOnInit(): void {

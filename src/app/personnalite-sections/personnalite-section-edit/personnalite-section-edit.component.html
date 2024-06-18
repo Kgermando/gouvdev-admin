@@ -6,11 +6,12 @@
     <mat-card-content>
         <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
             <div class="row"> 
-                <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="col-lg-6 col-md-6 col-sm-6"> 
                     <label class="d-block mb-12 fw-semibold gray-color">Image </label>
-                    <input type="file" (change)="onFileSelected($event)" placeholder="select image"> 
+                    <input type="file" (change)="uploadFile($event)" placeholder="select image">
+                    <mat-progress-bar mode="determinate" value="{{progress}}"></mat-progress-bar>
+                    <div style="text-align: center;" *ngIf="progress == 100">{{progress}} %</div>
                 </div>
-               
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <label class="d-block mb-12 fw-semibold gray-color">Titre de la section </label>
                     <mat-form-field appearance="fill">
