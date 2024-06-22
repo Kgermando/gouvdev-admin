@@ -140,7 +140,8 @@ export class ActualiteAddComponent implements OnInit {
     try {
       if (this.formGroup.valid) {
         this.isLoading = true;
-        var body = { 
+        var body = {
+          type: "Actualite",
           category: this.formGroup.value.category,
           sous_category: this.formGroup.value.sous_category,
           sujet_url: replaceSpecialChars(truncateString(this.formGroup.value.sujet)),

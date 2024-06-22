@@ -97,6 +97,7 @@ export class SondageAddComponent implements OnInit {
       if (this.formGroup.valid) {
         this.isLoading = true;
         var body = {
+          type: "Sondage",
           sujet_url: replaceSpecialChars(truncateString(this.formGroup.value.sujet)),
           sujet: this.formGroup.value.sujet,
           auteur: this.formGroup.value.auteur,
