@@ -5,16 +5,16 @@
     </div>
     <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
         <div class="row"> 
-            <div class="col-lg-12 col-md-12">
+            <div class="col-lg-12 col-md-12"> 
                 <div class="tagus-form-group">
                     <label class="d-block mb-12 fw-semibold gray-color">Statut</label>
                     <mat-form-field appearance="fill">
                         <i class="ri-edit-2-line"></i>
-                        <mat-label>Fermé le sondage</mat-label> 
+                        <mat-label>Participation citoyenne</mat-label> 
                         <mat-select formControlName="is_valid">
                             <mat-option *ngFor="let isValid of isValidList" [value]="isValid">
-                                <span *ngIf="!isValid">Fermée le sondage</span>
-                                <span *ngIf="isValid">Ouvrir le sondage</span>
+                                <span *ngIf="!isValid">Fermée la participation citoyenne</span>
+                                <span *ngIf="isValid">Ouvrir la participation citoyenne</span>
                             </mat-option>
                         </mat-select>
                     </mat-form-field> 
