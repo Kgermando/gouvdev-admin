@@ -125,9 +125,9 @@ export class PersonnaliteAddComponent implements OnInit {
 
     this.formGroup = this._formBuilder.group({
       category: [''],
-      category_gouv_aff_public: ['', Validators.required],
-      category_filtre_name_url: ['', Validators.required],
-      top_header: ['', Validators.required],
+      category_gouv_aff_public: [''],
+      category_filtre_name_url: [''],
+      top_header: [''],
       // photo: [''],
       nom: ['', Validators.required],
       postnom: ['', Validators.required],
@@ -277,10 +277,10 @@ export class PersonnaliteAddComponent implements OnInit {
       if (this.formGroup.valid) {
         this.isLoading = true;
         var body = {
-          category: this.formGroup.value.category,
-          category_gouv_aff_public: this.formGroup.value.category_gouv_aff_public,
-          category_filtre_name_url: this.formGroup.value.category_filtre_name_url,
-          top_header: this.formGroup.value.top_header,
+          category: (this.formGroup.value.category) ? this.formGroup.value.category : '-',
+          category_gouv_aff_public: (this.formGroup.value.category_gouv_aff_public) ? this.formGroup.value.category_gouv_aff_public : '-',
+          category_filtre_name_url: (this.formGroup.value.category_filtre_name_url) ? this.formGroup.value.category_filtre_name_url : '-',
+          top_header: (this.formGroup.value.top_header) ? this.formGroup.value.top_header : '-',
 
           photo: this.photo,
           nom: this.capitalizeTest(this.formGroup.value.nom),
